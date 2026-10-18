@@ -1,0 +1,8 @@
+---
+import Page from '../layouts/Page.astro';
+import { useI18n } from '../i18n';
+
+const { t, data } = useI18n(Astro.url);
+---
+
+<Page title={t.community.title} lead={t.community.lead} sections={data.communitySections} />

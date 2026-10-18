@@ -1,48 +1,68 @@
 ---
 import '../styles/global.css';
-import { site, nav } from '../data/site';
+import { useI18n, basePath, localize, locales, pages, type Locale } from '../i18n';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
+const { locale, t, data } = useI18n(Astro.url);
+const { site } = data;
 const { title = site.title, description = site.description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const path = Astro.url.pathname.replace(/\/?$/, '/');
+
+const path = basePath(Astro.url);
+const canonical = new URL(localize(locale, path), Astro.site);
+const other: Locale = locale === 'zh' ? 'en' : 'zh';
+// 404 頁沒有對應的另一語言版本，切換時回到對方首頁。
+const isKnownPage = (pages as readonly string[]).includes(path);
+const switchHref = localize(other, isKnownPage ? path : '/');
 const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="zh-Hant">
+<html lang={locales[locale].htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {
+      isKnownPage &&
+        (Object.keys(locales) as Locale[]).map((l) => (
+          <link rel="alternate" hreflang={locales[l].htmlLang} href={new URL(localize(l, path), Astro.site)} />
+        ))
+    }
+    {isKnownPage && <link rel="alternate" hreflang="x-default" href={new URL(path, Astro.site)} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'zh' ? 'zh_TW' : 'en_US'} />
   </head>
   <body>
     <header class="site-header">
-      <nav class="container" aria-label="主選單">
-        {
-          nav.map((item) => (
-            <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
-              {item.label}
-            </a>
-          ))
-        }
-      </nav>
+      <div class="container bar">
+        <nav aria-label={t.mainNav}>
+          {
+            pages.map((page, i) => (
+              <a href={localize(locale, page)} aria-current={path === page ? 'page' : undefined}>
+                {t.nav[i]}
+              </a>
+            ))
+          }
+        </nav>
+        <a class="lang" href={switchHref} hreflang={locales[other].htmlLang} lang={locales[other].htmlLang}>
+          {locales[other].label}
+        </a>
+      </div>
     </header>
     <slot />
     <footer class="site-footer container">
-      <p>Copyright © {year} {site.name} {site.nameEn}. All rights reserved.</p>
+      <p>Copyright © {year} {site.name} {site.nameEn}. {t.rights}</p>
     </footer>
   </body>
 </html>
@@ -58,29 +78,43 @@ const year = new Date().getFullYear();
     border-bottom: 1px solid var(--line);
   }
 
-  .site-header nav {
+  .bar {
     display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .bar nav {
+    display: flex;
+    flex: 1;
     gap: 1.25rem;
     overflow-x: auto;
-    padding-top: 0.875rem;
-    padding-bottom: 0.875rem;
+    padding: 0.875rem 0;
     font-size: 0.9375rem;
     white-space: nowrap;
     scrollbar-width: none;
   }
 
-  .site-header a {
+  .bar a {
     color: var(--muted);
     text-decoration: none;
   }
 
-  .site-header a:hover,
-  .site-header a[aria-current='page'] {
+  .bar a:hover,
+  .bar a[aria-current='page'] {
     color: var(--fg);
   }
 
-  .site-header a[aria-current='page'] {
+  .bar a[aria-current='page'] {
     font-weight: 600;
+  }
+
+  .lang {
+    flex-shrink: 0;
+    padding: 0.125rem 0.625rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.8125rem;
   }
 
   .site-footer {

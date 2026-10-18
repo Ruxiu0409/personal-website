@@ -1,7 +1,8 @@
 ---
 import Base from './Base.astro';
 import EntryList from '../components/EntryList.astro';
-import { site, type Section } from '../data/site';
+import { useI18n } from '../i18n';
+import type { Section } from '../data/site';
 
 interface Props {
   title: string;
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const { title, lead, sections = [] } = Astro.props;
+const { t, data } = useI18n(Astro.url);
+const { site } = data;
 ---
 
 <Base title={`${title} — ${site.name} ${site.nameEn}`} description={lead ?? site.description}>
@@ -21,7 +24,7 @@ const { title, lead, sections = [] } = Astro.props;
 
     {
       sections.length > 1 && (
-        <nav class="toc" aria-label="本頁章節">
+        <nav class="toc" aria-label={t.toc}>
           {sections.map((section) => (
             <a href={`#${section.id}`}>{section.label}</a>
           ))}

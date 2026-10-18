@@ -1,0 +1,251 @@
+---
+import { Image } from 'astro:assets';
+import Page from '../layouts/Page.astro';
+import EntryList from '../components/EntryList.astro';
+import avatar from '../assets/avatar.jpg';
+import { useI18n } from '../i18n';
+
+const { t, data, href } = useI18n(Astro.url);
+const { site, education, communityRoles, story, traits, closing, languages, skills } = data;
+---
+
+<Page title={t.about.title} lead={site.intro}>
+  <Image
+    class="avatar"
+    src={avatar}
+    alt={site.name}
+    width={160}
+    height={160}
+    densities={[1, 2, 3]}
+  />
+
+  <section aria-labelledby="education">
+    <h2 id="education" class="plain">{t.about.education}</h2>
+    <EntryList items={education} />
+  </section>
+
+  <section aria-labelledby="community">
+    <h2 id="community" class="plain">{t.about.community}</h2>
+    <EntryList items={communityRoles} />
+    <p class="more"><a href={href('/community/')}>{t.about.communityMore}</a></p>
+  </section>
+
+  <section aria-labelledby="links">
+    <h2 id="links">{t.about.links}</h2>
+    <ul class="social">
+      {
+        site.links.map((link) => (
+          <li>
+            <span class="social-label">{link.label}</span>
+            <a href={link.href} rel={link.href.startsWith('http') ? 'me noopener' : undefined}>
+              {link.handle}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby="story">
+    <h2 id="story">{t.about.story}</h2>
+    {
+      story.map((chapter) => (
+        <article>
+          <h3>{chapter.title}</h3>
+          {chapter.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </article>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="traits">
+    <h2 id="traits">{t.about.traits}</h2>
+    {
+      traits.map((trait) => (
+        <article>
+          <h3>{trait.title}</h3>
+          <p>{trait.paragraph}</p>
+        </article>
+      ))
+    }
+    <blockquote>{closing}</blockquote>
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">{t.about.skills}</h2>
+    <h3 class="skill-heading">{t.about.languages}</h3>
+    <ul class="languages">
+      {
+        languages.map(({ name, icon: Icon }) => (
+          <li>
+            <Icon width={40} height={40} aria-hidden="true" />
+            <span>{name}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <dl>
+      {
+        skills.map((skill) => (
+          <div>
+            <dt>{skill.label}</dt>
+            <dd>{skill.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</Page>
+
+<style>
+  .avatar {
+    display: block;
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 3rem;
+    border-radius: 22%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+
+  section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 4rem;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* EntryList 自帶上框線，標題不用再畫一條 */
+  h2.plain {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .social {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .social li {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .social-label {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .social a {
+    overflow-wrap: anywhere;
+  }
+
+  .more {
+    margin: 1rem 0 0;
+    font-size: 0.875rem;
+  }
+
+  .more a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .more a:hover {
+    color: var(--accent);
+  }
+
+  article + article {
+    margin-top: 2rem;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.0625rem;
+  }
+
+  article p {
+    margin: 0.5rem 0 0;
+  }
+
+  blockquote {
+    margin: 2.5rem 0 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+
+  .skill-heading {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .languages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+  }
+
+  .languages li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1.25rem 0.5rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .languages li:hover {
+    border-color: var(--muted);
+    transform: translateY(-2px);
+  }
+
+  .languages :global(svg) {
+    display: block;
+  }
+
+  dl {
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  dt {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  dd {
+    margin: 0;
+  }
+</style>

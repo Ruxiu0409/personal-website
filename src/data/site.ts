@@ -25,14 +25,6 @@ export const site = {
   ],
 };
 
-export const nav = [
-  { href: '/', label: '首頁' },
-  { href: '/about/', label: '關於我' },
-  { href: '/experience/', label: '個人經歷' },
-  { href: '/awards/', label: '競賽' },
-  { href: '/community/', label: '社群與活動' },
-];
-
 export type Entry = {
   title: string;
   subtitle?: string;

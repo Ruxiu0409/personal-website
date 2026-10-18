@@ -1,0 +1,110 @@
+// "Community & Events" page.
+import type { Section } from '../site';
+
+export const communitySections: Section[] = [
+  {
+    id: 'roles',
+    label: 'Organizer & Speaker',
+    items: [
+      {
+        title: 'Raycast Community Taiwan',
+        subtitle: 'Taiwan Ambassador',
+        date: '2026.06 – Present',
+      },
+      {
+        title: 'Swift Students Cafe: Get Inspired From Winners',
+        subtitle: 'Organizer · Host · Speaker — at iPlayground 2026, Taipei',
+        date: '2026.07.25',
+        description:
+          'The first Swift Students Cafe held in Taiwan. I led it end to end, from planning to the day itself.',
+        body: [
+          'The event invited members of the Swift Students Community and Swift Student Challenge winners to share how they went from idea and design to a finished project in Swift. During planning I wrote the run of show, invited speakers, recruited staff, worked out the venue with the iPlayground organizers, and discussed the program with community organizers from Japan and Singapore.',
+          'On the day I hosted the event and also gave a talk on what I saw in person at WWDC26. It was held in the lunch area with open admission, and far more people showed up than had registered.',
+        ],
+      },
+      {
+        title: 'iPlayground',
+        subtitle: '2026 Student Community Lead · 2024, 2025 attendee',
+        date: '2024 – 2026',
+        description:
+          "Taiwan's annual conference for Apple platform developers. The first time I attended, I could barely follow most of the talks; two years later I was its Student Community Lead.",
+      },
+      {
+        title: 'World Taichung Developer Workshop',
+        subtitle: 'Speaker — Feng Chia University',
+        date: '2025.11.23',
+        description:
+          'Talk: "A God\'s-Eye View of User-Experience-Driven App Development." Framed around design thinking, I compared Ban Feng Yu Jia, an app I built, with FCU Mobile to show how to design features starting from real usage scenarios.',
+      },
+    ],
+  },
+  {
+    id: 'wwdc',
+    label: 'WWDC26',
+    items: [
+      {
+        title: 'WWDC26 Apple Worldwide Developers Conference',
+        subtitle: 'Attended in person — Apple Park, Cupertino',
+        date: '2026.06.07 – 09',
+        description:
+          'Won an in-person spot through the lottery as an Apple Developer Program member and attended the Keynote, sessions and Design Lab.',
+        body: [
+          'At the Design Lab I discussed the spatial computing experience of LumaStage with Apple designers, who suggested bringing the entire experience to Vision Pro.',
+          "During those days at Apple Park I saw how Apple Intelligence is making its way into everyday life. But what I learned most had nothing to do with technology: every detail of an experience can be done well, and the confidence and joy of everyone there was contagious. I want to bring that spirit back to the community in Taiwan.",
+        ],
+      },
+      {
+        title: 'Bitrig Bash',
+        subtitle: 'Santana Row, San Jose',
+        date: '2026.06.11',
+        description:
+          'Met the lead of Apple Foundation Models, who advised me to get the core features right first. Back in Taiwan I read through the Foundation Models documentation and rewrote the LumaStage generation pipeline.',
+      },
+      {
+        title: 'build fridays sf',
+        subtitle: 'Cursor Office, San Francisco',
+        date: '2026.06.19',
+        description: 'Presented LumaStage on stage at a developer meetup at the Cursor office.',
+      },
+      {
+        title: 'WWDC Week Developer Meetups',
+        subtitle: 'Step-Into-Coffee, Swift Students Cafe, AiOS Meetup, Pre-WWDC Gathering, Feedback Friday',
+        date: '2026.06',
+        description:
+          'Saw someone teleoperate a humanoid robot with Apple Vision Pro, and met student communities from Singapore and Japan, which later led to bringing Swift Students Cafe to Taiwan together.',
+      },
+    ],
+  },
+  {
+    id: 'events',
+    label: 'Events Attended',
+    items: [
+      {
+        title: 'COSCUP 2026 × UbuCon Asia',
+        subtitle: 'National Taiwan University of Science and Technology, Taipei',
+        date: '2026.08',
+        description:
+          'Learned advanced uses of open-slide. Later, for an event I organized, I built a data service on Cloudflare Workers so the slides could show live data from the room.',
+      },
+      {
+        title: 'Codex Community Meetup Taichung (three sessions)',
+        date: '2026.06 – 07',
+        description:
+          'Brought LumaStage to all three sessions for people to try, and got feedback for the first time from users with design, engineering and non-technical backgrounds.',
+      },
+      {
+        title: 'Raycast Taiwan Meetup',
+        subtitle: 'Taichung',
+        date: '2026.05.30',
+        description: 'Raycast 2.0, extension development and workflows.',
+      },
+      {
+        title: 'DevFest 2025',
+        subtitle: 'Taichung · Taipei',
+        date: '2025.11',
+        description:
+          'My first encounter with command-line AI tools; I switched my own projects to the CLI as soon as I got home. Also heard why it still matters to understand your own code.',
+      },
+    ],
+  },
+];

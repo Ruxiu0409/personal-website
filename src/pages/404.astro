@@ -1,19 +1,27 @@
 ---
+// 404 頁不分語言（Cloudflare 對所有找不到的網址都回這一頁），所以中英並列。
 import Base from '../layouts/Base.astro';
+import { ui } from '../i18n';
 import { site } from '../data/site';
 ---
 
-<Base title={`找不到頁面 — ${site.handle}`}>
+<Base title={`404 — ${site.handle}`}>
   <main class="container">
     <p class="code">404</p>
-    <h1>找不到這個頁面</h1>
-    <p><a href="/">回到首頁</a></p>
+    <h1>{ui.zh.notFound.title}</h1>
+    <p lang="en" class="en">{ui.en.notFound.title}</p>
+    <p>
+      <a href="/">{ui.zh.notFound.back}</a>
+      <span aria-hidden="true">·</span>
+      <a href="/en/" lang="en">{ui.en.notFound.back}</a>
+    </p>
   </main>
 </Base>
 
 <style>
   main {
-    padding: 8rem 1.5rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
 
   .code {
@@ -23,7 +31,17 @@ import { site } from '../data/site';
   }
 
   h1 {
-    margin: 0.5rem 0 1.5rem;
+    margin: 0.5rem 0 0;
     letter-spacing: -0.02em;
+  }
+
+  .en {
+    margin: 0.25rem 0 1.5rem;
+    color: var(--muted);
+  }
+
+  span {
+    margin: 0 0.5rem;
+    color: var(--muted);
   }
 </style>

@@ -3,5 +3,9 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://tsaicy.dev',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      i18n: { defaultLocale: 'zh', locales: { zh: 'zh-Hant', en: 'en' } },
+    }),
+  ],
 });
