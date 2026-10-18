@@ -11,7 +11,7 @@ export const site = {
   badge: { label: 'Raycast Ambassador', href: 'https://www.raycast.tw' },
   nickname: '瑞瑞 Ray',
   tagline: 'An iOS Developer',
-  heroTags: ['visionOS', 'WWDC26 實體參加', '國科會研究計畫', '半逢遇甲 Founder', 'iOS Club 社長'],
+  heroTags: ['visionOS', 'WWDC26 實體參加', '半逢遇甲 Founder'],
   heroAlt: '蔡承曄在 WWDC26 的 Apple Park，背後是藍天白雲與彩虹拱門',
   intro:
     '逢甲大學資訊工程學系四年級。執行國科會大專學生研究計畫，在 Apple Vision Pro 上做中風後視覺空間忽略的評估與訓練系統。做過首次下載超過一萬兩千次的校園 App「半逢遇甲」，當過逢甲 iOS Club 社長，2026 年實體參加 WWDC26。',
