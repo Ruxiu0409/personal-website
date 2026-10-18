@@ -93,36 +93,4 @@ export const communitySections: Section[] = [
       },
     ],
   },
-  {
-    id: 'events',
-    label: '參加的活動',
-    items: [
-      {
-        title: 'COSCUP 2026 × UbuCon Asia',
-        subtitle: '臺灣科技大學，台北',
-        date: '2026.08',
-        description:
-          '學到 open-slide 的進階用法，後來在自己辦的活動裡用 Cloudflare Workers 建立資料服務，讓簡報即時呈現現場資料。',
-      },
-      {
-        title: 'Codex Community Meetup 台中（三場）',
-        date: '2026.06 – 07',
-        description:
-          '三場都帶著 LumaStage 到現場請大家試用，第一次收到設計、工程與非技術背景使用者的回饋。',
-      },
-      {
-        title: 'Raycast Taiwan Meetup',
-        subtitle: '台中',
-        date: '2026.05.30',
-        description: 'Raycast 2.0、擴充套件開發與工作流程。',
-      },
-      {
-        title: 'DevFest 2025',
-        subtitle: '台中場・台北場',
-        date: '2025.11',
-        description:
-          '第一次接觸命令列版本的 AI 工具，回家後就在自己的專案改用 CLI；也聽到為什麼仍要讀懂自己的程式碼。',
-      },
-    ],
-  },
 ];

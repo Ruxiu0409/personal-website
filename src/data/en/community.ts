@@ -97,36 +97,4 @@ export const communitySections: Section[] = [
       },
     ],
   },
-  {
-    id: 'events',
-    label: 'Events Attended',
-    items: [
-      {
-        title: 'COSCUP 2026 × UbuCon Asia',
-        subtitle: 'National Taiwan University of Science and Technology, Taipei',
-        date: '2026.08',
-        description:
-          'Learned advanced uses of open-slide. Later, for an event I organized, I built a data service on Cloudflare Workers so the slides could show live data from the room.',
-      },
-      {
-        title: 'Codex Community Meetup Taichung (three sessions)',
-        date: '2026.06 – 07',
-        description:
-          'Brought LumaStage to all three sessions for people to try, and got feedback for the first time from users with design, engineering and non-technical backgrounds.',
-      },
-      {
-        title: 'Raycast Taiwan Meetup',
-        subtitle: 'Taichung',
-        date: '2026.05.30',
-        description: 'Raycast 2.0, extension development and workflows.',
-      },
-      {
-        title: 'DevFest 2025',
-        subtitle: 'Taichung · Taipei',
-        date: '2025.11',
-        description:
-          'My first encounter with command-line AI tools; I switched my own projects to the CLI as soon as I got home. Also heard why it still matters to understand your own code.',
-      },
-    ],
-  },
 ];
