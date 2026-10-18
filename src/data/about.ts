@@ -46,7 +46,7 @@ export const story: { title: string; paragraphs: string[] }[] = [
   {
     title: '站上 Apple Park',
     paragraphs: [
-      '2026 年 6 月，我抽中 WWDC26 的實體名額，到 Apple Park 看 Keynote、參加議程。在 Design Lab，Apple 設計師建議我把 LumaStage 的整個體驗放進 Vision Pro；在 Bitrig Bash，Apple Foundation Models 的負責人建議我先把原本的功能做好。回台灣後，我把 Foundation Models 文件從頭讀完，改寫了 LumaStage 的生成流程，也學到與其一直加功能，不如先把核心體驗做到最好。',
+      '2026 年 6 月，我抽中 WWDC26 的實體名額，到 Apple Park 看 Keynote、參加議程。這趟也讓我學到，與其一直加功能，不如先把核心體驗做到最好。',
       '我學到最多的其實跟技術無關，而是 Apple 把活動的每個細節都做好，現場每個人的自信與快樂互相感染，讓我覺得自己屬於這裡。',
     ],
   },

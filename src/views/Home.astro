@@ -1,8 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import EntryList from '../components/EntryList.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import heroPhoto from '../assets/hero.jpg';
 // Raycast 標誌取自 Simple Icons（CC0）。
 import RaycastIcon from '../assets/icons/raycast.svg';
@@ -41,7 +39,7 @@ const highlights = [
     id: 'awards',
     label: t.awards.title,
     href: href('/awards/'),
-    items: pick(awardSections, 'awards', 3),
+    items: pick(awardSections, 'awards', 4),
   },
   {
     id: 'community',
@@ -95,24 +93,65 @@ const highlights = [
     </div>
   </header>
 
-  <main class="container">
+  <main>
+    <!-- 作品放在主視覺正下方：一排可橫向滑動的大圖，每張只留標題、獎項和日期 -->
+    <section class="showcase" aria-labelledby="portfolio">
+      <div class="section-head wide">
+        <h2 id="portfolio">{t.portfolio.title}</h2>
+        <a href={href('/portfolio/')}>{t.seeAll}</a>
+      </div>
+      <ul class="rail">
+        {
+          portfolio.map((project) => (
+            <li>
+              <a class="tile" href={`${href('/portfolio/')}#${project.slug}`}>
+                <div class="frame">
+                  {project.image ? (
+                    <Image
+                      class:list={[project.image.height > project.image.width && 'portrait']}
+                      src={project.image}
+                      alt={project.imageAlt ?? project.title}
+                      widths={[480, 720, 960]}
+                      sizes="(max-width: 720px) 80vw, 22rem"
+                    />
+                  ) : (
+                    <span class="placeholder" aria-hidden="true">
+                      {project.title.slice(0, 1)}
+                    </span>
+                  )}
+                </div>
+                <h3>{project.title}</h3>
+                {project.award && <p class="award">{project.award}</p>}
+                <p class="date">{project.date}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-    <section aria-labelledby="about">
-      <h2 id="about" class="ruled">{t.about.title}</h2>
+    <!-- 關於我：一句大字開場，故事用左標題、右內文的雜誌式排版，不加框線 -->
+    <section class="container about" aria-labelledby="about">
+      <h2 id="about">{t.about.title}</h2>
       <p class="lead">{site.intro}</p>
+
+      <h3 class="label">{t.about.story}</h3>
       <div class="story">
         {
           story.map((chapter) => (
             <article>
-              <h3>{chapter.title}</h3>
-              {chapter.paragraphs.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
+              <h4>{chapter.title}</h4>
+              <div>
+                {chapter.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
             </article>
           ))
         }
       </div>
-      <h3 class="subhead">{t.about.traits}</h3>
+
+      <h3 class="label">{t.about.traits}</h3>
       <div class="traits">
         {
           traits.map((trait) => (
@@ -123,35 +162,31 @@ const highlights = [
           ))
         }
       </div>
+
       <blockquote>{closing}</blockquote>
     </section>
 
-    <section aria-labelledby="portfolio">
-      <div class="section-head">
-        <h2 id="portfolio">{t.portfolio.title}</h2>
-        <a href={href('/portfolio/')}>{t.seeAll}</a>
-      </div>
-      <div class="cards">
-        {
-          portfolio.slice(0, 2).map((project) => (
-            <ProjectCard
-              project={project}
-              awardLabel={t.portfolio.award}
-              href={`${href('/portfolio/')}#${project.slug}`}
-            />
-          ))
-        }
-      </div>
-    </section>
-
+    <!-- 經歷、競賽、社群：只列標題和日期，細節留給各自的分頁 -->
     {
       highlights.map((section) => (
-        <section aria-labelledby={section.id}>
+        <section class="container" aria-labelledby={section.id}>
           <div class="section-head">
             <h2 id={section.id}>{section.label}</h2>
             <a href={section.href}>{t.seeAll}</a>
           </div>
-          <EntryList items={section.items} />
+          <ul class="brief">
+            {section.items.map((item) => (
+              <li>
+                <div>
+                  <p class="brief-title">
+                    {item.href ? <a href={item.href}>{item.title}</a> : item.title}
+                  </p>
+                  {item.subtitle && <p class="brief-sub">{item.subtitle}</p>}
+                </div>
+                <span class="date">{item.date}</span>
+              </li>
+            ))}
+          </ul>
         </section>
       ))
     }
@@ -169,7 +204,7 @@ const highlights = [
     max-width: 72rem;
     height: min(calc(100svh - 7rem), 52rem);
     min-height: 34rem;
-    margin: 1rem auto 4rem;
+    margin: 1rem auto 0;
     overflow: hidden;
     border-radius: 2rem;
     background: #9cc3e8;
@@ -302,12 +337,6 @@ const highlights = [
     transform: translateY(-2px);
   }
 
-  .lead {
-    margin: 0 0 2.5rem;
-    font-size: 1.25rem;
-    line-height: 1.6;
-  }
-
   @media (max-width: 720px) {
     .hero {
       width: calc(100% - 1rem);
@@ -341,45 +370,197 @@ const highlights = [
     .tags li {
       font-size: 0.8125rem;
     }
-
-    .lead {
-      font-size: 1.125rem;
-    }
   }
 
-  section {
-    margin-bottom: 3.5rem;
+  /* 主視覺以下：大量留白，區塊之間只用間距分隔 */
+  main {
+    padding-bottom: 8rem;
   }
 
-  .ruled {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--line);
+  main > section {
+    margin-top: 7rem;
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* 作品區標題對齊主視覺的寬度 */
+  .section-head.wide {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .section-head a {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+
+  .section-head a:hover {
+    color: var(--accent);
+  }
+
+  /* 橫向滑動作品列：滿版延伸到畫面邊緣，起點對齊上方標題，不用 JS */
+  .rail {
+    --inset: max(1.5rem, calc((100% - 72rem) / 2 + 1.5rem));
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0 var(--inset) 1rem;
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--inset);
+    scrollbar-width: none;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail li {
+    flex: 0 0 20rem;
+    scroll-snap-align: start;
+  }
+
+  .tile {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  /* 圖片統一放在淡色方框裡；手機截圖直式置中，橫式圖撐滿寬度 */
+  .frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5;
+    padding: 1.5rem;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+  }
+
+  .frame :global(img) {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 0.75rem;
+    transition: transform 0.4s ease;
+  }
+
+  .frame :global(img.portrait) {
+    border-radius: 1.25rem;
+  }
+
+  .tile:hover .frame :global(img) {
+    transform: scale(1.03);
+  }
+
+  .placeholder {
+    color: var(--muted);
+    font-size: 4rem;
+    font-weight: 600;
+  }
+
+  .tile h3 {
+    margin: 1.25rem 0 0;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .tile:hover h3 {
+    color: var(--accent);
+  }
+
+  .award {
+    margin: 0.375rem 0 0;
+    color: var(--accent);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .date {
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tile .date {
+    margin: 0.25rem 0 0;
+  }
+
+  /* 關於我：放寬一點的文字欄 */
+  .about {
+    max-width: 48rem;
+  }
+
+  .about h2 {
+    margin-bottom: 2rem;
+  }
+
+  .lead {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  .label {
+    margin: 5rem 0 2rem;
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  /* 故事：左邊窄欄放章節名，右邊放內文 */
+  .story article {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 2.5rem;
   }
 
   .story article + article {
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 
-  .story h3,
-  .subhead {
-    margin: 0 0 0.5rem;
-    font-size: 1.125rem;
+  h4 {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.6;
   }
 
   .story p {
-    margin: 0.5rem 0 0;
+    margin: 0;
   }
 
-  .subhead {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    color: var(--muted);
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+  .story p + p {
+    margin-top: 1rem;
   }
 
+  /* 特質：三個淡底小塊，不加框線 */
   .traits {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
@@ -387,15 +568,13 @@ const highlights = [
   }
 
   .traits article {
-    padding: 1.25rem;
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    background: var(--card);
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, var(--fg) 3%, var(--bg));
   }
 
-  h4 {
-    margin: 0 0 0.5rem;
-    font-size: 1rem;
+  .traits h4 {
+    margin-bottom: 0.5rem;
   }
 
   .traits p {
@@ -405,40 +584,110 @@ const highlights = [
   }
 
   blockquote {
-    margin: 2.5rem 0 0;
-    padding-left: 1.25rem;
-    border-left: 2px solid var(--accent);
+    max-width: 36rem;
+    margin: 5rem auto 0;
     color: var(--muted);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    text-align: center;
   }
 
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1rem;
+  /* 經歷精選：每項一行標題加日期，最多一行副標 */
+  .brief {
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .section-head {
+  .brief li {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 1rem;
+    gap: 1.5rem;
   }
 
-  h2 {
+  .brief li + li {
+    margin-top: 1.5rem;
+  }
+
+  .brief li > div {
+    min-width: 0;
+  }
+
+  .brief-title {
     margin: 0;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 0.04em;
+    font-weight: 500;
+    line-height: 1.5;
   }
 
-  .section-head a {
-    font-size: 0.875rem;
-    color: var(--muted);
+  .brief-title a {
     text-decoration: none;
   }
 
-  .section-head a:hover {
-    color: var(--accent);
+  .brief-sub {
+    margin: 0.125rem 0 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.875rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .brief .date {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 720px) {
+    main {
+      padding-bottom: 5rem;
+    }
+
+    main > section {
+      margin-top: 4rem;
+    }
+
+    .section-head {
+      margin-bottom: 1.5rem;
+    }
+
+    .rail {
+      gap: 1rem;
+    }
+
+    /* 手機上一張約八成寬，讓下一張露出一角 */
+    .rail li {
+      flex-basis: 80vw;
+    }
+
+    .frame {
+      padding: 1.25rem;
+    }
+
+    .label {
+      margin-top: 3.5rem;
+    }
+
+    .story article {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .story article + article {
+      margin-top: 2.5rem;
+    }
+
+    blockquote {
+      margin-top: 3.5rem;
+      font-size: 1.0625rem;
+    }
+
+    .brief li {
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .brief-sub {
+      white-space: normal;
+    }
   }
 </style>

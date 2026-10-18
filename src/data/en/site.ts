@@ -7,7 +7,7 @@ export const site = {
   description:
     'Cheng-Yeh Tsai is an Information Engineering and Computer Science student at Feng Chia University who builds for visionOS and iOS and researches mixed-reality systems for medical rehabilitation.',
   location: 'Taichung, Taiwan',
-  badge: { label: 'Raycast Ambassador', href: 'https://www.raycast.com/ambassadors' },
+  badge: { label: 'Raycast Ambassador', href: 'https://www.raycast.tw' },
   nickname: '瑞瑞 Ray',
   tagline: 'An iOS Developer',
   heroTags: ['visionOS', 'WWDC26 Attendee', 'NSTC Research Grant', 'Founder of Ban Feng Yu Jia', 'iOS Club President'],

@@ -36,7 +36,7 @@ export const portfolio: Project[] = [
     date: '2026.07',
     summary: '用文字描述氛圍，以 LLM 生成整場舞台燈光設定，並在 iPad 上預覽實景燈光。',
     body: [
-      '第一版用裝置端 Foundation Models 一次生成整場燈光，撐爆 4,096 token 的 context window。讀完官方文件後用 @Generable 固定格式，拆成兩階段：先生燈具骨架，再一個 cue 開一個 session，裝置端可生成 4–12 盞、2–6 個 cue 的整場燈光，後來改用雲端 LLM。',
+      '第一版用裝置端 Foundation Models 一次生成整場燈光，撐爆 4,096 token 的 context window。後來用 @Generable 固定格式，拆成兩階段：先生燈具骨架，再一個 cue 開一個 session，裝置端可生成 4–12 盞、2–6 個 cue 的整場燈光，後來改用雲端 LLM。',
     ],
     award: '行動應用創新賽（MAIC）三等獎',
     image: lumaStageImg,

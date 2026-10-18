@@ -38,7 +38,7 @@ export const story: { title: string; paragraphs: string[] }[] = [
   {
     title: 'At Apple Park',
     paragraphs: [
-      "In June 2026, I won an in-person spot at WWDC26 and went to Apple Park to watch the Keynote and attend sessions. At the Design Lab, an Apple designer suggested I bring the entire LumaStage experience into Vision Pro. At Bitrig Bash, the lead for Apple Foundation Models advised me to get the existing features right first. Back in Taiwan, I read the Foundation Models documentation from start to finish and rewrote LumaStage's generation pipeline. I also learned that instead of constantly adding features, it's better to make the core experience as good as it can be.",
+      "In June 2026, I won an in-person spot at WWDC26 and went to Apple Park to watch the Keynote and attend sessions. The trip also taught me that instead of constantly adding features, it's better to make the core experience as good as it can be.",
       "What I learned most had nothing to do with technology. Apple got every detail of the event right, and everyone's confidence and joy were contagious. It made me feel like I belonged there.",
     ],
   },

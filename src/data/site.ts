@@ -8,7 +8,7 @@ export const site = {
   description:
     '蔡承曄，逢甲大學資訊工程學系學生，做 visionOS 與 iOS 開發，研究混合實境醫療復健系統。',
   location: 'Taichung, Taiwan',
-  badge: { label: 'Raycast Ambassador', href: 'https://www.raycast.com/ambassadors' },
+  badge: { label: 'Raycast Ambassador', href: 'https://www.raycast.tw' },
   nickname: '瑞瑞 Ray',
   tagline: 'An iOS Developer',
   heroTags: ['visionOS', 'WWDC26 實體參加', '國科會研究計畫', '半逢遇甲 Founder', 'iOS Club 社長'],

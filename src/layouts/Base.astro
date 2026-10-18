@@ -51,7 +51,7 @@ const year = new Date().getFullYear();
         <span class="brand-mark">
           <Image src={avatar} alt="" width={28} height={28} densities={[1, 2, 3]} loading="eager" />
         </span>
-        <span class="brand-name">{site.name}</span>
+        <span class="visually-hidden">{site.name}</span>
       </a>
       <nav aria-label={t.mainNav}>
         <ul>
@@ -79,26 +79,25 @@ const year = new Date().getFullYear();
 </html>
 
 <style>
-  /* 參考 iOSClub.tw：浮在頁面上方的毛玻璃膠囊導覽列 */
+  /* 置中的小膠囊導覽列：只放頭像和連結，寬度跟著內容走 */
   .site-header {
     position: sticky;
-    top: 1rem;
+    top: 0.875rem;
     z-index: 50;
     isolation: isolate;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    width: calc(100% - 2rem);
-    max-width: 72rem;
-    margin: 1rem auto 0;
-    padding: 0.625rem 0.75rem 0.625rem 1rem;
+    gap: 0.25rem;
+    width: fit-content;
+    max-width: calc(100% - 1.5rem);
+    margin: 0.875rem auto 0;
+    padding: 0.3125rem;
     border: 1px solid var(--glass-border);
     border-radius: 999px;
     background: var(--glass-bg);
     box-shadow:
-      inset 0 1px 0 var(--glass-highlight),
-      0 4px 24px var(--glass-shadow),
-      0 1px 4px var(--glass-shadow-soft);
+      0 4px 20px var(--glass-shadow),
+      0 1px 3px var(--glass-shadow-soft);
   }
 
   /* 模糊放在偽元素上，避免 backdrop-filter 影響子元素的定位 */
@@ -108,132 +107,87 @@ const year = new Date().getFullYear();
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    backdrop-filter: saturate(180%) blur(16px);
-    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
     pointer-events: none;
   }
 
   .brand {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 0.625rem;
-    color: var(--fg);
-    text-decoration: none;
-  }
-
-  .brand:hover {
-    color: var(--fg);
-  }
-
-  .brand-mark {
     display: grid;
+    flex-shrink: 0;
     place-items: center;
     width: 2.25rem;
     height: 2.25rem;
-    border: 1px solid var(--glass-border);
     border-radius: 999px;
-    background: var(--glass-chip);
-    box-shadow: inset 0 1px 2px var(--glass-highlight);
-    transition: transform 0.3s, background 0.3s;
+    transition: transform 0.2s;
   }
 
-  .brand:hover .brand-mark {
-    transform: scale(1.05);
+  .brand:hover {
+    transform: scale(1.06);
   }
 
+  .brand-mark,
   .brand-mark :global(img) {
     display: block;
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 999px;
     object-fit: cover;
   }
 
-  .brand-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    white-space: nowrap;
-  }
-
   nav {
-    flex: 1;
     min-width: 0;
   }
 
   nav ul {
     display: flex;
-    gap: 0.25rem;
+    gap: 0.125rem;
     margin: 0;
-    padding: 0 1rem;
+    padding: 0;
     list-style: none;
     overflow-x: auto;
     scrollbar-width: none;
   }
 
-  nav li {
-    flex: 1;
-  }
-
   nav a {
     display: block;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid transparent;
+    padding: 0.4375rem 0.875rem;
     border-radius: 999px;
     color: var(--nav-fg);
-    font-size: 1rem;
+    font-size: 0.9375rem;
     font-weight: 500;
-    text-align: center;
     text-decoration: none;
     white-space: nowrap;
-    transition: all 0.3s;
+    transition: background 0.2s, color 0.2s;
   }
 
-  nav a:hover,
+  nav a:hover {
+    color: var(--nav-active);
+    background: var(--glass-chip);
+  }
+
   nav a[aria-current='page'] {
     color: var(--nav-active);
     background: var(--glass-chip);
-    border-color: var(--glass-border);
-    box-shadow:
-      inset 0 1px 0 var(--glass-highlight),
-      0 2px 8px rgba(0, 0, 0, 0.06);
-  }
-
-  nav a[aria-current='page'] {
     font-weight: 600;
   }
 
-  /* 手機：膠囊改成兩行的圓角卡片，上排名字，下排五個連結 */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
   @media (max-width: 720px) {
     .site-header {
-      flex-wrap: wrap;
-      gap: 0.25rem 0.5rem;
-      padding: 0.5rem;
-      border-radius: 1.5rem;
-    }
-
-    .brand-name {
-      font-size: 1.0625rem;
-    }
-
-    nav {
-      order: 3;
-      flex-basis: 100%;
-    }
-
-    nav ul {
-      justify-content: space-between;
       gap: 0;
-      padding: 0;
-    }
-
-    nav li {
-      flex: none;
     }
 
     nav a {
-      padding: 0.375rem 0.375rem;
+      padding: 0.4375rem 0.5rem;
       font-size: 0.8125rem;
     }
   }

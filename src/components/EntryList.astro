@@ -35,15 +35,11 @@ const { items, detailed = false } = Astro.props;
 
 <style>
   .entries {
+    display: grid;
+    gap: 2rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .entries > li {
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--line);
   }
 
   .entry-head {
@@ -56,6 +52,8 @@ const { items, detailed = false } = Astro.props;
   h3 {
     margin: 0;
     font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.45;
   }
 
   .date {
@@ -90,8 +88,8 @@ const { items, detailed = false } = Astro.props;
 
   .tags li {
     padding: 0.125rem 0.625rem;
-    border: 1px solid var(--line);
     border-radius: 999px;
+    background: var(--card);
     font-size: 0.75rem;
     color: var(--muted);
   }

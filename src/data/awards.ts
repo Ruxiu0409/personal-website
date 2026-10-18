@@ -27,7 +27,7 @@ export const awardSections: Section[] = [
         subtitle: 'LumaStage・產品經理、主要開發',
         date: '2026.07',
         description:
-          '用文字描述氛圍就生成整場舞台燈光。第一版用裝置端 Foundation Models 一次生成整場燈光，撐爆 4,096 token 的 context window；讀完官方文件後用 @Generable 固定格式、拆成兩階段生成，裝置端可生成 4–12 盞、2–6 個 cue 的整場燈光。',
+          '用文字描述氛圍就生成整場舞台燈光。第一版用裝置端 Foundation Models 一次生成整場燈光，撐爆 4,096 token 的 context window；後來用 @Generable 固定格式、拆成兩階段生成，裝置端可生成 4–12 盞、2–6 個 cue 的整場燈光。',
         tags: ['Foundation Models', 'RealityKit', 'ARKit'],
       },
       {

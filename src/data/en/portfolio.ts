@@ -38,7 +38,7 @@ export const portfolio: Project[] = [
     summary:
       'Describe a mood in words and an LLM generates the lighting setup for an entire stage, which you can preview in the real venue on iPad.',
     body: [
-      'My first version generated the whole show in one pass with on-device Foundation Models and blew past the 4,096-token context window. After reading the official docs, I locked the output format with @Generable and split generation into two stages: first the lighting rig, then one session per cue. It now generates complete shows of 4–12 lights and 2–6 cues on device; we later switched to a cloud LLM.',
+      'My first version generated the whole show in one pass with on-device Foundation Models and blew past the 4,096-token context window. I then locked the output format with @Generable and split generation into two stages: first the lighting rig, then one session per cue. It now generates complete shows of 4–12 lights and 2–6 cues on device; we later switched to a cloud LLM.',
     ],
     award: 'Third Prize, Mobile App Innovation Contest (MAIC)',
     image: lumaStageImg,

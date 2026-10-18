@@ -73,7 +73,6 @@ export const communitySections: Section[] = [
         description:
           'Won an in-person spot through the lottery as an Apple Developer Program member and attended the Keynote, sessions and Design Lab.',
         body: [
-          'At the Design Lab I discussed the spatial computing experience of LumaStage with Apple designers, who suggested bringing the entire experience to Vision Pro.',
           "During those days at Apple Park I saw how Apple Intelligence is making its way into everyday life. But what I learned most had nothing to do with technology: every detail of an experience can be done well, and the confidence and joy of everyone there was contagious. I want to bring that spirit back to the community in Taiwan.",
         ],
       },
@@ -81,8 +80,7 @@ export const communitySections: Section[] = [
         title: 'Bitrig Bash',
         subtitle: 'Santana Row, San Jose',
         date: '2026.06.11',
-        description:
-          'Met the lead of Apple Foundation Models, who advised me to get the core features right first. Back in Taiwan I read through the Foundation Models documentation and rewrote the LumaStage generation pipeline.',
+        description: 'A developer party hosted by the Bitrig team during WWDC week.',
       },
       {
         title: 'build fridays sf',

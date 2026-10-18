@@ -27,7 +27,7 @@ export const awardSections: Section[] = [
         subtitle: 'LumaStage · Product manager & lead developer',
         date: '2026.07',
         description:
-          'Describe a mood in words and get a full stage lighting show. My first version generated the whole show in one pass with on-device Foundation Models and blew past the 4,096-token context window. After reading the official docs, I locked the output format with @Generable and split generation into two stages; it now generates complete shows of 4–12 lights and 2–6 cues on device.',
+          'Describe a mood in words and get a full stage lighting show. My first version generated the whole show in one pass with on-device Foundation Models and blew past the 4,096-token context window. I then locked the output format with @Generable and split generation into two stages; it now generates complete shows of 4–12 lights and 2–6 cues on device.',
         tags: ['Foundation Models', 'RealityKit', 'ARKit'],
       },
       {

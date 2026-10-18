@@ -69,7 +69,6 @@ export const communitySections: Section[] = [
         date: '2026.06.07 – 09',
         description: '以 Apple Developer Program 會員身分抽中實體名額，參加 Keynote、議程與 Design Lab。',
         body: [
-          '在 Design Lab 和 Apple 設計師討論 LumaStage 的空間運算體驗，得到把整個體驗放進 Vision Pro 的建議。',
           '在 Apple Park 的那幾天，我看見 Apple Intelligence 如何走進日常生活。但我學到最多的其實跟技術無關，而是發現每個體驗的細節都可以做得很好，現場每個人散發的自信與快樂互相感染。我希望把這份理念帶回台灣的社群。',
         ],
       },
@@ -77,8 +76,7 @@ export const communitySections: Section[] = [
         title: 'Bitrig Bash',
         subtitle: 'Santana Row，San Jose',
         date: '2026.06.11',
-        description:
-          '認識 Apple Foundation Models 的負責人，他建議我先把原本的功能做好。回台後讀完 Foundation Models 文件，改寫了 LumaStage 的生成流程。',
+        description: 'Bitrig 團隊在 WWDC 週舉辦的開發者派對。',
       },
       {
         title: 'build fridays sf',
