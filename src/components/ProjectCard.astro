@@ -1,0 +1,184 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../data/site';
+
+interface Props {
+  project: Project;
+  /** 作品集頁顯示完整段落；首頁只顯示摘要 */
+  detailed?: boolean;
+  awardLabel: string;
+  href?: string;
+}
+
+const { project, detailed = false, awardLabel, href } = Astro.props;
+---
+
+<article class="card" id={detailed ? project.slug : undefined}>
+  {
+    project.image && (
+      <div class="media">
+        <Image
+          src={project.image}
+          alt={project.imageAlt ?? project.title}
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 720px) 100vw, 22rem"
+        />
+      </div>
+    )
+  }
+  <div class="content">
+    <div class="head">
+      <h3>{href ? <a href={href}>{project.title}</a> : project.title}</h3>
+      <span class="date">{project.date}</span>
+    </div>
+    <p class="role">{project.role}</p>
+    {
+      project.award && (
+        <p class="award">
+          <span class="visually-hidden">{awardLabel}：</span>
+          {project.award}
+        </p>
+      )
+    }
+    <p class="summary">{project.summary}</p>
+    {detailed && project.body?.map((paragraph) => <p class="body">{paragraph}</p>)}
+    <ul class="tags">
+      {project.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    {
+      detailed && project.links && project.links.length > 0 && (
+        <p class="links">
+          {project.links.map((link) => (
+            <a href={link.href} rel="noopener">
+              {link.label} ↗
+            </a>
+          ))}
+        </p>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: var(--card);
+    scroll-margin-top: 6rem;
+  }
+
+  /* 固定高度，直式手機截圖與橫式截圖都完整放進來 */
+  .media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15rem;
+    padding: 1.25rem;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--line) 60%, transparent), transparent);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .media :global(img) {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+
+  .date {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .role {
+    margin-top: 0.125rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .award {
+    align-self: flex-start;
+    margin-top: 0.75rem;
+    padding: 0.125rem 0.625rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+
+  .summary {
+    margin-top: 0.75rem;
+  }
+
+  .body {
+    margin-top: 0.75rem;
+    color: var(--muted);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: auto 0 0;
+    padding: 1rem 0 0;
+    list-style: none;
+  }
+
+  .tags li {
+    padding: 0.125rem 0.625rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>

@@ -3,6 +3,30 @@ import type { Section } from '../site';
 
 export const communitySections: Section[] = [
   {
+    id: 'clubs',
+    label: 'Student Organizations',
+    items: [
+      {
+        title: 'Feng Chia University (FCU) iOS Club',
+        subtitle: 'Head of Teaching (8th term) · President (9th term) · Advisor (10th term)',
+        date: '2024.08 – Present',
+        description:
+          'Grew membership from 47 to 175 during my term, with more than half from outside computing majors.',
+        body: [
+          "When I took over as president, the club had only 47 members. I had the marketing team proactively reply to Threads posts mentioning FCU, student clubs or iOS, partnered with four departments (Information Engineering, AI, Finance, and Applied Mathematics) to promote the club in their classes, and added a hands-on class session to the freshman welcome tea, reaching 219 students in total. Within one semester membership grew to 175, and over the year members earned 117 Apple Regional Training Center course certificates.",
+          'After membership tripled, I set up weekly department meetings and regular officer meetings, and pushed for a club wiki documenting responsibilities, event workflows and past mistakes. In my second year I founded a design track, and in my third year replaced it with a maker track. I turned the end-of-semester showcase into a mock competition with 72 members taking part, and 32 of them went on to enter external competitions over winter break.',
+        ],
+      },
+      {
+        title: 'Google Developer Groups on Campus FCU',
+        subtitle: 'Associate Lead (Vice President) · Advisor',
+        date: '2025.08 – Present',
+        description:
+          'Co-hosted talks and workshops with the iOS Club, inviting developers from World, Zeabur and Forest to speak.',
+      },
+    ],
+  },
+  {
     id: 'roles',
     label: 'Organizer & Speaker',
     items: [

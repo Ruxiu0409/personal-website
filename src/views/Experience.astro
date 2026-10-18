@@ -1,8 +1,123 @@
 ---
 import Page from '../layouts/Page.astro';
+import EntryList from '../components/EntryList.astro';
 import { useI18n } from '../i18n';
 
 const { t, data } = useI18n(Astro.url);
+const { education, experienceSections, languages, skills } = data;
 ---
 
-<Page title={t.experience.title} lead={t.experience.lead} sections={data.experienceSections} />
+<Page title={t.experience.title} lead={t.experience.lead} sections={experienceSections}>
+  <section slot="before" aria-labelledby="education">
+    <h2 id="education">{t.experience.education}</h2>
+    <EntryList items={education} />
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">{t.experience.skills}</h2>
+    <h3>{t.experience.languages}</h3>
+    <ul class="languages">
+      {
+        languages.map(({ name, icon: Icon }) => (
+          <li>
+            <Icon width={36} height={36} aria-hidden="true" />
+            <span>{name}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <dl>
+      {
+        skills.map((skill) => (
+          <div>
+            <dt>{skill.label}</dt>
+            <dd>{skill.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</Page>
+
+<style>
+  section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 6rem;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .languages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+  }
+
+  .languages li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1.25rem 0.5rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .languages li:hover {
+    border-color: var(--muted);
+    transform: translateY(-2px);
+  }
+
+  /* 單色灰色剪影，滑鼠移上去時變深 */
+  .languages :global(svg) {
+    display: block;
+    color: var(--muted);
+    transition: color 0.15s;
+  }
+
+  .languages li:hover :global(svg) {
+    color: var(--fg);
+  }
+
+  dl {
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  dt {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  dd {
+    margin: 0;
+  }
+</style>

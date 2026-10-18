@@ -3,6 +3,28 @@ import type { Section } from './site';
 
 export const communitySections: Section[] = [
   {
+    id: 'clubs',
+    label: '社團',
+    items: [
+      {
+        title: '逢甲大學 iOS Club',
+        subtitle: '第 8 屆教學長・第 9 屆社長・第 10 屆顧問',
+        date: '2024.08 – 現在',
+        description: '任內社員從 47 人成長到 175 人，非資訊系超過一半。',
+        body: [
+          '接手社長時社團只有 47 人。我讓行銷部在 Threads 主動回覆提到逢甲、社團、iOS 的貼文，並與資訊、AI、財金、應數四系合作入班宣傳，新生茶會加入社課體驗，共 219 位同學參與。一學期社員成長到 175 人，全年 117 人次取得 Apple Regional Training Center 修課證明。',
+          '人數暴增三倍後，我建立部門週會與幹部例會，推動社團 Wiki，把權責、活動流程和曾經犯過的錯寫成文件。大二創立設計線、大三改開創客線，學期末把成果發表升級成模擬競賽，72 位社員參與，寒假有 32 位繼續投入校外競賽。',
+        ],
+      },
+      {
+        title: 'Google Developer Groups on Campus FCU',
+        subtitle: 'Associate Lead（副社長）・顧問',
+        date: '2025.08 – 現在',
+        description: '與 iOS Club 合辦講座與工作坊，邀請 World、Zeabur 與專注森林的開發者分享。',
+      },
+    ],
+  },
+  {
     id: 'roles',
     label: '主辦與講者',
     items: [

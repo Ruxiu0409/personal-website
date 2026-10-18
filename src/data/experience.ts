@@ -40,41 +40,6 @@ export const experienceSections: Section[] = [
     ],
   },
   {
-    id: 'projects',
-    label: '作品',
-    items: [
-      {
-        title: '半逢遇甲',
-        subtitle: 'Founder',
-        date: '2024.10 – 現在',
-        description: '逢甲校園資訊整合 App，首次下載超過 12,000 次，App Store 評分 4.9。',
-        body: [
-          '學校官方 App 的課表要上下左右滑動才找得到課，我想讓學生一眼看到整週。上架第一天登上 App Store 工具程式免費榜第 2 名；上線一週後 277 位使用者的系統易用性量表（SUS）平均 82.9 分，淨推薦值（NPS）+56。',
-          '功能包含課表與桌面、鎖定畫面小工具，MyFCU、iLearn 單一登入，iLearn 作業提醒，停車位與公車查詢，特約商店與校園美食地圖。帳號密碼只放在 Keychain，課表透過 App Group 分享給小工具，共用的 Swift Package 讓 App、小工具與 Android 版跑同一套課表邏輯，目前正以 Skip 移植 Android 版。',
-        ],
-        href: 'https://apps.apple.com/tw/app/id6736971566',
-        tags: ['SwiftUI', 'WidgetKit', 'Firebase', 'MVVM'],
-      },
-      {
-        title: '行動逢甲',
-        subtitle: 'Developer',
-        date: '2024.12 – 2025.06',
-        description: '逢甲大學官方校園 App，以 Flutter 開發，負責四項功能。',
-        body: [
-          '做了課表 Widget，讓同學在主畫面就能看到課表；校園地圖以 Google Maps Platform 的 3D Maps 呈現立體校園建築並規劃步行路線；把各課程在 iLearn 上的作業整理成一份清單；並改版校園行事曆。',
-        ],
-        tags: ['Flutter'],
-      },
-      {
-        title: 'LumaStage',
-        subtitle: '產品經理、主要開發',
-        date: '2026',
-        description: '用文字描述氛圍，以 LLM 生成整場舞台燈光設定，並在 iPad 上預覽實景燈光。',
-        tags: ['SwiftUI', 'Foundation Models', 'RealityKit'],
-      },
-    ],
-  },
-  {
     id: 'work',
     label: '工作經歷',
     items: [
@@ -105,28 +70,6 @@ export const experienceSections: Section[] = [
         subtitle: '工作人員・課程助教',
         date: '2024 – 2026',
         description: '葳格國際學校、永安國小資優班程式營隊，三年累計服務 29 小時。',
-      },
-    ],
-  },
-  {
-    id: 'clubs',
-    label: '社團',
-    items: [
-      {
-        title: '逢甲大學 iOS Club',
-        subtitle: '第 8 屆教學長・第 9 屆社長・第 10 屆顧問',
-        date: '2024.08 – 現在',
-        description: '任內社員從 47 人成長到 175 人，非資訊系超過一半。',
-        body: [
-          '接手社長時社團只有 47 人。我讓行銷部在 Threads 主動回覆提到逢甲、社團、iOS 的貼文，並與資訊、AI、財金、應數四系合作入班宣傳，新生茶會加入社課體驗，共 219 位同學參與。一學期社員成長到 175 人，全年 117 人次取得 Apple Regional Training Center 修課證明。',
-          '人數暴增三倍後，我建立部門週會與幹部例會，推動社團 Wiki，把權責、活動流程和曾經犯過的錯寫成文件。大二創立設計線、大三改開創客線，學期末把成果發表升級成模擬競賽，72 位社員參與，寒假有 32 位繼續投入校外競賽。',
-        ],
-      },
-      {
-        title: 'Google Developer Groups on Campus FCU',
-        subtitle: 'Associate Lead（副社長）・顧問',
-        date: '2025.08 – 現在',
-        description: '與 iOS Club 合辦講座與工作坊，邀請 World、Zeabur 與專注森林的開發者分享。',
       },
     ],
   },

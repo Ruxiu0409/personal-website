@@ -5,42 +5,44 @@ import * as zhAbout from './data/about';
 import * as zhExperience from './data/experience';
 import * as zhAwards from './data/awards';
 import * as zhCommunity from './data/community';
+import * as zhPortfolio from './data/portfolio';
 import * as enSite from './data/en/site';
 import * as enAbout from './data/en/about';
 import * as enExperience from './data/en/experience';
 import * as enAwards from './data/en/awards';
 import * as enCommunity from './data/en/community';
+import * as enPortfolio from './data/en/portfolio';
 
 export type Locale = 'zh' | 'en';
 
 export const locales: Record<Locale, { htmlLang: string; prefix: string; label: string }> = {
-  zh: { htmlLang: 'zh-Hant', prefix: '', label: '中文' },
+  zh: { htmlLang: 'zh-Hant', prefix: '', label: '繁體中文' },
   en: { htmlLang: 'en', prefix: '/en', label: 'English' },
 };
 
-export const pages = ['/', '/about/', '/experience/', '/awards/', '/community/'] as const;
+export const pages = ['/', '/portfolio/', '/experience/', '/awards/', '/community/'] as const;
 
 export const ui = {
   zh: {
-    nav: ['首頁', '關於我', '個人經歷', '競賽', '社群與活動'],
+    nav: ['首頁', '作品集', '個人經歷', '競賽', '社群與活動'],
     mainNav: '主選單',
     socialNav: '社群連結',
     toc: '本頁章節',
     seeAll: '看全部 →',
-    moreAbout: '更多關於我',
     rights: 'All rights reserved.',
-    about: {
-      title: '關於我',
+    about: { title: '關於我', story: '學習歷程', traits: '個人特質' },
+    portfolio: {
+      title: '作品集',
+      lead: '從校園 App 到 Apple Vision Pro 上的復健系統，這些是我做過的作品。',
+      award: '獲獎',
+    },
+    experience: {
+      title: '個人經歷',
+      lead: '教育背景、研究、論文、工作、教學、證照與技能。',
       education: '教育背景',
-      community: '社群經歷',
-      communityMore: '看全部社群與活動 →',
-      links: '社群連結',
-      story: '學習歷程',
-      traits: '個人特質',
       skills: '技能專長',
       languages: '程式語言',
     },
-    experience: { title: '個人經歷', lead: '研究、論文、作品、工作、教學、社團與證照。' },
     awards: {
       title: '競賽',
       lead: '對我來說，比賽不是目的，而是逼自己學新東西最快的方式。每一場比賽，我都讓自己學一樣新東西。',
@@ -53,27 +55,24 @@ export const ui = {
     notFound: { title: '找不到這個頁面', back: '回到首頁' },
   },
   en: {
-    nav: ['Home', 'About', 'Experience', 'Awards', 'Community'],
+    nav: ['Home', 'Portfolio', 'Experience', 'Awards', 'Community'],
     mainNav: 'Main navigation',
     socialNav: 'Social links',
     toc: 'On this page',
     seeAll: 'See all →',
-    moreAbout: 'More about me',
     rights: 'All rights reserved.',
-    about: {
-      title: 'About',
-      education: 'Education',
-      community: 'Community',
-      communityMore: 'See all community & events →',
-      links: 'Links',
-      story: 'My Story',
-      traits: 'What Drives Me',
-      skills: 'Skills',
-      languages: 'Programming Languages',
+    about: { title: 'About Me', story: 'My Story', traits: 'What Drives Me' },
+    portfolio: {
+      title: 'Portfolio',
+      lead: "From a campus app to a rehabilitation system on Apple Vision Pro, here's what I've built.",
+      award: 'Award',
     },
     experience: {
       title: 'Experience',
-      lead: 'Research, publications, projects, work, teaching, student organizations, and certifications.',
+      lead: 'Education, research, publications, work, teaching, certifications, and skills.',
+      education: 'Education',
+      skills: 'Skills',
+      languages: 'Programming Languages',
     },
     awards: {
       title: 'Awards',
@@ -89,8 +88,8 @@ export const ui = {
 } satisfies Record<Locale, unknown>;
 
 const content = {
-  zh: { ...zhSite, ...zhAbout, ...zhExperience, ...zhAwards, ...zhCommunity },
-  en: { ...enSite, ...enAbout, ...enExperience, ...enAwards, ...enCommunity },
+  zh: { ...zhSite, ...zhAbout, ...zhExperience, ...zhAwards, ...zhCommunity, ...zhPortfolio },
+  en: { ...enSite, ...enAbout, ...enExperience, ...enAwards, ...enCommunity, ...enPortfolio },
 };
 
 /** 由網址判斷語言：/en/ 開頭是英文，其餘是中文。 */

@@ -1,0 +1,21 @@
+---
+import Page from '../layouts/Page.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { useI18n } from '../i18n';
+
+const { t, data } = useI18n(Astro.url);
+---
+
+<Page title={t.portfolio.title} lead={t.portfolio.lead}>
+  <div class="grid">
+    {data.portfolio.map((project) => <ProjectCard project={project} detailed awardLabel={t.portfolio.award} />)}
+  </div>
+</Page>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 1.25rem;
+  }
+</style>

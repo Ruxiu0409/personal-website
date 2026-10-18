@@ -13,23 +13,6 @@ export const education: Entry[] = [
   },
 ];
 
-export const communityRoles: Entry[] = [
-  { title: 'Raycast Community Taiwan', subtitle: 'Taiwan Ambassador', date: '2026.06 – Present' },
-  { title: 'iPlayground 2026', subtitle: 'Student Community Lead', date: '2026.07' },
-  { title: 'Swift Students Cafe Taiwan', subtitle: 'Organizer · Host · Speaker', date: '2026.07' },
-  { title: 'World Taichung Developer Workshop', subtitle: 'Speaker', date: '2025.11' },
-  {
-    title: 'Google Developer Groups on Campus FCU',
-    subtitle: 'Associate Lead (Vice President) · Advisor',
-    date: '2025.08 – Present',
-  },
-  {
-    title: 'FCU iOS Club',
-    subtitle: 'Head of Teaching (8th term) · President (9th term) · Advisor (10th term)',
-    date: '2024.08 – Present',
-  },
-];
-
 export const story: { title: string; paragraphs: string[] }[] = [
   {
     title: 'From Member to President',
@@ -98,4 +81,5 @@ export const skills: { label: string; value: string }[] = [
   },
   { label: 'AI', value: 'Core ML, Vision Framework, MediaPipe, YOLO, BERT, Whisper, RAG' },
   { label: 'Cloud', value: 'Firebase, Supabase, Google Cloud Run, Cloudflare Workers' },
+  { label: 'Device Management', value: 'Jamf School' },
 ];

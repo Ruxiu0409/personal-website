@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import EntryList from '../components/EntryList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import avatar from '../assets/avatar.jpg';
 // Raycast 標誌取自 Simple Icons（CC0）。
 import RaycastIcon from '../assets/icons/raycast.svg';
@@ -9,7 +10,7 @@ import type { Entry } from '../data/site';
 import { useI18n } from '../i18n';
 
 const { t, data, href } = useI18n(Astro.url);
-const { site, experienceSections, awardSections, communitySections } = data;
+const { site, experienceSections, awardSections, communitySections, portfolio, story, traits, closing } = data;
 
 const pick = (sections: { id: string; items: Entry[] }[], id: string, count: number) =>
   sections.find((section) => section.id === id)?.items.slice(0, count) ?? [];
@@ -19,7 +20,7 @@ const highlights = [
     id: 'experience',
     label: t.experience.title,
     href: href('/experience/'),
-    items: [...pick(experienceSections, 'research', 1), ...pick(experienceSections, 'projects', 1)],
+    items: [...pick(experienceSections, 'research', 1), ...pick(experienceSections, 'publications', 1)],
   },
   {
     id: 'awards',
@@ -55,12 +56,59 @@ const highlights = [
       />
       <p class="eyebrow">{site.location}</p>
       <h1>{site.name} <span class="name-en">{site.nameEn}</span></h1>
+      <p class="nickname">{site.nickname}</p>
       <p class="tagline">{site.tagline}</p>
-      <p class="intro">{site.intro} <a href={href('/about/')}>{t.moreAbout}</a></p>
+      <p class="intro">{site.intro}</p>
       <nav class="links" aria-label={t.socialNav}>
         {site.links.map((link) => <a href={link.href}>{link.label}</a>)}
       </nav>
     </header>
+
+    <section aria-labelledby="about">
+      <h2 id="about" class="ruled">{t.about.title}</h2>
+      <div class="story">
+        {
+          story.map((chapter) => (
+            <article>
+              <h3>{chapter.title}</h3>
+              {chapter.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </article>
+          ))
+        }
+      </div>
+      <h3 class="subhead">{t.about.traits}</h3>
+      <div class="traits">
+        {
+          traits.map((trait) => (
+            <article>
+              <h4>{trait.title}</h4>
+              <p>{trait.paragraph}</p>
+            </article>
+          ))
+        }
+      </div>
+      <blockquote>{closing}</blockquote>
+    </section>
+
+    <section aria-labelledby="portfolio">
+      <div class="section-head">
+        <h2 id="portfolio">{t.portfolio.title}</h2>
+        <a href={href('/portfolio/')}>{t.seeAll}</a>
+      </div>
+      <div class="cards">
+        {
+          portfolio.slice(0, 2).map((project) => (
+            <ProjectCard
+              project={project}
+              awardLabel={t.portfolio.award}
+              href={`${href('/portfolio/')}#${project.slug}`}
+            />
+          ))
+        }
+      </div>
+    </section>
 
     {
       highlights.map((section) => (
@@ -140,28 +188,33 @@ const highlights = [
     letter-spacing: -0.03em;
   }
 
+  /* 英文名放在中文名右邊，同一行、底線對齊 */
   .name-en {
-    display: block;
-    margin-top: 0.5rem;
+    display: inline-block;
+    margin-left: 0.75rem;
     font-size: 1.125rem;
     font-weight: 500;
     color: var(--muted);
     letter-spacing: 0;
   }
 
+  .nickname {
+    margin: 0.75rem 0 0;
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
   .tagline {
-    margin: 1rem 0 0;
-    font-size: 1.25rem;
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+    font-size: 1.125rem;
   }
 
   .intro {
     margin: 1.25rem 0 0;
     color: var(--muted);
     max-width: 36rem;
-  }
-
-  .intro a {
-    color: var(--fg);
   }
 
   .links {
@@ -174,6 +227,72 @@ const highlights = [
 
   section {
     margin-bottom: 3.5rem;
+  }
+
+  .ruled {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .story article + article {
+    margin-top: 2rem;
+  }
+
+  .story h3,
+  .subhead {
+    margin: 0 0 0.5rem;
+    font-size: 1.125rem;
+  }
+
+  .story p {
+    margin: 0.5rem 0 0;
+  }
+
+  .subhead {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .traits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1rem;
+  }
+
+  .traits article {
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: var(--card);
+  }
+
+  h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  .traits p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  blockquote {
+    margin: 2.5rem 0 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
   }
 
   .section-head {

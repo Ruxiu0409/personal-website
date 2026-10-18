@@ -32,6 +32,8 @@ const { site } = data;
       )
     }
 
+    <slot name="before" />
+
     {
       sections.map((section) => (
         <section aria-labelledby={section.id}>
@@ -86,7 +88,7 @@ const { site } = data;
 
   section {
     margin-bottom: 3.5rem;
-    scroll-margin-top: 4rem;
+    scroll-margin-top: 6rem;
   }
 
   h2 {
