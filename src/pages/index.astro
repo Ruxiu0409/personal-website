@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import avatar from '../assets/avatar.jpg';
 import { site, projects } from '../data/site';
 
 const year = new Date().getFullYear();
@@ -8,6 +10,15 @@ const year = new Date().getFullYear();
 <Base>
   <main class="container">
     <header class="hero">
+      <Image
+        class="avatar"
+        src={avatar}
+        alt={site.name}
+        width={112}
+        height={112}
+        densities={[1, 2, 3]}
+        loading="eager"
+      />
       <p class="eyebrow">{site.location}</p>
       <h1>{site.name}</h1>
       <p class="tagline">{site.tagline}</p>
@@ -47,6 +58,16 @@ const year = new Date().getFullYear();
 <style>
   .hero {
     padding: 7rem 0 4rem;
+  }
+
+  .avatar {
+    display: block;
+    width: 7rem;
+    height: 7rem;
+    margin-bottom: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
   }
 
   .eyebrow {
