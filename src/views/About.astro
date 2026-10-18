@@ -80,7 +80,7 @@ const { site, education, communityRoles, story, traits, closing, languages, skil
       {
         languages.map(({ name, icon: Icon }) => (
           <li>
-            <Icon width={40} height={40} aria-hidden="true" />
+            <Icon width={36} height={36} aria-hidden="true" />
             <span>{name}</span>
           </li>
         ))
@@ -223,8 +223,15 @@ const { site, education, communityRoles, story, traits, closing, languages, skil
     transform: translateY(-2px);
   }
 
+  /* 單色灰色剪影，滑鼠移上去時變深 */
   .languages :global(svg) {
     display: block;
+    color: var(--muted);
+    transition: color 0.15s;
+  }
+
+  .languages li:hover :global(svg) {
+    color: var(--fg);
   }
 
   dl {

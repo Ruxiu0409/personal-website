@@ -1,6 +1,6 @@
 // 「關於我」頁，改寫自推甄自傳。
 import type { Entry } from './site';
-// 程式語言圖示取自 Devicon（MIT License，https://devicon.dev）。
+// 程式語言圖示取自 Simple Icons（CC0，https://simpleicons.org），單色剪影；Java 用 OpenJDK 圖示（Simple Icons 沒有收錄 Java 商標）。
 import SwiftIcon from '../assets/icons/swift.svg';
 import DartIcon from '../assets/icons/dart.svg';
 import TypeScriptIcon from '../assets/icons/typescript.svg';
