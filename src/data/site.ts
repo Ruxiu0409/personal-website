@@ -11,9 +11,17 @@ export const site = {
   tagline: '混合實境醫療復健系統｜visionOS、iOS 應用開發',
   intro:
     '逢甲大學資訊工程學系四年級。執行國科會大專學生研究計畫，在 Apple Vision Pro 上做中風後視覺空間忽略的評估與訓練系統。做過首次下載超過一萬兩千次的校園 App「半逢遇甲」，當過逢甲 iOS Club 社長，2026 年實體參加 WWDC26。',
+  // 社群帳號取自 GitHub 個人檔案的 Social accounts。
   links: [
-    { label: 'GitHub', href: 'https://github.com/Ruxiu0409' },
-    { label: 'Email', href: 'mailto:enokgood2@gmail.com' },
+    { label: 'GitHub', handle: 'Ruxiu0409', href: 'https://github.com/Ruxiu0409' },
+    {
+      label: 'LinkedIn',
+      handle: 'Cheng-Yeh Tsai',
+      href: 'https://www.linkedin.com/in/cheng-yeh-tsai-678788316',
+    },
+    { label: 'Instagram', handle: '@cy_4.9', href: 'https://www.instagram.com/cy_4.9/' },
+    { label: 'X', handle: '@tsaicy0409', href: 'https://x.com/tsaicy0409' },
+    { label: 'Email', handle: 'enokgood2@gmail.com', href: 'mailto:enokgood2@gmail.com' },
   ],
 };
 

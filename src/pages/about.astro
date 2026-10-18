@@ -28,6 +28,22 @@ import { education, communityRoles, story, traits, closing, skills } from '../da
     <p class="more"><a href="/community/">看全部社群與活動 →</a></p>
   </section>
 
+  <section aria-labelledby="links">
+    <h2 id="links">社群連結</h2>
+    <ul class="social">
+      {
+        site.links.map((link) => (
+          <li>
+            <span class="social-label">{link.label}</span>
+            <a href={link.href} rel={link.href.startsWith('http') ? 'me noopener' : undefined}>
+              {link.handle}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
   <section aria-labelledby="story">
     <h2 id="story">學習歷程</h2>
     {
@@ -99,6 +115,29 @@ import { education, communityRoles, story, traits, closing, skills } from '../da
   h2.plain {
     padding-bottom: 0;
     border-bottom: none;
+  }
+
+  .social {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .social li {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .social-label {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .social a {
+    overflow-wrap: anywhere;
   }
 
   .more {
