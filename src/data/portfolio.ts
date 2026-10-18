@@ -8,7 +8,6 @@ import fcuMobileImg from '../assets/portfolio/fcu-mobile.png';
 import parcelImg from '../assets/portfolio/smart-parcel.png';
 import tcmImg from '../assets/portfolio/tcm-diagnosis-companion.png';
 import handMaestroImg from '../assets/portfolio/hand-maestro.png';
-import travelImg from '../assets/portfolio/travel-copywriter.png';
 import petScanImg from '../assets/portfolio/petscan.png';
 import fitnessImg from '../assets/portfolio/fitness-butler.png';
 import chairImg from '../assets/portfolio/chair-fitness.png';
@@ -116,20 +115,6 @@ export const portfolio: Project[] = [
     image: handMaestroImg,
     imageAlt: 'Hand Maestro 的 iPad 主畫面，可選擇單手指揮或雙手協奏模式',
     tags: ['MediaPipe', 'Core ML', 'SwiftUI'],
-  },
-  {
-    slug: 'travel-copywriter',
-    title: '旅文寫手',
-    role: '模型與 RAG',
-    date: '2024.10',
-    summary: '以生成式 AI 替南投冷門景點寫旅遊文案，把人潮從熱門景點分散到其他鄉鎮。',
-    body: [
-      '以實地訪查與政府開放資料建立南投景點知識庫，用聯發科達哥模型搭配 RAG 生成冷門景點旅遊文案。',
-    ],
-    award: '南投縣山城數位黑客松 大專組 銅獎',
-    image: travelImg,
-    imageAlt: '旅文寫手的系統架構圖：景點資料與撰文技巧經 RAG 生成創意旅遊文案',
-    tags: ['RAG', 'LLM'],
   },
   {
     slug: 'petscan',

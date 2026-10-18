@@ -8,7 +8,6 @@ import fcuMobileImg from '../../assets/portfolio/fcu-mobile.png';
 import parcelImg from '../../assets/portfolio/smart-parcel.png';
 import tcmImg from '../../assets/portfolio/tcm-diagnosis-companion.png';
 import handMaestroImg from '../../assets/portfolio/hand-maestro.png';
-import travelImg from '../../assets/portfolio/travel-copywriter.png';
 import petScanImg from '../../assets/portfolio/petscan.png';
 import fitnessImg from '../../assets/portfolio/fitness-butler.png';
 import chairImg from '../../assets/portfolio/chair-fitness.png';
@@ -122,21 +121,6 @@ export const portfolio: Project[] = [
     image: handMaestroImg,
     imageAlt: 'Hand Maestro iPad home screen with single-hand conducting and two-hand ensemble modes',
     tags: ['MediaPipe', 'Core ML', 'SwiftUI'],
-  },
-  {
-    slug: 'travel-copywriter',
-    title: 'Travel Copywriter (旅文寫手)',
-    role: 'Model & RAG',
-    date: '2024.10',
-    summary:
-      'Generative AI that writes travel copy for lesser-known spots in Nantou, spreading visitors from popular sites to other townships.',
-    body: [
-      'Built a knowledge base of Nantou attractions from on-site visits and government open data, then used the MediaTek DaVinci model with RAG to write travel copy for lesser-known spots.',
-    ],
-    award: 'Bronze Award (University Division), Nantou Mountain City Digital Hackathon',
-    image: travelImg,
-    imageAlt: 'Travel Copywriter architecture diagram: attraction data and writing techniques feed RAG to generate travel copy',
-    tags: ['RAG', 'LLM'],
   },
   {
     slug: 'petscan',
