@@ -11,7 +11,6 @@ import PythonIcon from '../assets/icons/python.svg';
 import FlutterIcon from '../assets/icons/flutter.svg';
 import ReactIcon from '../assets/icons/react.svg';
 import MediaPipeIcon from '../assets/icons/mediapipe.svg';
-import YoloIcon from '../assets/icons/yolo.svg';
 import FirebaseIcon from '../assets/icons/firebase.svg';
 import SupabaseIcon from '../assets/icons/supabase.svg';
 import GoogleCloudIcon from '../assets/icons/googlecloud.svg';
@@ -109,8 +108,6 @@ export const aiSkills: Skill[] = [
   { name: 'Core ML', mono: 'ML' },
   { name: 'Vision', mono: 'Vi' },
   { name: 'MediaPipe', icon: MediaPipeIcon },
-  { name: 'YOLO', icon: YoloIcon },
-  { name: 'BERT', mono: 'B' },
   { name: 'Whisper', mono: 'W' },
   { name: 'RAG', mono: 'RAG' },
 ];
