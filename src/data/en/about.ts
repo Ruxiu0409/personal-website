@@ -25,7 +25,6 @@ export const story: { title: string; paragraphs: string[] }[] = [
     title: 'From Solo to Team',
     paragraphs: [
       'In the first semester of my sophomore year, I started building Ban Feng Yu Jia (半逢遇甲) on my own because my classmates wanted to see their whole week\'s schedule at a glance. Over time I added a food map, partner-store discounts, and iLearn assignment reminders. On launch day it reached #2 on the App Store\'s free Utilities chart. A week after launch, I surveyed 277 users with the System Usability Scale (SUS); the average score was 82.9, well above the common benchmark of 68.',
-      'As the app grew, writing it alone was no longer enough, so I started bringing in collaborators. To make the code easy for others to understand and pick up, I adopted an MVVM architecture that separates views, data, and business logic, so every feature has a clear place and a consistent pattern.',
     ],
   },
   {
