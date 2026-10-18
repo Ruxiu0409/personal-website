@@ -57,11 +57,6 @@ export const traits: { title: string; paragraph: string }[] = [
       "Rather than perfecting a plan up front, I'd rather build a working version first and refine it as I go. A lot of things look huge at the start, but once I break them into small steps, I know what I can finish today. To me, getting things done isn't about being fast; it's about finishing things one step at a time.",
   },
   {
-    title: 'Go to the Source',
-    paragraph:
-      "When I don't understand something, I go back to the original documentation and sources instead of just following someone else's summary. Understanding the underlying principles before I start often leads me to a better approach.",
-  },
-  {
     title: 'People First',
     paragraph:
       "Whether it's teammates or users, I think about people first. When leading a team, I make the direction clear and keep an eye on how everyone is doing. When writing code, I often imagine I'm using it for the first time and picture where I'd get stuck. Making a feature work is only the first step; it's only truly done when people want to use it and it feels effortless.",
