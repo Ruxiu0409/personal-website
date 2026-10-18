@@ -498,18 +498,14 @@ const highlights = [
     background: color-mix(in srgb, var(--fg) 4%, var(--bg));
   }
 
+  /* 圖片撐滿方框再用 contain 等比縮小，任何尺寸都不會被裁到 */
   .frame :global(img) {
     display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    border-radius: 0.75rem;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
     transition: transform 0.4s ease;
-  }
-
-  .frame :global(img.portrait) {
-    border-radius: 1.25rem;
   }
 
   .tile:hover .frame :global(img) {
