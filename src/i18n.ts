@@ -46,7 +46,6 @@ export const ui = {
     awards: {
       title: '競賽',
       lead: '對我來說，比賽不是目的，而是逼自己學新東西最快的方式。每一場比賽，我都讓自己學一樣新東西。',
-      others: '其他參賽經歷',
     },
     community: {
       title: '社群與活動',
@@ -77,7 +76,6 @@ export const ui = {
     awards: {
       title: 'Awards',
       lead: "For me, competitions aren't the goal. They're the fastest way to push myself to learn something new, and I make sure every one teaches me something.",
-      others: 'Other Competitions',
     },
     community: {
       title: 'Community & Events',

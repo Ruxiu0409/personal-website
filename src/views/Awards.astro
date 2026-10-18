@@ -1,27 +1,8 @@
 ---
 import Page from '../layouts/Page.astro';
-import EntryList from '../components/EntryList.astro';
 import { useI18n } from '../i18n';
 
 const { t, data } = useI18n(Astro.url);
 ---
 
-<Page title={t.awards.title} lead={t.awards.lead} sections={data.awardSections}>
-  <section aria-labelledby="others">
-    <h2 id="others">{t.awards.others}</h2>
-    <EntryList items={data.otherEntries} />
-  </section>
-</Page>
-
-<style>
-  section {
-    margin-bottom: 5.5rem;
-  }
-
-  h2 {
-    margin: 0 0 1.5rem;
-    font-size: 1.625rem;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-  }
-</style>
+<Page title={t.awards.title} lead={t.awards.lead} sections={data.awardSections} />

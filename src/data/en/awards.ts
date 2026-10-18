@@ -1,5 +1,5 @@
 // "Competitions" page. Teammates' names are intentionally omitted; only my own role is listed.
-import type { Entry, Section } from '../site';
+import type { Section } from '../site';
 
 export const awardSections: Section[] = [
   {
@@ -90,29 +90,5 @@ export const awardSections: Section[] = [
         date: '2025',
       },
     ],
-  },
-];
-
-export const otherEntries: Entry[] = [
-  { title: 'Bitrig Hacks (Y Combinator, Mountain View)', subtitle: 'Mistake-log app for studying', date: '2026' },
-  {
-    title: 'China Collegiate Computing Contest, AIGC Innovation Track',
-    subtitle: 'CrispPic — a co-creative memory agent for group event photos',
-    date: '2026',
-  },
-  {
-    title: 'WWDC Swift Student Challenge',
-    subtitle: 'Dissociation — detecting whether text and facial expressions carry emotion',
-    date: '2026',
-  },
-  {
-    title: 'Finalist, MOEA 2025 Smart Innovation Award (AI Applications, Student Division)',
-    subtitle: 'Finger Maestro — hand training assisted by a local LLM and motion tracking',
-    date: '2025',
-  },
-  {
-    title: 'Digital Social Innovation Competition (智在家鄉)',
-    subtitle: 'iClub — a club management platform',
-    date: '2025',
   },
 ];

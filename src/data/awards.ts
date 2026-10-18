@@ -1,5 +1,5 @@
 // 「競賽」頁。隊友姓名不公開，只寫自己的角色。
-import type { Entry, Section } from './site';
+import type { Section } from './site';
 
 export const awardSections: Section[] = [
   {
@@ -88,16 +88,4 @@ export const awardSections: Section[] = [
       },
     ],
   },
-];
-
-export const otherEntries: Entry[] = [
-  { title: 'Bitrig Hacks（Y Combinator，Mountain View）', subtitle: '錯題紀錄 App', date: '2026' },
-  { title: '中國高校計算機大賽 AIGC 創新賽', subtitle: 'CrispPic｜多人活動照片的共創記憶 Agent', date: '2026' },
-  { title: 'WWDC Swift Student Challenge', subtitle: 'Dissociation｜判斷文字與表情是否帶情緒', date: '2026' },
-  {
-    title: '經濟部 2025 智慧創新大賞（AI 應用類學生組）入圍',
-    subtitle: 'Finger Maestro｜本地端 LLM 與動態追蹤輔助手部訓練',
-    date: '2025',
-  },
-  { title: '智在家鄉數位社會創新競賽', subtitle: 'iClub｜社團管理平台', date: '2025' },
 ];
