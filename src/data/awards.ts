@@ -82,10 +82,6 @@ export const awardSections: Section[] = [
         subtitle: '亞洲區腦神經科學知識測驗',
         date: '2025',
       },
-      {
-        title: '第七屆逢甲大學英語簡報比賽 佳作',
-        date: '2025',
-      },
     ],
   },
 ];

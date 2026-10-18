@@ -85,10 +85,6 @@ export const awardSections: Section[] = [
         subtitle: 'Asia-region neuroscience knowledge competition',
         date: '2025',
       },
-      {
-        title: 'Honorable Mention, 7th Feng Chia University English Presentation Contest',
-        date: '2025',
-      },
     ],
   },
 ];
