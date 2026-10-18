@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import '../styles/global.css';
+import avatar from '../assets/avatar.jpg';
 import { useI18n, basePath, localize, locales, pages, type Locale } from '../i18n';
 
 interface Props {
@@ -45,20 +47,28 @@ const year = new Date().getFullYear();
   </head>
   <body>
     <header class="site-header">
-      <div class="container bar">
-        <nav aria-label={t.mainNav}>
+      <a class="brand" href={localize(locale, '/')}>
+        <span class="brand-mark">
+          <Image src={avatar} alt="" width={28} height={28} densities={[1, 2, 3]} loading="eager" />
+        </span>
+        <span class="brand-name">{site.name}</span>
+      </a>
+      <nav aria-label={t.mainNav}>
+        <ul>
           {
             pages.map((page, i) => (
-              <a href={localize(locale, page)} aria-current={path === page ? 'page' : undefined}>
-                {t.nav[i]}
-              </a>
+              <li>
+                <a href={localize(locale, page)} aria-current={path === page ? 'page' : undefined}>
+                  {t.nav[i]}
+                </a>
+              </li>
             ))
           }
-        </nav>
-        <a class="lang" href={switchHref} hreflang={locales[other].htmlLang} lang={locales[other].htmlLang}>
-          {locales[other].label}
-        </a>
-      </div>
+        </ul>
+      </nav>
+      <a class="lang" href={switchHref} hreflang={locales[other].htmlLang} lang={locales[other].htmlLang}>
+        {locales[other].label}
+      </a>
     </header>
     <slot />
     <footer class="site-footer container">
@@ -68,53 +78,197 @@ const year = new Date().getFullYear();
 </html>
 
 <style>
+  /* 參考 iOSClub.tw：浮在頁面上方的毛玻璃膠囊導覽列 */
   .site-header {
     position: sticky;
-    top: 0;
-    z-index: 10;
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .bar {
+    top: 1rem;
+    z-index: 50;
+    isolation: isolate;
     display: flex;
     align-items: center;
     gap: 1rem;
+    width: calc(100% - 2rem);
+    max-width: 72rem;
+    margin: 1rem auto 0;
+    padding: 0.625rem 0.75rem 0.625rem 1rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    background: var(--glass-bg);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 4px 24px var(--glass-shadow),
+      0 1px 4px var(--glass-shadow-soft);
   }
 
-  .bar nav {
+  /* 模糊放在偽元素上，避免 backdrop-filter 影響子元素的定位 */
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    pointer-events: none;
+  }
+
+  .brand {
     display: flex;
-    flex: 1;
-    gap: 1.25rem;
-    overflow-x: auto;
-    padding: 0.875rem 0;
-    font-size: 0.9375rem;
-    white-space: nowrap;
-    scrollbar-width: none;
-  }
-
-  .bar a {
-    color: var(--muted);
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.625rem;
+    color: var(--fg);
     text-decoration: none;
   }
 
-  .bar a:hover,
-  .bar a[aria-current='page'] {
+  .brand:hover {
     color: var(--fg);
   }
 
-  .bar a[aria-current='page'] {
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    background: var(--glass-chip);
+    box-shadow: inset 0 1px 2px var(--glass-highlight);
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .brand:hover .brand-mark {
+    transform: scale(1.05);
+  }
+
+  .brand-mark :global(img) {
+    display: block;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 999px;
+    object-fit: cover;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  nav {
+    flex: 1;
+    min-width: 0;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0 1rem;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav li {
+    flex: 1;
+  }
+
+  nav a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: var(--nav-fg);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.3s;
+  }
+
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--nav-active);
+    background: var(--glass-chip);
+    border-color: var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  nav a[aria-current='page'] {
     font-weight: 600;
   }
 
+  /* 右側按鈕：iOSClub.tw「Join Us」的漸層膠囊 */
   .lang {
     flex-shrink: 0;
-    padding: 0.125rem 0.625rem;
-    border: 1px solid var(--line);
+    padding: 0.5rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 999px;
-    font-size: 0.8125rem;
+    background: linear-gradient(to bottom, #5a6fa0, #445484);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 4px 14px rgba(68, 84, 132, 0.45);
+    color: #fff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: box-shadow 0.3s, transform 0.15s;
+  }
+
+  .lang:hover {
+    color: #fff;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      0 6px 20px rgba(68, 84, 132, 0.6);
+  }
+
+  .lang:active {
+    transform: scale(0.95);
+  }
+
+  /* 手機：膠囊改成兩行的圓角卡片，上排名字與語言按鈕，下排五個連結 */
+  @media (max-width: 720px) {
+    .site-header {
+      flex-wrap: wrap;
+      gap: 0.25rem 0.5rem;
+      padding: 0.5rem;
+      border-radius: 1.5rem;
+    }
+
+    .brand-name {
+      font-size: 1.0625rem;
+    }
+
+    .lang {
+      margin-left: auto;
+      padding: 0.375rem 1rem;
+      font-size: 0.8125rem;
+    }
+
+    nav {
+      order: 3;
+      flex-basis: 100%;
+    }
+
+    nav ul {
+      justify-content: space-between;
+      gap: 0;
+      padding: 0;
+    }
+
+    nav li {
+      flex: none;
+    }
+
+    nav a {
+      padding: 0.375rem 0.375rem;
+      font-size: 0.8125rem;
+    }
   }
 
   .site-footer {

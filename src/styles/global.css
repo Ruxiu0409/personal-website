@@ -5,6 +5,14 @@
   --line: #e7e5e4;
   --accent: #e11d48;
   --card: #ffffff;
+  --nav-fg: #374151;
+  --nav-active: #0e7490;
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-chip: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+  --glass-shadow: rgba(80, 110, 150, 0.18);
+  --glass-shadow-soft: rgba(80, 110, 150, 0.12);
   color-scheme: light dark;
 }
 
@@ -16,6 +24,14 @@
     --line: #292524;
     --accent: #fb7185;
     --card: #1c1917;
+    --nav-fg: #d6d3d1;
+    --nav-active: #67e8f9;
+    --glass-bg: rgba(41, 37, 36, 0.55);
+    --glass-chip: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.08);
+    --glass-shadow: rgba(0, 0, 0, 0.4);
+    --glass-shadow-soft: rgba(0, 0, 0, 0.25);
   }
 }
 
