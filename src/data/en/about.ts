@@ -66,14 +66,14 @@ export const traits: { title: string; paragraph: string }[] = [
 export const closing =
   "Apple often talks about using the power of code to change the world, and I've always loved that idea. To me, code isn't just homework or a competition entry; it's a tool that can genuinely help the people around me. Seeing something I built being used by others is what has kept me going this far, and what makes me want to keep going.";
 
-export { languages } from '../about';
+import { languages, frameworkSkills, aiSkills, cloudSkills, deviceSkills, type Skill } from '../about';
+export { languages };
 
-export const skills: { label: string; value: string }[] = [
-  {
-    label: 'Frameworks',
-    value: 'SwiftUI (iOS / iPadOS / visionOS), RealityKit, ARKit, WidgetKit, SwiftData, Flutter, React',
-  },
-  { label: 'AI', value: 'Core ML, Vision Framework, MediaPipe, YOLO, BERT, Whisper, RAG' },
-  { label: 'Cloud', value: 'Firebase, Supabase, Google Cloud Run, Cloudflare Workers' },
-  { label: 'Device Management', value: 'Jamf School' },
+export const skillGroups: { label: string; items: Skill[] }[] = [
+  { label: 'Programming Languages', items: languages },
+  { label: 'Frameworks', items: frameworkSkills },
+  { label: 'AI', items: aiSkills },
+  { label: 'Cloud', items: cloudSkills },
+  { label: 'Device Management', items: deviceSkills },
 ];
+

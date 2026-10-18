@@ -41,7 +41,6 @@ export const ui = {
       lead: '教育背景、研究、論文、工作、教學、證照與技能。',
       education: '教育背景',
       skills: '技能專長',
-      languages: '程式語言',
     },
     awards: {
       title: '競賽',
@@ -71,7 +70,6 @@ export const ui = {
       lead: 'Education, research, publications, work, teaching, certifications, and skills.',
       education: 'Education',
       skills: 'Skills',
-      languages: 'Programming Languages',
     },
     awards: {
       title: 'Awards',

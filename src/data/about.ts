@@ -8,6 +8,14 @@ import JavaScriptIcon from '../assets/icons/javascript.svg';
 import CIcon from '../assets/icons/c.svg';
 import CppIcon from '../assets/icons/cplusplus.svg';
 import PythonIcon from '../assets/icons/python.svg';
+import FlutterIcon from '../assets/icons/flutter.svg';
+import ReactIcon from '../assets/icons/react.svg';
+import MediaPipeIcon from '../assets/icons/mediapipe.svg';
+import YoloIcon from '../assets/icons/yolo.svg';
+import FirebaseIcon from '../assets/icons/firebase.svg';
+import SupabaseIcon from '../assets/icons/supabase.svg';
+import GoogleCloudIcon from '../assets/icons/googlecloud.svg';
+import CloudflareWorkersIcon from '../assets/icons/cloudflareworkers.svg';
 
 export const education: Entry[] = [
   {
@@ -84,12 +92,43 @@ export const languages = [
   { name: 'Python', icon: PythonIcon },
 ];
 
-export const skills: { label: string; value: string }[] = [
-  {
-    label: '框架',
-    value: 'SwiftUI（iOS / iPadOS / visionOS）, RealityKit, ARKit, WidgetKit, SwiftData, Flutter, React',
-  },
-  { label: 'AI', value: 'Core ML, Vision Framework, MediaPipe, YOLO, BERT, Whisper, RAG' },
-  { label: '雲端', value: 'Firebase, Supabase, Google Cloud Run, Cloudflare Workers' },
-  { label: '裝置管理', value: 'Jamf School' },
+/** 技能圖示：有官方圖示就用 icon，沒有的（Apple 框架等）用 mono 縮寫字當單色字標 */
+export type Skill = { name: string; icon?: (typeof languages)[number]['icon']; mono?: string };
+
+export const frameworkSkills: Skill[] = [
+  { name: 'SwiftUI', mono: 'SU' },
+  { name: 'RealityKit', mono: 'RK' },
+  { name: 'ARKit', mono: 'AR' },
+  { name: 'WidgetKit', mono: 'WK' },
+  { name: 'SwiftData', mono: 'SD' },
+  { name: 'Flutter', icon: FlutterIcon },
+  { name: 'React', icon: ReactIcon },
 ];
+
+export const aiSkills: Skill[] = [
+  { name: 'Core ML', mono: 'ML' },
+  { name: 'Vision', mono: 'Vi' },
+  { name: 'MediaPipe', icon: MediaPipeIcon },
+  { name: 'YOLO', icon: YoloIcon },
+  { name: 'BERT', mono: 'B' },
+  { name: 'Whisper', mono: 'W' },
+  { name: 'RAG', mono: 'RAG' },
+];
+
+export const cloudSkills: Skill[] = [
+  { name: 'Firebase', icon: FirebaseIcon },
+  { name: 'Supabase', icon: SupabaseIcon },
+  { name: 'Google Cloud Run', icon: GoogleCloudIcon },
+  { name: 'Cloudflare Workers', icon: CloudflareWorkersIcon },
+];
+
+export const deviceSkills: Skill[] = [{ name: 'Jamf School', mono: 'J' }];
+
+export const skillGroups: { label: string; items: Skill[] }[] = [
+  { label: '程式語言', items: languages },
+  { label: '框架', items: frameworkSkills },
+  { label: 'AI', items: aiSkills },
+  { label: '雲端', items: cloudSkills },
+  { label: '裝置管理', items: deviceSkills },
+];
+

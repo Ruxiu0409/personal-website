@@ -4,7 +4,7 @@ import EntryList from '../components/EntryList.astro';
 import { useI18n } from '../i18n';
 
 const { t, data } = useI18n(Astro.url);
-const { education, experienceSections, languages, skills } = data;
+const { education, experienceSections, skillGroups } = data;
 ---
 
 <Page title={t.experience.title} lead={t.experience.lead} sections={experienceSections}>
@@ -15,27 +15,27 @@ const { education, experienceSections, languages, skills } = data;
 
   <section aria-labelledby="skills">
     <h2 id="skills">{t.experience.skills}</h2>
-    <h3>{t.experience.languages}</h3>
-    <ul class="languages">
-      {
-        languages.map(({ name, icon: Icon }) => (
-          <li>
-            <Icon width={36} height={36} aria-hidden="true" />
-            <span>{name}</span>
-          </li>
-        ))
-      }
-    </ul>
-    <dl>
-      {
-        skills.map((skill) => (
-          <div>
-            <dt>{skill.label}</dt>
-            <dd>{skill.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
+    {
+      skillGroups.map((group) => (
+        <>
+          <h3>{group.label}</h3>
+          <ul class="languages">
+            {group.items.map(({ name, icon: Icon, mono }) => (
+              <li>
+                {Icon ? (
+                  <Icon width={36} height={36} aria-hidden="true" />
+                ) : (
+                  <span class="mono" aria-hidden="true">
+                    {mono}
+                  </span>
+                )}
+                <span>{name}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      ))
+    }
   </section>
 </Page>
 
@@ -64,7 +64,7 @@ const { education, experienceSections, languages, skills } = data;
     grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
     gap: 0.75rem;
     list-style: none;
-    margin: 0 0 2rem;
+    margin: 0 0 2.5rem;
     padding: 0;
   }
 
@@ -96,24 +96,28 @@ const { education, experienceSections, languages, skills } = data;
     color: var(--fg);
   }
 
-  dl {
+  /* 沒有官方圖示的技能：用縮寫做成和圖示同大小的灰色字標 */
+  .mono {
     display: grid;
-    gap: 1rem;
-    margin: 0;
-  }
-
-  dl div {
-    display: grid;
-    grid-template-columns: 8rem 1fr;
-    gap: 1rem;
-  }
-
-  dt {
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--muted);
+    border-radius: 9px;
     color: var(--muted);
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transition: color 0.15s, border-color 0.15s;
   }
 
-  dd {
-    margin: 0;
+  .languages li:hover .mono {
+    color: var(--fg);
+    border-color: var(--fg);
+  }
+
+  .languages li > span:last-child {
+    text-align: center;
+    line-height: 1.3;
   }
 </style>
