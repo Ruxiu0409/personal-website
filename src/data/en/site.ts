@@ -7,7 +7,7 @@ export const site = {
   description:
     'Cheng-Yeh Tsai is an Information Engineering and Computer Science student at Feng Chia University who builds for visionOS and iOS and researches mixed-reality systems for medical rehabilitation.',
   location: 'Taichung, Taiwan',
-  tagline: 'Mixed-reality medical rehabilitation systems | visionOS & iOS development',
+  tagline: 'An iOS Developer',
   intro:
     'Senior in Information Engineering and Computer Science at Feng Chia University. Through an NSTC Undergraduate Research Grant, I am building an assessment and training system for post-stroke visuospatial neglect on Apple Vision Pro. I built Ban Feng Yu Jia (半逢遇甲), a campus app with more than 12,000 first-time downloads, served as President of the FCU iOS Club, and attended WWDC26 in person in 2026.',
   // Social accounts taken from the GitHub profile's Social accounts.

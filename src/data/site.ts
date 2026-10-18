@@ -8,7 +8,7 @@ export const site = {
   description:
     '蔡承曄，逢甲大學資訊工程學系學生，做 visionOS 與 iOS 開發，研究混合實境醫療復健系統。',
   location: 'Taichung, Taiwan',
-  tagline: '混合實境醫療復健系統｜visionOS、iOS 應用開發',
+  tagline: 'An iOS Developer',
   intro:
     '逢甲大學資訊工程學系四年級。執行國科會大專學生研究計畫，在 Apple Vision Pro 上做中風後視覺空間忽略的評估與訓練系統。做過首次下載超過一萬兩千次的校園 App「半逢遇甲」，當過逢甲 iOS Club 社長，2026 年實體參加 WWDC26。',
   // 社群帳號取自 GitHub 個人檔案的 Social accounts。
