@@ -1,0 +1,30 @@
+---
+import Page from '../layouts/Page.astro';
+import EntryList from '../components/EntryList.astro';
+import { awardSections, otherEntries } from '../data/awards';
+---
+
+<Page
+  title="競賽"
+  lead="對我來說，比賽不是目的，而是逼自己學新東西最快的方式。每一場比賽，我都讓自己學一樣新東西。"
+  sections={awardSections}
+>
+  <section aria-labelledby="others">
+    <h2 id="others">其他參賽經歷</h2>
+    <EntryList items={otherEntries} />
+  </section>
+</Page>
+
+<style>
+  section {
+    margin-bottom: 3.5rem;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+</style>

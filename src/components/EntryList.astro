@@ -1,0 +1,98 @@
+---
+import type { Entry } from '../data/site';
+
+interface Props {
+  items: Entry[];
+  /** 顯示 body 詳細段落（分頁用），首頁只顯示摘要 */
+  detailed?: boolean;
+}
+
+const { items, detailed = false } = Astro.props;
+---
+
+<ul class="entries">
+  {
+    items.map((item) => (
+      <li>
+        <div class="entry-head">
+          <h3>{item.href ? <a href={item.href}>{item.title}</a> : item.title}</h3>
+          <span class="date">{item.date}</span>
+        </div>
+        {item.subtitle && <p class="subtitle">{item.subtitle}</p>}
+        {item.description && <p>{item.description}</p>}
+        {detailed && item.body?.map((paragraph) => <p class="body">{paragraph}</p>)}
+        {item.tags && (
+          <ul class="tags">
+            {item.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .entries > li {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  .date {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  p {
+    margin: 0.375rem 0 0;
+    color: var(--muted);
+  }
+
+  .subtitle {
+    margin-top: 0.25rem;
+  }
+
+  .body {
+    margin-top: 0.75rem;
+    color: var(--fg);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0.875rem 0 0;
+    padding: 0;
+  }
+
+  .tags li {
+    padding: 0.125rem 0.625rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+</style>

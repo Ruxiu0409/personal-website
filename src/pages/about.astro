@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import Page from '../layouts/Page.astro';
+import avatar from '../assets/avatar.jpg';
+import { site } from '../data/site';
+import { story, traits, closing, skills } from '../data/about';
+---
+
+<Page title="關於我" lead={site.intro}>
+  <Image
+    class="avatar"
+    src={avatar}
+    alt={site.name}
+    width={160}
+    height={160}
+    densities={[1, 2, 3]}
+  />
+
+  <section aria-labelledby="story">
+    <h2 id="story">學習歷程</h2>
+    {
+      story.map((chapter) => (
+        <article>
+          <h3>{chapter.title}</h3>
+          {chapter.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </article>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="traits">
+    <h2 id="traits">個人特質</h2>
+    {
+      traits.map((trait) => (
+        <article>
+          <h3>{trait.title}</h3>
+          <p>{trait.paragraph}</p>
+        </article>
+      ))
+    }
+    <blockquote>{closing}</blockquote>
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">技術能力</h2>
+    <dl>
+      {
+        skills.map((skill) => (
+          <div>
+            <dt>{skill.label}</dt>
+            <dd>{skill.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</Page>
+
+<style>
+  .avatar {
+    display: block;
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+
+  section {
+    margin-bottom: 3.5rem;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  article + article {
+    margin-top: 2rem;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.0625rem;
+  }
+
+  article p {
+    margin: 0.5rem 0 0;
+  }
+
+  blockquote {
+    margin: 2.5rem 0 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  dt {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  dd {
+    margin: 0;
+  }
+</style>

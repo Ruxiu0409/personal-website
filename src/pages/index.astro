@@ -1,10 +1,36 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import EntryList from '../components/EntryList.astro';
 import avatar from '../assets/avatar.jpg';
-import { site, sections } from '../data/site';
+import { site, type Entry } from '../data/site';
+import { experienceSections } from '../data/experience';
+import { awardSections } from '../data/awards';
+import { communitySections } from '../data/community';
 
-const year = new Date().getFullYear();
+const pick = (sections: { id: string; items: Entry[] }[], id: string, count: number) =>
+  sections.find((section) => section.id === id)?.items.slice(0, count) ?? [];
+
+const highlights = [
+  {
+    id: 'experience',
+    label: '個人經歷',
+    href: '/experience/',
+    items: [...pick(experienceSections, 'research', 1), ...pick(experienceSections, 'projects', 1)],
+  },
+  {
+    id: 'awards',
+    label: '競賽',
+    href: '/awards/',
+    items: pick(awardSections, 'awards', 3),
+  },
+  {
+    id: 'community',
+    label: '社群與活動',
+    href: '/community/',
+    items: [...pick(communitySections, 'roles', 2), ...pick(communitySections, 'wwdc', 1)],
+  },
+];
 ---
 
 <Base>
@@ -22,48 +48,29 @@ const year = new Date().getFullYear();
       <p class="eyebrow">{site.location}</p>
       <h1>{site.name} <span class="name-en">{site.nameEn}</span></h1>
       <p class="tagline">{site.tagline}</p>
-      <p class="intro">{site.intro}</p>
+      <p class="intro">{site.intro} <a href="/about/">更多關於我</a></p>
       <nav class="links" aria-label="社群連結">
         {site.links.map((link) => <a href={link.href}>{link.label}</a>)}
       </nav>
     </header>
 
     {
-      sections.map((section) => (
+      highlights.map((section) => (
         <section aria-labelledby={section.id}>
-          <h2 id={section.id}>{section.label}</h2>
-          <ul class="entries">
-            {section.items.map((item) => (
-              <li>
-                <div class="entry-head">
-                  <h3>{item.href ? <a href={item.href}>{item.title}</a> : item.title}</h3>
-                  <span class="date">{item.date}</span>
-                </div>
-                {item.subtitle && <p class="subtitle">{item.subtitle}</p>}
-                {item.description && <p>{item.description}</p>}
-                {item.tags && (
-                  <ul class="tags">
-                    {item.tags.map((tag) => (
-                      <li>{tag}</li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div class="section-head">
+            <h2 id={section.id}>{section.label}</h2>
+            <a href={section.href}>看全部 →</a>
+          </div>
+          <EntryList items={section.items} />
         </section>
       ))
     }
   </main>
-
-  <footer class="container">
-    <p>© {year} {site.name}</p>
-  </footer>
 </Base>
 
 <style>
   .hero {
-    padding: 7rem 0 4rem;
+    padding: 5rem 0 4rem;
   }
 
   .avatar {
@@ -90,6 +97,15 @@ const year = new Date().getFullYear();
     letter-spacing: -0.03em;
   }
 
+  .name-en {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+
   .tagline {
     margin: 1rem 0 0;
     font-size: 1.25rem;
@@ -101,6 +117,10 @@ const year = new Date().getFullYear();
     max-width: 36rem;
   }
 
+  .intro a {
+    color: var(--fg);
+  }
+
   .links {
     display: flex;
     flex-wrap: wrap;
@@ -109,92 +129,32 @@ const year = new Date().getFullYear();
     font-weight: 500;
   }
 
-  .name-en {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0;
-  }
-
   section {
     margin-bottom: 3.5rem;
   }
 
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+
   h2 {
-    margin: 0 0 1rem;
+    margin: 0;
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--muted);
     letter-spacing: 0.04em;
   }
 
-  .entries {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .entries > li {
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .entry-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-  }
-
-  h3 {
-    margin: 0;
-    font-size: 1.0625rem;
-  }
-
-  .date {
-    flex-shrink: 0;
-    color: var(--muted);
-    font-size: 0.8125rem;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .entries p {
-    margin: 0.375rem 0 0;
-    color: var(--muted);
-  }
-
-  .entries .subtitle {
-    margin-top: 0.25rem;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    margin: 0.875rem 0 0;
-    padding: 0;
-  }
-
-  .tags li {
-    padding: 0.125rem 0.625rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  footer {
-    padding-top: 4rem;
-    padding-bottom: 3rem;
-    color: var(--muted);
+  .section-head a {
     font-size: 0.875rem;
+    color: var(--muted);
+    text-decoration: none;
   }
 
-  footer p {
-    margin: 0;
+  .section-head a:hover {
+    color: var(--accent);
   }
 </style>

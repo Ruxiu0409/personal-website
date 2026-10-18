@@ -1,0 +1,96 @@
+---
+import Base from './Base.astro';
+import EntryList from '../components/EntryList.astro';
+import { site, type Section } from '../data/site';
+
+interface Props {
+  title: string;
+  lead?: string;
+  sections?: Section[];
+}
+
+const { title, lead, sections = [] } = Astro.props;
+---
+
+<Base title={`${title} — ${site.name} ${site.nameEn}`} description={lead ?? site.description}>
+  <main class="container">
+    <header class="page-header">
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+    </header>
+
+    {
+      sections.length > 1 && (
+        <nav class="toc" aria-label="本頁章節">
+          {sections.map((section) => (
+            <a href={`#${section.id}`}>{section.label}</a>
+          ))}
+        </nav>
+      )
+    }
+
+    {
+      sections.map((section) => (
+        <section aria-labelledby={section.id}>
+          <h2 id={section.id}>{section.label}</h2>
+          <EntryList items={section.items} detailed />
+        </section>
+      ))
+    }
+
+    <slot />
+  </main>
+</Base>
+
+<style>
+  .page-header {
+    padding: 4.5rem 0 2rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .lead {
+    margin: 1rem 0 0;
+    color: var(--muted);
+    max-width: 36rem;
+  }
+
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .toc a {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .toc a:hover {
+    color: var(--fg);
+    border-color: var(--muted);
+  }
+
+  section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 4rem;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+</style>

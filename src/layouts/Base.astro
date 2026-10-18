@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { site } from '../data/site';
+import { site, nav } from '../data/site';
 
 interface Props {
   title?: string;
@@ -9,6 +9,8 @@ interface Props {
 
 const { title = site.title, description = site.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -27,6 +29,68 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
   </head>
   <body>
+    <header class="site-header">
+      <nav class="container" aria-label="主選單">
+        {
+          nav.map((item) => (
+            <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
     <slot />
+    <footer class="site-footer container">
+      <p>© {year} {site.name} {site.nameEn}</p>
+    </footer>
   </body>
 </html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header nav {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .site-header a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .site-header a:hover,
+  .site-header a[aria-current='page'] {
+    color: var(--fg);
+  }
+
+  .site-header a[aria-current='page'] {
+    font-weight: 600;
+  }
+
+  .site-footer {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+</style>
