@@ -207,7 +207,9 @@ const highlights = [
     margin: 1rem auto 0;
     overflow: hidden;
     border-radius: 2rem;
-    background: #9cc3e8;
+    /* 用 clip-path 裁圓角，避免圓角邊緣透出底色變成一圈亮邊 */
+    clip-path: inset(0 round 2rem);
+    background: var(--bg);
     color: #fff;
   }
 
@@ -344,6 +346,7 @@ const highlights = [
       min-height: 30rem;
       margin-top: 0.5rem;
       border-radius: 1.5rem;
+      clip-path: inset(0 round 1.5rem);
     }
 
     .hero-photo {
