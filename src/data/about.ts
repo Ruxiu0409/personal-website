@@ -13,6 +13,23 @@ export const education: Entry[] = [
   },
 ];
 
+export const communityRoles: Entry[] = [
+  { title: 'Raycast Community Taiwan', subtitle: '台灣大使', date: '2026.06 – 現在' },
+  { title: 'iPlayground 2026', subtitle: '學生社群負責人', date: '2026.07' },
+  { title: 'Swift Students Cafe 台灣場', subtitle: '主辦人・主持人・講者', date: '2026.07' },
+  { title: 'World Taichung Developer Workshop', subtitle: '講者', date: '2025.11' },
+  {
+    title: 'Google Developer Groups on Campus FCU',
+    subtitle: 'Associate Lead（副社長）・顧問',
+    date: '2025.08 – 現在',
+  },
+  {
+    title: '逢甲大學 iOS Club',
+    subtitle: '第 8 屆教學長・第 9 屆社長・第 10 屆顧問',
+    date: '2024.08 – 現在',
+  },
+];
+
 export const story: { title: string; paragraphs: string[] }[] = [
   {
     title: '從社員到社長',

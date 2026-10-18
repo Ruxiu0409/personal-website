@@ -4,7 +4,7 @@ import Page from '../layouts/Page.astro';
 import EntryList from '../components/EntryList.astro';
 import avatar from '../assets/avatar.jpg';
 import { site } from '../data/site';
-import { education, story, traits, closing, skills } from '../data/about';
+import { education, communityRoles, story, traits, closing, skills } from '../data/about';
 ---
 
 <Page title="關於我" lead={site.intro}>
@@ -20,6 +20,12 @@ import { education, story, traits, closing, skills } from '../data/about';
   <section aria-labelledby="education">
     <h2 id="education" class="plain">教育背景</h2>
     <EntryList items={education} />
+  </section>
+
+  <section aria-labelledby="community">
+    <h2 id="community" class="plain">社群經歷</h2>
+    <EntryList items={communityRoles} />
+    <p class="more"><a href="/community/">看全部社群與活動 →</a></p>
   </section>
 
   <section aria-labelledby="story">
@@ -93,6 +99,20 @@ import { education, story, traits, closing, skills } from '../data/about';
   h2.plain {
     padding-bottom: 0;
     border-bottom: none;
+  }
+
+  .more {
+    margin: 1rem 0 0;
+    font-size: 0.875rem;
+  }
+
+  .more a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .more a:hover {
+    color: var(--accent);
   }
 
   article + article {
