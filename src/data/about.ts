@@ -1,5 +1,14 @@
 // 「關於我」頁，改寫自推甄自傳。
 import type { Entry } from './site';
+// 程式語言圖示取自 Devicon（MIT License，https://devicon.dev）。
+import SwiftIcon from '../assets/icons/swift.svg';
+import DartIcon from '../assets/icons/dart.svg';
+import TypeScriptIcon from '../assets/icons/typescript.svg';
+import JavaScriptIcon from '../assets/icons/javascript.svg';
+import CIcon from '../assets/icons/c.svg';
+import CppIcon from '../assets/icons/cplusplus.svg';
+import JavaIcon from '../assets/icons/java.svg';
+import PythonIcon from '../assets/icons/python.svg';
 
 export const education: Entry[] = [
   {
@@ -89,8 +98,18 @@ export const traits: { title: string; paragraph: string }[] = [
 export const closing =
   'Apple 常說要用程式碼的力量改變世界，我一直很喜歡這句話。程式對我來說不只是作業或比賽，而是真的能幫助身邊的人的工具。看到自己做的東西被別人用上，那份成就感就是我一路走到現在、也想繼續走下去的動力。';
 
+export const languages = [
+  { name: 'Swift', icon: SwiftIcon },
+  { name: 'Dart', icon: DartIcon },
+  { name: 'TypeScript', icon: TypeScriptIcon },
+  { name: 'JavaScript', icon: JavaScriptIcon },
+  { name: 'C', icon: CIcon },
+  { name: 'C++', icon: CppIcon },
+  { name: 'Java', icon: JavaIcon },
+  { name: 'Python', icon: PythonIcon },
+];
+
 export const skills: { label: string; value: string }[] = [
-  { label: '語言', value: 'Swift, Dart, TypeScript / JavaScript, C / C++, Java, Python' },
   {
     label: '框架',
     value: 'SwiftUI（iOS / iPadOS / visionOS）, RealityKit, ARKit, WidgetKit, SwiftData, Flutter, React',

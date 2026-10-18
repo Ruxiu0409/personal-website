@@ -4,7 +4,7 @@ import Page from '../layouts/Page.astro';
 import EntryList from '../components/EntryList.astro';
 import avatar from '../assets/avatar.jpg';
 import { site } from '../data/site';
-import { education, communityRoles, story, traits, closing, skills } from '../data/about';
+import { education, communityRoles, story, traits, closing, languages, skills } from '../data/about';
 ---
 
 <Page title="關於我" lead={site.intro}>
@@ -72,7 +72,18 @@ import { education, communityRoles, story, traits, closing, skills } from '../da
   </section>
 
   <section aria-labelledby="skills">
-    <h2 id="skills">技術能力</h2>
+    <h2 id="skills">技能專長</h2>
+    <h3 class="skill-heading">程式語言</h3>
+    <ul class="languages">
+      {
+        languages.map(({ name, icon: Icon }) => (
+          <li>
+            <Icon width={40} height={40} aria-hidden="true" />
+            <span>{name}</span>
+          </li>
+        ))
+      }
+    </ul>
     <dl>
       {
         skills.map((skill) => (
@@ -99,6 +110,7 @@ import { education, communityRoles, story, traits, closing, skills } from '../da
 
   section {
     margin-bottom: 3.5rem;
+    scroll-margin-top: 4rem;
   }
 
   h2 {
@@ -174,8 +186,48 @@ import { education, communityRoles, story, traits, closing, skills } from '../da
     color: var(--muted);
   }
 
+  .skill-heading {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .languages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+  }
+
+  .languages li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1.25rem 0.5rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .languages li:hover {
+    border-color: var(--muted);
+    transform: translateY(-2px);
+  }
+
+  .languages :global(svg) {
+    display: block;
+  }
+
   dl {
     margin: 0;
+    border-top: 1px solid var(--line);
   }
 
   dl div {
