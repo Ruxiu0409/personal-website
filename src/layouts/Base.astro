@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
     </header>
     <slot />
     <footer class="site-footer container">
-      <p>© {year} {site.name} {site.nameEn}</p>
+      <p>Copyright © {year} {site.name} {site.nameEn}. All rights reserved.</p>
     </footer>
   </body>
 </html>
@@ -84,8 +84,11 @@ const year = new Date().getFullYear();
   }
 
   .site-footer {
-    padding-top: 4rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
     padding-bottom: 3rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
     color: var(--muted);
     font-size: 0.875rem;
   }
