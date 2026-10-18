@@ -77,11 +77,6 @@ export const awardSections: Section[] = [
           'iPad 前鏡頭追蹤雙手手腕，把上肢動作做成遊戲關卡。我負責文獻探討與訓練機制，依肩袖撕裂風險把單場遊戲限制在 10 分鐘內。',
         tags: ['Vision', 'Core ML', 'SwiftUI'],
       },
-      {
-        title: '亞洲青少年腦神經科學大賽 亞軍',
-        subtitle: '亞洲區腦神經科學知識測驗',
-        date: '2025',
-      },
     ],
   },
 ];

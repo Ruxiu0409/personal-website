@@ -80,11 +80,6 @@ export const awardSections: Section[] = [
           "The iPad front camera tracks both wrists and turns upper-limb movements into game levels. I handled the literature review and training design, capping each session at 10 minutes based on rotator cuff tear risk.",
         tags: ['Vision', 'Core ML', 'SwiftUI'],
       },
-      {
-        title: 'Runner-up, Asian Youth Brain Science Competition',
-        subtitle: 'Asia-region neuroscience knowledge competition',
-        date: '2025',
-      },
     ],
   },
 ];
