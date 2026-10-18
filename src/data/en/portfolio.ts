@@ -9,7 +9,6 @@ import parcelImg from '../../assets/portfolio/smart-parcel.png';
 import tcmImg from '../../assets/portfolio/tcm-diagnosis-companion.png';
 import handMaestroImg from '../../assets/portfolio/hand-maestro.png';
 import petScanImg from '../../assets/portfolio/petscan.png';
-import fitnessImg from '../../assets/portfolio/fitness-butler.png';
 import chairImg from '../../assets/portfolio/chair-fitness.png';
 
 export const portfolio: Project[] = [
@@ -137,18 +136,6 @@ export const portfolio: Project[] = [
     imageAlt: 'PetScan app icon and name',
     tags: ['Create ML', 'Core ML', 'SwiftUI'],
     links: [{ label: 'GitHub', href: 'https://github.com/Ruxiu0409/PetScan-Maic' }],
-  },
-  {
-    slug: 'fitness-butler',
-    title: 'Fitness Butler (健身管家)',
-    role: 'App developer',
-    date: '2024',
-    summary:
-      'A health management app combining diet and exercise: integrates HealthKit with SwiftUI and uses an LLM to generate dietary advice and recipes.',
-    award: 'Third Prize (Shanghai), 9th Cross-Strait Youth Maker Competition',
-    image: fitnessImg,
-    imageAlt: 'Fitness Butler screens for basic profile, nutrition assessment and AI dietary advice',
-    tags: ['SwiftUI', 'HealthKit'],
   },
   {
     slug: 'chair-fitness',

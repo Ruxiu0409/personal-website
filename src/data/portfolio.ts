@@ -9,7 +9,6 @@ import parcelImg from '../assets/portfolio/smart-parcel.png';
 import tcmImg from '../assets/portfolio/tcm-diagnosis-companion.png';
 import handMaestroImg from '../assets/portfolio/hand-maestro.png';
 import petScanImg from '../assets/portfolio/petscan.png';
-import fitnessImg from '../assets/portfolio/fitness-butler.png';
 import chairImg from '../assets/portfolio/chair-fitness.png';
 
 export const portfolio: Project[] = [
@@ -130,17 +129,6 @@ export const portfolio: Project[] = [
     imageAlt: 'PetScan 獸醫隨行的 App 圖示與名稱',
     tags: ['Create ML', 'Core ML', 'SwiftUI'],
     links: [{ label: 'GitHub', href: 'https://github.com/Ruxiu0409/PetScan-Maic' }],
-  },
-  {
-    slug: 'fitness-butler',
-    title: '健身管家',
-    role: 'App 開發',
-    date: '2024',
-    summary: '結合飲食與運動的健康管理 App，以 SwiftUI 串接 HealthKit，並由 LLM 生成飲食建議與食譜。',
-    award: '第九屆海峽兩岸青少年創客大賽 三等獎（上海賽區）',
-    image: fitnessImg,
-    imageAlt: '健身管家的基本資料、營養評估與 AI 健康飲食建議畫面',
-    tags: ['SwiftUI', 'HealthKit'],
   },
   {
     slug: 'chair-fitness',
