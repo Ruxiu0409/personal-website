@@ -9,7 +9,6 @@ import CIcon from '../assets/icons/c.svg';
 import CppIcon from '../assets/icons/cplusplus.svg';
 import PythonIcon from '../assets/icons/python.svg';
 import FlutterIcon from '../assets/icons/flutter.svg';
-import ReactIcon from '../assets/icons/react.svg';
 import MediaPipeIcon from '../assets/icons/mediapipe.svg';
 import FirebaseIcon from '../assets/icons/firebase.svg';
 import SupabaseIcon from '../assets/icons/supabase.svg';
@@ -101,7 +100,6 @@ export const frameworkSkills: Skill[] = [
   { name: 'WidgetKit', mono: 'WK' },
   { name: 'SwiftData', mono: 'SD' },
   { name: 'Flutter', icon: FlutterIcon },
-  { name: 'React', icon: ReactIcon },
 ];
 
 export const aiSkills: Skill[] = [
