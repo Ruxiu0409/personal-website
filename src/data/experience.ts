@@ -79,20 +79,32 @@ export const experienceSections: Section[] = [
     label: '工作經歷',
     items: [
       {
-        title: '復興實驗中學',
-        subtitle: '中學雙語部 ACE Club（AI Creator & Executor Club）社團老師',
-        date: '2026.09 – 現在',
-      },
-      {
         title: '逢甲大學 Apple Regional Training Center',
         subtitle: 'Student Support',
         date: '2024.08 – 2026.06',
         description: '以 Jamf School、Apple Remote Desktop、Apple School Manager 管理中心的 iMac、Mac mini 與 iPad。',
       },
+    ],
+  },
+  {
+    id: 'teaching',
+    label: '教學經歷',
+    items: [
+      {
+        title: '復興實驗中學',
+        subtitle: '中學雙語部 ACE Club（AI Creator & Executor Club）社團老師',
+        date: '2026.09 – 現在',
+      },
       {
         title: '逢甲大學 課程助教',
         subtitle: '程式設計 I / II、計算機概論、行動應用程式開發、iOS App',
         date: '2024 – 2026',
+      },
+      {
+        title: '程式營隊',
+        subtitle: '工作人員・課程助教',
+        date: '2024 – 2026',
+        description: '葳格國際學校、永安國小資優班程式營隊，三年累計服務 29 小時。',
       },
     ],
   },
@@ -115,12 +127,6 @@ export const experienceSections: Section[] = [
         subtitle: 'Associate Lead（副社長）・顧問',
         date: '2025.08 – 現在',
         description: '與 iOS Club 合辦講座與工作坊，邀請 World、Zeabur 與專注森林的開發者分享。',
-      },
-      {
-        title: '程式營隊',
-        subtitle: '工作人員・課程助教',
-        date: '2024 – 2026',
-        description: '葳格國際學校、永安國小資優班程式營隊，三年累計服務 29 小時。',
       },
     ],
   },
