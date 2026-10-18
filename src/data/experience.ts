@@ -72,13 +72,6 @@ export const experienceSections: Section[] = [
         description: '用文字描述氛圍，以 LLM 生成整場舞台燈光設定，並在 iPad 上預覽實景燈光。',
         tags: ['SwiftUI', 'Foundation Models', 'RealityKit'],
       },
-      {
-        title: 'tsaicy.dev',
-        date: '2026',
-        description: '就是這個網站。Astro 建置，透過 GitHub Actions 部署到 Cloudflare Workers。',
-        href: 'https://github.com/Ruxiu0409/personal-website',
-        tags: ['Astro', 'Cloudflare Workers'],
-      },
     ],
   },
   {
