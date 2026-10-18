@@ -1,13 +1,12 @@
 // 「關於我」頁，改寫自推甄自傳。
 import type { Entry } from './site';
-// 程式語言圖示取自 Simple Icons（CC0，https://simpleicons.org），單色剪影；Java 用 OpenJDK 圖示（Simple Icons 沒有收錄 Java 商標）。
+// 程式語言圖示取自 Simple Icons（CC0，https://simpleicons.org），單色剪影。
 import SwiftIcon from '../assets/icons/swift.svg';
 import DartIcon from '../assets/icons/dart.svg';
 import TypeScriptIcon from '../assets/icons/typescript.svg';
 import JavaScriptIcon from '../assets/icons/javascript.svg';
 import CIcon from '../assets/icons/c.svg';
 import CppIcon from '../assets/icons/cplusplus.svg';
-import JavaIcon from '../assets/icons/java.svg';
 import PythonIcon from '../assets/icons/python.svg';
 
 export const education: Entry[] = [
@@ -105,7 +104,6 @@ export const languages = [
   { name: 'JavaScript', icon: JavaScriptIcon },
   { name: 'C', icon: CIcon },
   { name: 'C++', icon: CppIcon },
-  { name: 'Java', icon: JavaIcon },
   { name: 'Python', icon: PythonIcon },
 ];
 
