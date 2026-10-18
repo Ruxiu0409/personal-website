@@ -6,11 +6,26 @@ import ProjectCard from '../components/ProjectCard.astro';
 import avatar from '../assets/avatar.jpg';
 // Raycast 標誌取自 Simple Icons（CC0）。
 import RaycastIcon from '../assets/icons/raycast.svg';
+// 社群平台圖示：GitHub、Instagram、X 取自 Simple Icons（CC0），
+// LinkedIn 取自 Devicon（MIT），Email 取自 Material Design Icons（Apache 2.0）。
+import GitHubIcon from '../assets/icons/github.svg';
+import LinkedInIcon from '../assets/icons/linkedin.svg';
+import InstagramIcon from '../assets/icons/instagram.svg';
+import XIcon from '../assets/icons/x.svg';
+import EmailIcon from '../assets/icons/email.svg';
 import type { Entry } from '../data/site';
 import { useI18n } from '../i18n';
 
 const { t, data, href } = useI18n(Astro.url);
 const { site, experienceSections, awardSections, communitySections, portfolio, story, traits, closing } = data;
+
+const socialIcons = {
+  GitHub: GitHubIcon,
+  LinkedIn: LinkedInIcon,
+  Instagram: InstagramIcon,
+  X: XIcon,
+  Email: EmailIcon,
+} as const;
 
 const pick = (sections: { id: string; items: Entry[] }[], id: string, count: number) =>
   sections.find((section) => section.id === id)?.items.slice(0, count) ?? [];
@@ -60,7 +75,17 @@ const highlights = [
       <p class="tagline">{site.tagline}</p>
       <p class="intro">{site.intro}</p>
       <nav class="links" aria-label={t.socialNav}>
-        {site.links.map((link) => <a href={link.href}>{link.label}</a>)}
+        {
+          site.links.map((link) => {
+            const Icon = socialIcons[link.label as keyof typeof socialIcons];
+            return (
+              <a href={link.href} rel={link.href.startsWith('http') ? 'me noopener' : undefined}>
+                {Icon && <Icon width={18} height={18} aria-hidden="true" />}
+                {link.label}
+              </a>
+            );
+          })
+        }
       </nav>
     </header>
 
@@ -220,9 +245,37 @@ const highlights = [
   .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem;
+    gap: 0.625rem;
     margin-top: 2rem;
     font-weight: 500;
+  }
+
+  /* 社群連結：圖示＋文字的小膠囊 */
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4375rem 0.875rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .links a:hover {
+    border-color: var(--muted);
+  }
+
+  .links :global(svg) {
+    flex-shrink: 0;
+    color: var(--muted);
+    transition: color 0.15s;
+  }
+
+  .links a:hover :global(svg) {
+    color: currentColor;
   }
 
   section {
