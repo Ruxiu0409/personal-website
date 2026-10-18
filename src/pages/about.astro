@@ -1,9 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import Page from '../layouts/Page.astro';
+import EntryList from '../components/EntryList.astro';
 import avatar from '../assets/avatar.jpg';
 import { site } from '../data/site';
-import { story, traits, closing, skills } from '../data/about';
+import { education, story, traits, closing, skills } from '../data/about';
 ---
 
 <Page title="關於我" lead={site.intro}>
@@ -15,6 +16,11 @@ import { story, traits, closing, skills } from '../data/about';
     height={160}
     densities={[1, 2, 3]}
   />
+
+  <section aria-labelledby="education">
+    <h2 id="education" class="plain">教育背景</h2>
+    <EntryList items={education} />
+  </section>
 
   <section aria-labelledby="story">
     <h2 id="story">學習歷程</h2>
@@ -81,6 +87,12 @@ import { story, traits, closing, skills } from '../data/about';
     font-weight: 600;
     color: var(--muted);
     letter-spacing: 0.04em;
+  }
+
+  /* EntryList 自帶上框線，標題不用再畫一條 */
+  h2.plain {
+    padding-bottom: 0;
+    border-bottom: none;
   }
 
   article + article {

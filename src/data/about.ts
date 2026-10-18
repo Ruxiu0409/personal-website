@@ -1,4 +1,18 @@
 // 「關於我」頁，改寫自推甄自傳。
+import type { Entry } from './site';
+
+export const education: Entry[] = [
+  {
+    title: '逢甲大學',
+    subtitle: '資訊工程學系 學士',
+    date: '2023.09 – 2027.06（預計）',
+  },
+  {
+    title: '臺中市立臺中第二高級中等學校（台中二中）',
+    date: '2020.09 – 2023.06',
+  },
+];
+
 export const story: { title: string; paragraphs: string[] }[] = [
   {
     title: '從社員到社長',
