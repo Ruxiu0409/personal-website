@@ -10,7 +10,7 @@ export const site = {
   badge: { label: 'Raycast Ambassador', href: 'https://www.raycast.tw' },
   nickname: '瑞瑞 Ray',
   tagline: 'An iOS Developer',
-  heroTags: ['visionOS', 'WWDC26 Attendee', 'Founder of Ban Feng Yu Jia'],
+  heroTags: ['visionOS', 'WWDC26', 'Founder of Ban Feng Yu Jia'],
   heroAlt: 'Cheng-Yeh Tsai at Apple Park during WWDC26, with blue sky and the rainbow arch behind him',
   intro:
     'Senior in Information Engineering and Computer Science at Feng Chia University. Through an NSTC Undergraduate Research Grant, I am building an assessment and training system for post-stroke visuospatial neglect on Apple Vision Pro. I built Ban Feng Yu Jia (半逢遇甲), a campus app with more than 12,000 first-time downloads, served as President of the FCU iOS Club, and attended WWDC26 in person in 2026.',
