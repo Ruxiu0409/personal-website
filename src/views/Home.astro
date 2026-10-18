@@ -370,8 +370,52 @@ const highlights = [
       font-size: 4.4vw;
     }
 
-    .tags li {
+    /* 手機：臉在照片約 40% 的高度，文字區塊要縮在下方三分之一，不能蓋到臉 */
+    .badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      margin: 0;
+      padding: 0.3125rem 0.75rem 0.3125rem 0.625rem;
       font-size: 0.8125rem;
+    }
+
+    .nickname {
+      margin-top: 0.5rem;
+      font-size: 1.125rem;
+    }
+
+    /* 標籤改成一排，可左右滑 */
+    .tags {
+      flex-wrap: nowrap;
+      margin: 0.875rem -1.25rem 0;
+      padding: 0 1.25rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tags li {
+      flex-shrink: 0;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+
+    .links {
+      margin-top: 1rem;
+    }
+
+    .links a {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    /* 漸層只壓在底部，不讓臉變暗 */
+    .hero::after {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.35) 28%, transparent 46%);
     }
   }
 
