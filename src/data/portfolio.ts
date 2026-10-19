@@ -30,7 +30,7 @@ export const portfolio: Project[] = [
       '做了課表 Widget，讓同學在主畫面就能看到課表；校園地圖以 Google Maps Platform 的 3D Maps 呈現立體校園建築並規劃步行路線；把各課程在 iLearn 上的作業整理成一份清單；並改版校園行事曆。',
     ],
     image: fcuMobileImg,
-    imageAlt: '行動逢甲的 3D 校園地圖，顯示步行到資訊電機館的路線、預估時間與剩餘距離',
+    imageAlt: '行動逢甲的首頁，列出我的通知、課務資訊、iLearn、MyFCU 等校園服務',
     tags: ['Flutter', 'Google Maps Platform'],
     links: [{ label: 'App Store', href: 'https://apps.apple.com/tw/app/id6633420933' }],
   },

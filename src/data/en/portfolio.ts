@@ -32,7 +32,7 @@ export const portfolio: Project[] = [
       'I built a timetable widget so students can see their schedule right on the Home Screen; a campus map that renders campus buildings in 3D with Google Maps Platform 3D Maps and plans walking routes; a single list that collects assignments from every course on iLearn; and a redesigned academic calendar.',
     ],
     image: fcuMobileImg,
-    imageAlt: 'FCU Mobile 3D campus map showing a walking route with estimated time and remaining distance',
+    imageAlt: 'FCU Mobile home screen listing campus services such as notifications, course info, iLearn and MyFCU',
     tags: ['Flutter', 'Google Maps Platform'],
     links: [{ label: 'App Store', href: 'https://apps.apple.com/tw/app/id6633420933' }],
   },
