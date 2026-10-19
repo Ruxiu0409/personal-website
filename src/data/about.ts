@@ -14,8 +14,9 @@ import FirebaseIcon from '../assets/icons/firebase.svg';
 import SupabaseIcon from '../assets/icons/supabase.svg';
 import GoogleCloudIcon from '../assets/icons/googlecloud.svg';
 import CloudflareWorkersIcon from '../assets/icons/cloudflareworkers.svg';
-// SwiftUI 用 Apple 官方的彩色 App 圖示（點陣圖）
+// SwiftUI、Jamf 用官方的彩色圖示（點陣圖）
 import swiftUIImage from '../assets/icons/swiftui.png';
+import jamfImage from '../assets/icons/jamf.png';
 
 export const education: Entry[] = [
   {
@@ -124,7 +125,7 @@ export const cloudSkills: Skill[] = [
   { name: 'Cloudflare Workers', icon: CloudflareWorkersIcon },
 ];
 
-export const deviceSkills: Skill[] = [{ name: 'Jamf School', mono: 'J' }];
+export const deviceSkills: Skill[] = [{ name: 'Jamf School', image: jamfImage }];
 
 export const skillGroups: { label: string; items: Skill[] }[] = [
   { label: '程式語言', items: languages },
