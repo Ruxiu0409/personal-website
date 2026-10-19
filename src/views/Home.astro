@@ -206,9 +206,6 @@ const highlights = [
     /* 往上拉過導覽列佔的高度（上方間距 + 膠囊高度），讓照片從畫面最頂端開始 */
     margin: calc(-1 * var(--header-offset)) 0 0;
     overflow: hidden;
-    /* 只有底部留圓角；用 clip-path 裁，避免圓角邊緣透出底色變成亮邊 */
-    border-radius: 0 0 2rem 2rem;
-    clip-path: inset(0 round 0 0 2rem 2rem);
     background: var(--bg);
     color: #fff;
   }
@@ -345,8 +342,6 @@ const highlights = [
     .hero {
       height: 100svh;
       min-height: 30rem;
-      border-radius: 0 0 1.5rem 1.5rem;
-      clip-path: inset(0 round 0 0 1.5rem 1.5rem);
     }
 
     .hero-photo {
