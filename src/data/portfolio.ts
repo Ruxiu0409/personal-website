@@ -1,15 +1,8 @@
 // 「作品集」頁。隊友姓名不公開，只寫自己的角色。
-// 內容取自 experience.ts、awards.ts 與推甄資料簡報；圖片來源 ~/Project/推甄/Assets。
+// 只放兩個校園 App；其他比賽作品寫在競賽頁（awards.ts）。圖片來源 ~/Project/推甄/Assets。
 import type { Project } from './site';
 import banFengImg from '../assets/portfolio/ban-feng-yu-jia.png';
-import lumaStageImg from '../assets/portfolio/lumastage.png';
-import neglectImg from '../assets/portfolio/mr-neglect-training.png';
 import fcuMobileImg from '../assets/portfolio/fcu-mobile.png';
-import parcelImg from '../assets/portfolio/smart-parcel.png';
-import tcmImg from '../assets/portfolio/tcm-diagnosis-companion.png';
-import handMaestroImg from '../assets/portfolio/hand-maestro.png';
-import petScanImg from '../assets/portfolio/petscan.png';
-import chairImg from '../assets/portfolio/chair-fitness.png';
 
 export const portfolio: Project[] = [
   {
@@ -28,37 +21,6 @@ export const portfolio: Project[] = [
     links: [{ label: 'App Store', href: 'https://apps.apple.com/tw/app/id6736971566' }],
   },
   {
-    slug: 'lumastage',
-    title: 'LumaStage',
-    role: '產品經理、主要開發',
-    date: '2026.07',
-    summary: '用文字描述氛圍，以 LLM 生成整場舞台燈光設定，並在 iPad 上預覽實景燈光。',
-    body: [
-      '第一版用裝置端 Foundation Models 一次生成整場燈光，撐爆 4,096 token 的 context window。後來用 @Generable 固定格式，拆成兩階段：先生燈具骨架，再一個 cue 開一個 session，裝置端可生成 4–12 盞、2–6 個 cue 的整場燈光，後來改用雲端 LLM。',
-    ],
-    award: '行動應用創新賽（MAIC）三等獎',
-    image: lumaStageImg,
-    imageAlt: 'LumaStage 在校園實景中預覽虛擬舞台、燈架與燈具',
-    tags: ['SwiftUI', 'Foundation Models', 'RealityKit', 'ARKit'],
-    links: [{ label: 'GitHub', href: 'https://github.com/Ruxiu0409/LumaStage' }],
-  },
-  {
-    slug: 'mr-neglect-training',
-    title: '混合實境視覺空間忽略注意力訓練系統',
-    role: '計畫執行學生・測驗與照顧者端開發',
-    date: '2026',
-    summary:
-      '在 Apple Vision Pro 上做中風後視覺空間忽略的評估與訓練系統，後來延伸成國科會大專學生研究計畫。',
-    body: [
-      '以 SwiftUI 與 RealityKit 開發星星刪除、線段平分、蝴蝶追蹤等測驗與 iPad 照顧者端。臨床上只做一份紙筆測驗，至少會漏掉 42.5% 的病人（Bosma et al., 2023），我想讓病人在家也能自己評估與訓練。',
-      '延伸成國科會計畫後，系統先找出病人從哪個角度開始注意不到，誤差在 1 度以內，再讓訓練目標沿著這條忽略邊界出現，並招募 14 位受試者完成實地測試。',
-    ],
-    award: '第二十二屆全國電子設計創意競賽 亞軍',
-    image: neglectImg,
-    imageAlt: 'Apple Vision Pro 中的星星刪除測驗，白色圖形浮在真實房間的牆面前',
-    tags: ['visionOS', 'SwiftUI', 'RealityKit'],
-  },
-  {
     slug: 'fcu-mobile',
     title: '行動逢甲',
     role: 'Developer',
@@ -71,77 +33,5 @@ export const portfolio: Project[] = [
     imageAlt: '行動逢甲的 3D 校園地圖，顯示步行到資訊電機館的路線、預估時間與剩餘距離',
     tags: ['Flutter', 'Google Maps Platform'],
     links: [{ label: 'App Store', href: 'https://apps.apple.com/tw/app/id6633420933' }],
-  },
-  {
-    slug: 'smart-parcel',
-    title: '社區智慧包裹收受管理系統',
-    role: '解法發想與後端',
-    date: '2026.03',
-    summary:
-      '給社區大樓的包裹收受系統，以身分、條碼、重量、影像四因子交叉驗證包裹與領件人，取代人工登記。',
-    body: [
-      '題目由保全公司出題，我提出不做實體櫃門、改用四因子交叉驗證的解法。以 FastAPI 與 Supabase 建立後端並部署到 Google Cloud Run，重量異常或有人停留過久就即時通報物管。',
-    ],
-    award: '第二十二屆全國電子設計創意競賽 佳作',
-    image: parcelImg,
-    imageAlt: '物管 iPad 的包裹上架畫面，輸入收件資訊後掃描條碼並放上秤重貨架',
-    tags: ['FastAPI', 'Supabase', 'Cloud Run'],
-  },
-  {
-    slug: 'tcm-diagnosis-companion',
-    title: '三診隨行',
-    role: '團隊成員',
-    date: '2025.07',
-    summary: '中醫望、聞、問三診的輔助 App，分析舌象、語氣與主訴後產生調理方案，並在手上標出穴位。',
-    body: [
-      '望診用 YOLO 在 16,551 張舌象照片上訓練，聞診分析語氣，問診由 LLM 加 RAG 生成調理方案，再用 MediaPipe 依同身寸法在手上標出穴位。',
-    ],
-    award: '第十屆海峽兩岸青少年創客大賽 上海賽區二等獎、福州賽區優秀展覽獎',
-    image: tcmImg,
-    imageAlt: '三診隨行的診療結果畫面，列出舌診、聞診、主訴與 AI 調理建議',
-    tags: ['YOLO', 'MediaPipe', 'RAG'],
-  },
-  {
-    slug: 'hand-maestro',
-    title: 'Hand Maestro',
-    role: '隊長',
-    date: '2025.03',
-    summary: '給輕偏癱患者的遊戲化手部訓練 App，不用戴裝置，平板鏡頭追蹤雙手就能跟著音樂訓練。',
-    body: [
-      '平板鏡頭追蹤雙手 21 個關節點，以食指當游標跟著音樂完成關卡，同時量化手抖程度與雙手協調。這是我第一次實作 Core ML，後來改寫成 IEEE BECITHCON 2026 論文。',
-    ],
-    award: '第二十一屆全國電子設計創意競賽 IEEE Tainan Section 特別獎',
-    image: handMaestroImg,
-    imageAlt: 'Hand Maestro 的 iPad 主畫面，可選擇單手指揮或雙手協奏模式',
-    tags: ['MediaPipe', 'Core ML', 'SwiftUI'],
-  },
-  {
-    slug: 'petscan',
-    title: 'PetScan',
-    role: '隊長',
-    date: '2024.07',
-    summary: '狗狗皮膚檢查 App，在手機上直接判斷健康、濕疹或異位性皮膚炎，照片不上傳。',
-    body: [
-      '只有 36 張照片，用資料擴增與留一驗證訓練 Create ML 模型，由 Core ML 在手機上直接辨識。設計稿由我手寫成 SwiftUI。',
-    ],
-    award: '行動應用創新賽（MAIC）三等獎',
-    image: petScanImg,
-    imageAlt: 'PetScan 獸醫隨行的 App 圖示與名稱',
-    tags: ['Create ML', 'Core ML', 'SwiftUI'],
-    links: [{ label: 'GitHub', href: 'https://github.com/Ruxiu0409/PetScan-Maic' }],
-  },
-  {
-    slug: 'chair-fitness',
-    title: '椅上健康',
-    role: '文獻探討與訓練機制',
-    date: '2024.03',
-    summary: '輪椅使用者坐著就能做的運動 App，iPad 前鏡頭追蹤雙手手腕，把上肢動作做成遊戲關卡。',
-    body: [
-      '我負責文獻探討與訓練機制，依肩袖撕裂風險把單場遊戲限制在 10 分鐘內。',
-    ],
-    award: '第二十屆全國電子設計創意競賽 冠軍',
-    image: chairImg,
-    imageAlt: '椅上健康的 iPad 主畫面，列出各種上肢運動遊戲關卡',
-    tags: ['Vision', 'Core ML', 'SwiftUI'],
   },
 ];

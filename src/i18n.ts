@@ -33,7 +33,7 @@ export const ui = {
     about: { title: '關於我', story: '學習歷程', traits: '個人特質' },
     portfolio: {
       title: '作品集',
-      lead: '從校園 App 到 Apple Vision Pro 上的復健系統，這些是我做過的作品。',
+      lead: '我為逢甲同學做的校園 App。',
       award: '獲獎',
     },
     experience: {
@@ -62,7 +62,7 @@ export const ui = {
     about: { title: 'About Me', story: 'My Story', traits: 'What Drives Me' },
     portfolio: {
       title: 'Portfolio',
-      lead: "From a campus app to a rehabilitation system on Apple Vision Pro, here's what I've built.",
+      lead: 'Campus apps I built for students at Feng Chia University.',
       award: 'Award',
     },
     experience: {
