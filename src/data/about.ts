@@ -14,6 +14,8 @@ import FirebaseIcon from '../assets/icons/firebase.svg';
 import SupabaseIcon from '../assets/icons/supabase.svg';
 import GoogleCloudIcon from '../assets/icons/googlecloud.svg';
 import CloudflareWorkersIcon from '../assets/icons/cloudflareworkers.svg';
+// SwiftUI 用 Apple 官方的彩色 App 圖示（點陣圖）
+import swiftUIImage from '../assets/icons/swiftui.png';
 
 export const education: Entry[] = [
   {
@@ -90,11 +92,16 @@ export const languages = [
   { name: 'Python', icon: PythonIcon },
 ];
 
-/** 技能圖示：有官方圖示就用 icon，沒有的（Apple 框架等）用 mono 縮寫字當單色字標 */
-export type Skill = { name: string; icon?: (typeof languages)[number]['icon']; mono?: string };
+/** 技能圖示：有官方圖示就用 icon（單色 SVG）或 image（彩色點陣圖），沒有的用 mono 縮寫字當單色字標 */
+export type Skill = {
+  name: string;
+  icon?: (typeof languages)[number]['icon'];
+  image?: ImageMetadata;
+  mono?: string;
+};
 
 export const frameworkSkills: Skill[] = [
-  { name: 'SwiftUI', mono: 'SU' },
+  { name: 'SwiftUI', image: swiftUIImage },
   { name: 'RealityKit', mono: 'RK' },
   { name: 'ARKit', mono: 'AR' },
   { name: 'WidgetKit', mono: 'WK' },

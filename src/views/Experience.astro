@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Page from '../layouts/Page.astro';
 import EntryList from '../components/EntryList.astro';
 import { useI18n } from '../i18n';
@@ -20,9 +21,11 @@ const { education, experienceSections, skillGroups } = data;
         <>
           <h3>{group.label}</h3>
           <ul class="languages">
-            {group.items.map(({ name, icon: Icon, mono }) => (
+            {group.items.map(({ name, icon: Icon, image, mono }) => (
               <li>
-                {Icon ? (
+                {image ? (
+                  <Image class="app-icon" src={image} alt="" width={36} height={36} densities={[1, 2, 3]} />
+                ) : Icon ? (
                   <Icon width={36} height={36} aria-hidden="true" />
                 ) : (
                   <span class="mono" aria-hidden="true">
@@ -97,6 +100,13 @@ const { education, experienceSections, skillGroups } = data;
   }
 
   /* 沒有官方圖示的技能：用縮寫做成和圖示同大小的灰色字標 */
+  /* 彩色 App 圖示本身就有圓角，不再加框 */
+  :global(.app-icon) {
+    display: block;
+    width: 36px;
+    height: 36px;
+  }
+
   .mono {
     display: grid;
     place-items: center;
