@@ -194,18 +194,17 @@ const highlights = [
 </Base>
 
 <style>
-  /* 首頁主視覺：全版照片，上、左、右貼齊畫面邊緣，導覽列浮在照片上 */
+  /* 首頁主視覺：置中的照片卡，左右留白，照原比例 16:9 顯示不裁切 */
   .hero {
     position: relative;
     isolation: isolate;
     display: flex;
     align-items: flex-end;
-    width: 100%;
-    /* 照片原比例 16:9，不放大裁切；寬螢幕最多佔畫面 80% 高 */
-    height: min(56.25vw, 80svh);
-    min-height: 30rem;
-    /* 往上拉過導覽列佔的高度（上方間距 + 膠囊高度），讓照片從畫面最頂端開始 */
-    margin: calc(-1 * var(--header-offset)) 0 0;
+    width: calc(100% - 4rem);
+    max-width: 68rem;
+    aspect-ratio: 16 / 9;
+    min-height: 26rem;
+    margin: 1.5rem auto 0;
     overflow: hidden;
     background: var(--bg);
     color: #fff;
@@ -233,9 +232,7 @@ const highlights = [
 
   .hero-content {
     width: 100%;
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 2.5rem 2.5rem 3rem;
+    padding: 2.5rem;
   }
 
   .badge {
@@ -353,8 +350,11 @@ const highlights = [
 
   @media (max-width: 720px) {
     .hero {
-      height: 72svh;
+      width: calc(100% - 2rem);
+      aspect-ratio: auto;
+      height: 70svh;
       min-height: 28rem;
+      margin-top: 1rem;
     }
 
     .hero-photo {
@@ -381,8 +381,7 @@ const highlights = [
     /* 手機：臉在照片約 40% 的高度，文字區塊要縮在下方三分之一，不能蓋到臉 */
     .badge {
       position: absolute;
-      /* 導覽列浮在照片上，徽章放在導覽列下方 */
-      top: calc(var(--header-offset) + 0.75rem);
+      top: 1rem;
       left: 1rem;
       margin: 0;
       padding: 0.3125rem 0.75rem 0.3125rem 0.625rem;

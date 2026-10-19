@@ -1,6 +1,4 @@
 :root {
-  /* 導覽列佔的高度（上方間距 + 膠囊高度），首頁主視覺用來往上貼齊畫面頂端 */
-  --header-offset: 4.09375rem;
   /* 極簡：純白底、中性灰、很淡的分隔線 */
   --bg: #ffffff;
   --fg: #1d1d1f;
@@ -81,11 +79,4 @@ a:hover {
   max-width: 44rem;
   margin: 0 auto;
   padding: 0 1.5rem;
-}
-
-/* 手機的導覽列較矮（頭像 36px 撐高度），主視覺往上拉的距離跟著調整 */
-@media (max-width: 720px) {
-  :root {
-    --header-offset: 3.875rem;
-  }
 }
