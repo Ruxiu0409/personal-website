@@ -201,8 +201,9 @@ const highlights = [
     display: flex;
     align-items: flex-end;
     width: 100%;
-    height: 100svh;
-    min-height: 34rem;
+    /* 照片原比例 16:9，不放大裁切；寬螢幕最多佔畫面 80% 高 */
+    height: min(56.25vw, 80svh);
+    min-height: 30rem;
     /* 往上拉過導覽列佔的高度（上方間距 + 膠囊高度），讓照片從畫面最頂端開始 */
     margin: calc(-1 * var(--header-offset)) 0 0;
     overflow: hidden;
@@ -352,8 +353,8 @@ const highlights = [
 
   @media (max-width: 720px) {
     .hero {
-      height: 100svh;
-      min-height: 30rem;
+      height: 72svh;
+      min-height: 28rem;
     }
 
     .hero-photo {
