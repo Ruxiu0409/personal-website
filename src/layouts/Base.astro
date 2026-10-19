@@ -52,19 +52,24 @@ const year = new Date().getFullYear();
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href={localize(locale, '/')}>
+      <!-- 頭像就是「首頁」連結，導覽列不再另外放首頁文字 -->
+      <a
+        class="brand"
+        href={localize(locale, '/')}
+        aria-label={t.nav[0]}
+        aria-current={path === '/' ? 'page' : undefined}
+      >
         <span class="brand-mark">
           <Image src={avatar} alt="" width={28} height={28} densities={[1, 2, 3]} loading="eager" />
         </span>
-        <span class="visually-hidden">{site.name}</span>
       </a>
       <nav aria-label={t.mainNav}>
         <ul>
           {
-            pages.map((page, i) => (
+            pages.slice(1).map((page, i) => (
               <li>
                 <a href={localize(locale, page)} aria-current={path === page ? 'page' : undefined}>
-                  {t.nav[i]}
+                  {t.nav[i + 1]}
                 </a>
               </li>
             ))
@@ -129,6 +134,11 @@ const year = new Date().getFullYear();
 
   .brand:hover {
     transform: scale(1.06);
+  }
+
+  /* 在首頁時，頭像外圈亮起，對應其他連結的選取狀態 */
+  .brand[aria-current='page'] .brand-mark {
+    box-shadow: 0 0 0 2px var(--nav-active);
   }
 
   .brand-mark,
