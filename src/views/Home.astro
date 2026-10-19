@@ -217,8 +217,8 @@ const highlights = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* 人在照片中間偏右上，裁切時讓臉保持在畫面裡 */
-    object-position: 55% 35%;
+    /* 人在照片左半邊，裁切時讓臉和 iOS Club 貼紙保持在畫面裡 */
+    object-position: 20% 30%;
   }
 
   /* 底部漸層，讓白字在亮色天空上也看得清楚 */
@@ -338,6 +338,18 @@ const highlights = [
     transform: translateY(-2px);
   }
 
+  /* 電腦版：人在左半邊，文字放右下角，不蓋到臉和貼紙 */
+  @media (min-width: 721px) {
+    .hero-content {
+      text-align: right;
+    }
+
+    .tags,
+    .links {
+      justify-content: flex-end;
+    }
+  }
+
   @media (max-width: 720px) {
     .hero {
       height: 100svh;
@@ -345,7 +357,7 @@ const highlights = [
     }
 
     .hero-photo {
-      object-position: 58% 30%;
+      object-position: 33% 30%;
     }
 
     .hero-content {
