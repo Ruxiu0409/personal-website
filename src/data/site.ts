@@ -39,6 +39,8 @@ export type Entry = {
   body?: string[];
   href?: string;
   tags?: string[];
+  /** 現場照片（競賽頁），顯示在說明下方 */
+  photos?: { src: ImageMetadata; alt: string }[];
 };
 
 /** 作品集的一個作品（portfolio.ts） */

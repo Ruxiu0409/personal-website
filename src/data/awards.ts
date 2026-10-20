@@ -1,5 +1,6 @@
 // 「競賽」頁。隊友姓名不公開，只寫自己的角色。
 import type { Section } from './site';
+import { awardPhotos as P } from './awardPhotos';
 
 export const awardSections: Section[] = [
   {
@@ -13,6 +14,7 @@ export const awardSections: Section[] = [
         description:
           '以 SwiftUI 與 RealityKit 開發星星刪除、線段平分、蝴蝶追蹤等測驗與 iPad 照顧者端，後來延伸成國科會大專學生研究計畫。',
         tags: ['visionOS', 'RealityKit'],
+        photos: [{ src: P.neglectTraining, alt: '在第二十二屆全國電子設計創意競賽頒獎台上，拿著亞軍看板與獎狀' }],
       },
       {
         title: '第二十二屆全國電子設計創意競賽 佳作',
@@ -21,6 +23,7 @@ export const awardSections: Section[] = [
         description:
           '題目由保全公司出題，我提出不做實體櫃門、改用身分、條碼、重量、影像四因子交叉驗證的解法。以 FastAPI 與 Supabase 建立後端並部署到 Google Cloud Run，重量異常或有人停留過久就即時通報物管。',
         tags: ['FastAPI', 'Supabase', 'Cloud Run'],
+        photos: [{ src: P.smartParcel, alt: '第二十二屆全國電子設計創意競賽，團隊拿著佳作獎狀合照' }],
       },
       {
         title: '行動應用創新賽（MAIC）三等獎',
@@ -29,6 +32,7 @@ export const awardSections: Section[] = [
         description:
           '用文字描述氛圍就生成整場舞台燈光。第一版用裝置端 Foundation Models 一次生成整場燈光，撐爆 4,096 token 的 context window；後來用 @Generable 固定格式、拆成兩階段生成，裝置端可生成 4–12 盞、2–6 個 cue 的整場燈光。',
         tags: ['Foundation Models', 'RealityKit', 'ARKit'],
+        photos: [{ src: P.lumaStage, alt: '行動應用創新賽頒獎後，拿著三等獎看板與 LumaStage 布條' }],
       },
       {
         title: '第十屆海峽兩岸青少年創客大賽 上海賽區二等獎、福州賽區優秀展覽獎',
@@ -37,6 +41,7 @@ export const awardSections: Section[] = [
         description:
           '望診用 YOLO 在 16,551 張舌象照片上訓練，聞診分析語氣，問診由 LLM 加 RAG 生成調理方案，再用 MediaPipe 依同身寸法在手上標出穴位。',
         tags: ['YOLO', 'MediaPipe', 'RAG'],
+        photos: [{ src: P.tcmCrossStrait, alt: '第十屆海峽兩岸青少年創客大賽的舞台，團隊站在大螢幕前' }],
       },
       {
         title: '第二十一屆全國電子設計創意競賽 IEEE Tainan Section 特別獎',
@@ -45,6 +50,10 @@ export const awardSections: Section[] = [
         description:
           '給輕偏癱患者的手部訓練 App，不用戴裝置，平板鏡頭追蹤雙手 21 個關節點，以食指當游標跟著音樂完成關卡，同時量化手抖程度與雙手協調。這是我第一次實作 Core ML，後來改寫成 IEEE BECITHCON 2026 論文。',
         tags: ['MediaPipe', 'Core ML', 'SwiftUI'],
+        photos: [
+          { src: P.handMaestro1, alt: '第二十一屆全國電子設計創意競賽，團隊拿著 IEEE Signal Processing Society 旗幟合照' },
+          { src: P.handMaestro2, alt: 'IEEE Tainan Section 特別獎的得獎隊伍在舞台上合照' },
+        ],
       },
       {
         title: '南投縣山城數位黑客松 大專組 銅獎',
@@ -53,6 +62,7 @@ export const awardSections: Section[] = [
         description:
           '以實地訪查與政府開放資料建立南投景點知識庫，用聯發科達哥模型搭配 RAG 生成冷門景點旅遊文案，把人潮從熱門景點分散到其他鄉鎮。',
         tags: ['RAG', 'LLM'],
+        photos: [{ src: P.nantouHackathon, alt: '南投縣山城數位黑客松，團隊拿著銅獎看板合照' }],
       },
       {
         title: '行動應用創新賽（MAIC）三等獎',
@@ -76,6 +86,7 @@ export const awardSections: Section[] = [
         description:
           'iPad 前鏡頭追蹤雙手手腕，把上肢動作做成遊戲關卡。我負責文獻探討與訓練機制，依肩袖撕裂風險把單場遊戲限制在 10 分鐘內。',
         tags: ['Vision', 'Core ML', 'SwiftUI'],
+        photos: [{ src: P.chairFitness, alt: '第二十屆全國電子設計創意競賽智慧大數據及行動 App 類冠軍看板' }],
       },
     ],
   },

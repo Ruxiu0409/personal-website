@@ -1,5 +1,6 @@
 // "Competitions" page. Teammates' names are intentionally omitted; only my own role is listed.
 import type { Section } from '../site';
+import { awardPhotos as P } from '../awardPhotos';
 
 export const awardSections: Section[] = [
   {
@@ -13,6 +14,7 @@ export const awardSections: Section[] = [
         description:
           'Built star cancellation, line bisection and butterfly-tracking tests plus an iPad caregiver app with SwiftUI and RealityKit. The project later grew into an NSTC Undergraduate Research Grant.',
         tags: ['visionOS', 'RealityKit'],
+        photos: [{ src: P.neglectTraining, alt: 'On stage at the 22nd National Electronic Design Creativity Competition, holding the runner-up board and certificate' }],
       },
       {
         title: 'Honorable Mention, 22nd National Electronic Design Creativity Competition',
@@ -21,6 +23,7 @@ export const awardSections: Section[] = [
         description:
           'The challenge was set by a security company. Instead of building physical locker doors, I proposed cross-checking four factors: identity, barcode, weight and camera images. I built the backend with FastAPI and Supabase, deployed it on Google Cloud Run, and it alerts building management in real time when a weight anomaly occurs or someone lingers too long.',
         tags: ['FastAPI', 'Supabase', 'Cloud Run'],
+        photos: [{ src: P.smartParcel, alt: 'The team holding the honorable mention certificate at the 22nd National Electronic Design Creativity Competition' }],
       },
       {
         title: 'Third Prize, Mobile App Innovation Contest (MAIC)',
@@ -29,6 +32,7 @@ export const awardSections: Section[] = [
         description:
           'Describe a mood in words and get a full stage lighting show. My first version generated the whole show in one pass with on-device Foundation Models and blew past the 4,096-token context window. I then locked the output format with @Generable and split generation into two stages; it now generates complete shows of 4–12 lights and 2–6 cues on device.',
         tags: ['Foundation Models', 'RealityKit', 'ARKit'],
+        photos: [{ src: P.lumaStage, alt: 'Holding the MAIC third prize board and a LumaStage sash after the ceremony' }],
       },
       {
         title:
@@ -39,6 +43,7 @@ export const awardSections: Section[] = [
         description:
           'Inspection uses YOLO trained on 16,551 tongue images; listening analyzes tone of voice; inquiry uses an LLM with RAG to generate a wellness plan. MediaPipe then marks acupoints on the hand using the proportional body-inch (tongshencun) method.',
         tags: ['YOLO', 'MediaPipe', 'RAG'],
+        photos: [{ src: P.tcmCrossStrait, alt: 'The team on stage in front of the screen at the 10th Cross-Strait Youth Maker Competition' }],
       },
       {
         title: 'IEEE Tainan Section Special Award, 21st National Electronic Design Creativity Competition',
@@ -47,6 +52,10 @@ export const awardSections: Section[] = [
         description:
           'A hand-training app for patients with mild hemiparesis. No wearables: the tablet camera tracks 21 joints on each hand, and the index finger acts as a cursor to clear levels in time with music, while the app quantifies hand tremor and bimanual coordination. It was my first time implementing Core ML, and the work later became an IEEE BECITHCON 2026 paper.',
         tags: ['MediaPipe', 'Core ML', 'SwiftUI'],
+        photos: [
+          { src: P.handMaestro1, alt: 'The team holding the IEEE Signal Processing Society flag at the 21st National Electronic Design Creativity Competition' },
+          { src: P.handMaestro2, alt: 'IEEE Tainan Section Special Award winners on stage' },
+        ],
       },
       {
         title: 'Bronze Award (University Division), Nantou Mountain City Digital Hackathon',
@@ -55,6 +64,7 @@ export const awardSections: Section[] = [
         description:
           'Built a knowledge base of Nantou attractions from on-site visits and government open data, then used the MediaTek DaVinci model with RAG to write travel copy for lesser-known spots, spreading visitors from popular sites to other townships.',
         tags: ['RAG', 'LLM'],
+        photos: [{ src: P.nantouHackathon, alt: 'The team holding the bronze award board at the Nantou Mountain City Digital Hackathon' }],
       },
       {
         title: 'Third Prize, Mobile App Innovation Contest (MAIC)',
@@ -79,6 +89,7 @@ export const awardSections: Section[] = [
         description:
           "The iPad front camera tracks both wrists and turns upper-limb movements into game levels. I handled the literature review and training design, capping each session at 10 minutes based on rotator cuff tear risk.",
         tags: ['Vision', 'Core ML', 'SwiftUI'],
+        photos: [{ src: P.chairFitness, alt: 'First place board for the smart big data and mobile app category at the 20th National Electronic Design Creativity Competition' }],
       },
     ],
   },

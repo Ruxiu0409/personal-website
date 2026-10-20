@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { Entry } from '../data/site';
 
 interface Props {
@@ -28,6 +29,23 @@ const { items, detailed = false } = Astro.props;
             ))}
           </ul>
         )}
+        {item.photos && (
+          <div
+            class="photos"
+            style={`--ratio: ${item.photos.reduce((sum, { src }) => sum + src.width / src.height, 0)}`}
+          >
+            {item.photos.map(({ src, alt }) => (
+              <Image
+                class="photo"
+                src={src}
+                alt={alt}
+                widths={[480, 800, 1200]}
+                sizes="(max-width: 720px) 100vw, 40rem"
+                style={`flex: ${(100 * src.width) / src.height} 1 0`}
+              />
+            ))}
+          </div>
+        )}
       </li>
     ))
   }
@@ -36,6 +54,7 @@ const { items, detailed = false } = Astro.props;
 <style>
   .entries {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
     list-style: none;
     margin: 0;
@@ -84,6 +103,21 @@ const { items, detailed = false } = Astro.props;
     list-style: none;
     margin: 0.875rem 0 0;
     padding: 0;
+  }
+
+  /* 照片同一列等高，整列最高約 15rem，窄螢幕跟著等比例縮小 */
+  .photos {
+    display: flex;
+    gap: 0.5rem;
+    width: min(100%, calc(var(--ratio) * 15rem));
+    margin-top: 1rem;
+  }
+
+  :global(.photo) {
+    display: block;
+    min-width: 0;
+    height: auto;
+    border-radius: 0.75rem;
   }
 
   .tags li {
