@@ -38,7 +38,7 @@ export const awardSections: Section[] = [
         title:
           'Second Prize (Shanghai) and Outstanding Exhibition Award (Fuzhou), 10th Cross-Strait Youth Maker Competition',
         subtitle:
-          'TCM Diagnosis Companion (三診隨行) — assisting the inspection, listening and inquiry diagnoses of Traditional Chinese Medicine (TCM)',
+          'TCM Diagnosis Companion — assisting the inspection, listening and inquiry diagnoses of Traditional Chinese Medicine (TCM)',
         date: '2025.07',
         description:
           'Inspection uses YOLO trained on 16,551 tongue images; listening analyzes tone of voice; inquiry uses an LLM with RAG to generate a wellness plan. MediaPipe then marks acupoints on the hand using the proportional body-inch (tongshencun) method.',
@@ -59,7 +59,7 @@ export const awardSections: Section[] = [
       },
       {
         title: 'Bronze Award (University Division), Nantou Mountain City Digital Hackathon',
-        subtitle: 'Travel Copywriter (旅文寫手) — travel copy for lesser-known spots · Model & RAG',
+        subtitle: 'Travel Copywriter — travel copy for lesser-known spots · Model & RAG',
         date: '2024.10',
         description:
           'Built a knowledge base of Nantou attractions from on-site visits and government open data, then used the MediaTek DaVinci model with RAG to write travel copy for lesser-known spots, spreading visitors from popular sites to other townships.',
@@ -76,7 +76,7 @@ export const awardSections: Section[] = [
       },
       {
         title: 'Third Prize (Shanghai), 9th Cross-Strait Youth Maker Competition',
-        subtitle: 'Fitness Butler (健身管家) — health management app combining diet and exercise',
+        subtitle: 'Fitness Butler — health management app combining diet and exercise',
         date: '2024',
         description:
           'Developed the app: integrated HealthKit with SwiftUI and used an LLM to generate dietary advice and recipes.',
@@ -84,7 +84,7 @@ export const awardSections: Section[] = [
       },
       {
         title: 'First Place, 20th National Electronic Design Creativity Competition',
-        subtitle: 'Chair Fitness (椅上健康) — a seated exercise app for wheelchair users',
+        subtitle: 'Chair Fitness — a seated exercise app for wheelchair users',
         date: '2024.03',
         description:
           "The iPad front camera tracks both wrists and turns upper-limb movements into game levels. I handled the literature review and training design, capping each session at 10 minutes based on rotator cuff tear risk.",

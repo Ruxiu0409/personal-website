@@ -7,7 +7,7 @@ import fcuMobileImg from '../../assets/portfolio/fcu-mobile.png';
 export const portfolio: Project[] = [
   {
     slug: 'ban-feng-yu-jia',
-    title: 'Ban Feng Yu Jia (半逢遇甲)',
+    title: 'Ban Feng Yu Jia',
     role: 'Founder',
     date: '2024.10',
     summary:
