@@ -69,7 +69,7 @@ const socialIcons = {
   </header>
 
   <main>
-    <!-- 作品放在主視覺正下方：一排可橫向滑動的大圖，每張只留標題、獎項和日期 -->
+    <!-- 作品放在主視覺正下方：由上往下排列的大圖，每張只留標題、獎項和日期 -->
     <section class="showcase" aria-labelledby="portfolio">
       <div class="section-head wide">
         <h2 id="portfolio">{t.portfolio.title}</h2>
@@ -389,11 +389,10 @@ const socialIcons = {
     margin-bottom: 2rem;
   }
 
-  /* 作品區標題對齊主視覺的寬度 */
+  /* 作品區標題和下方作品欄同寬 */
   .section-head.wide {
-    max-width: 72rem;
+    width: min(100% - 3rem, 24rem);
     margin-inline: auto;
-    padding-inline: 1.5rem;
   }
 
   h2 {
@@ -415,28 +414,15 @@ const socialIcons = {
     color: var(--accent);
   }
 
-  /* 橫向滑動作品列：滿版延伸到畫面邊緣，起點對齊上方標題，不用 JS */
+  /* 作品由上往下排成一欄，置中，每張之間留大間距 */
   .rail {
-    --inset: max(1.5rem, calc((100% - 72rem) / 2 + 1.5rem));
     display: flex;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0 var(--inset) 1rem;
+    flex-direction: column;
+    gap: 4rem;
+    width: min(100% - 3rem, 24rem);
+    margin: 0 auto;
+    padding: 0;
     list-style: none;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--inset);
-    scrollbar-width: none;
-  }
-
-  .rail::-webkit-scrollbar {
-    display: none;
-  }
-
-  .rail li {
-    flex: 0 0 20rem;
-    scroll-snap-align: start;
   }
 
   .tile {
@@ -602,12 +588,7 @@ const socialIcons = {
     }
 
     .rail {
-      gap: 1rem;
-    }
-
-    /* 手機上一張約八成寬，讓下一張露出一角 */
-    .rail li {
-      flex-basis: 80vw;
+      gap: 3rem;
     }
 
     .frame {
