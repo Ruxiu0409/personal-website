@@ -83,7 +83,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       {
         heading: '訂閱與付款',
         body: [
-          'XDD Plus 是月訂閱，新訂閱者享有一週免費試用。購買流程完全由 Apple 處理，開發者看不到你的付款資訊。',
+          'XDD Plus 是月訂閱，新訂閱者前 7 天免費。購買流程完全由 Apple 處理，開發者看不到你的付款資訊。',
         ],
       },
       {
@@ -152,7 +152,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       {
         heading: 'Subscriptions and Payment',
         body: [
-          'XDD Plus is a monthly subscription with a one-week free trial for new subscribers. Purchases are handled entirely by Apple, and the developer never sees your payment information.',
+          'XDD Plus is a monthly subscription, and new subscribers get the first 7 days free. Purchases are handled entirely by Apple, and the developer never sees your payment information.',
         ],
       },
       {
@@ -223,7 +223,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       {
         heading: 'サブスクリプションと支払い',
         body: [
-          'XDD Plus は月額サブスクリプションで、新規登録者は1週間無料でお試しいただけます。購入の手続きはすべて Apple が行い、開発者が支払い情報を目にすることはありません。',
+          'XDD Plus は月額サブスクリプションで、新規登録者は最初の7日間無料でご利用いただけます。購入の手続きはすべて Apple が行い、開発者が支払い情報を目にすることはありません。',
         ],
       },
       {
@@ -278,7 +278,7 @@ export const support: Record<
       {
         q: '「照片」相簿功能是什麼？',
         a: [
-          'XDD Plus 訂閱者開啟這個功能後，笑死會在「照片」App 建立一本名為「笑死」的相簿，並持續維護它。XDD Plus 是月訂閱，新訂閱者享有一週免費試用。',
+          'XDD Plus 訂閱者開啟這個功能後，笑死會在「照片」App 建立一本名為「笑死」的相簿，並持續維護它。XDD Plus 是月訂閱，新訂閱者前 7 天免費。',
           '訂閱到期後，已經在相簿裡的照片會留著，只是不再同步新的梗圖。',
         ],
       },
@@ -341,7 +341,7 @@ export const support: Record<
       {
         q: 'What is the Photos album feature?',
         a: [
-          'XDD Plus subscribers can turn this on to have XDDD create and maintain an album named “XDDD” in the Photos app. XDD Plus is a monthly subscription with a one-week free trial for new subscribers.',
+          'XDD Plus subscribers can turn this on to have XDDD create and maintain an album named “XDDD” in the Photos app. XDD Plus is a monthly subscription, and new subscribers get the first 7 days free.',
           'If your subscription ends, the photos already in the album stay there; only syncing new memes stops.',
         ],
       },
@@ -410,7 +410,7 @@ export const support: Record<
       {
         q: '「写真」アルバム機能とは？',
         a: [
-          'XDD Plus の登録者がこの機能をオンにすると、XDDD が「写真」App に「XDDD」というアルバムを作成し、管理します。XDD Plus は月額サブスクリプションで、新規登録者は1週間無料でお試しいただけます。',
+          'XDD Plus の登録者がこの機能をオンにすると、XDDD が「写真」App に「XDDD」というアルバムを作成し、管理します。XDD Plus は月額サブスクリプションで、新規登録者は最初の7日間無料でご利用いただけます。',
           'サブスクリプションが終了しても、アルバム内の写真はそのまま残ります。新しいミームの同期だけが停止します。',
         ],
       },
