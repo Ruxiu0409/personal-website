@@ -57,6 +57,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* 日文頁面改用日文字形，避免漢字套到繁中字體 */
+html:lang(ja) body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', system-ui, sans-serif;
+}
+
 a {
   color: inherit;
   text-decoration-color: var(--line);

@@ -8,14 +8,17 @@ interface Props {
   title: string;
   lead?: string;
   sections?: Section[];
+  /** 傳給 Base 的 <html lang> 覆寫 */
+  lang?: string;
 }
 
-const { title, lead, sections = [] } = Astro.props;
+const { title, lead, sections = [], lang } = Astro.props;
 const { t, data } = useI18n(Astro.url);
 const { site } = data;
 ---
 
-<Base title={`${title} — ${site.name} ${site.nameEn}`} description={lead ?? site.description}>
+<Base title={`${title} — ${site.name} ${site.nameEn}`} description={lead ?? site.description} lang={lang}>
+  <slot name="head" slot="head" />
   <main class="container">
     <header class="page-header">
       <h1>{title}</h1>

@@ -2,28 +2,32 @@
 import { Image } from 'astro:assets';
 import '../styles/global.css';
 import avatar from '../assets/avatar.jpg';
-import { useI18n, basePath, localize, locales, pages, type Locale } from '../i18n';
+import { useI18n, basePath, localize, locales, pages, unlistedPages, type Locale } from '../i18n';
 
 interface Props {
   title?: string;
   description?: string;
+  /** 覆寫 <html lang>，給中英以外語言的頁面用（例如 /ja/ 的 App 說明頁） */
+  lang?: string;
 }
 
 const { locale, t, data } = useI18n(Astro.url);
 const { site } = data;
-const { title = site.title, description = site.description } = Astro.props;
+const { title = site.title, description = site.description, lang } = Astro.props;
+const htmlLang = lang ?? locales[locale].htmlLang;
+const ogLocales: Record<string, string> = { 'zh-Hant': 'zh_TW', en: 'en_US', ja: 'ja_JP' };
 
 const path = basePath(Astro.url);
 const canonical = new URL(localize(locale, path), Astro.site);
 const other: Locale = locale === 'zh' ? 'en' : 'zh';
 // 404 頁沒有對應的另一語言版本，切換時回到對方首頁。
-const isKnownPage = (pages as readonly string[]).includes(path);
+const isKnownPage = ([...pages, ...unlistedPages] as readonly string[]).includes(path);
 const switchHref = localize(other, isKnownPage ? path : '/');
 const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang={locales[locale].htmlLang}>
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,7 +52,8 @@ const year = new Date().getFullYear();
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={locale === 'zh' ? 'zh_TW' : 'en_US'} />
+    <meta property="og:locale" content={ogLocales[htmlLang] ?? 'zh_TW'} />
+    <slot name="head" />
   </head>
   <body>
     <header class="site-header">

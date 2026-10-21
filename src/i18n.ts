@@ -22,6 +22,9 @@ export const locales: Record<Locale, { htmlLang: string; prefix: string; label: 
 
 export const pages = ['/', '/portfolio/', '/experience/', '/awards/', '/community/'] as const;
 
+/** 有中英兩版、但不放進導覽列的頁面（App 的隱私權政策與支援頁），語言切換與 hreflang 用。 */
+export const unlistedPages = ['/xddd/privacy/', '/xddd/support/'] as const;
+
 export const ui = {
   zh: {
     nav: ['首頁', '作品集', '個人經歷', '競賽', '社群與活動'],

@@ -1,0 +1,137 @@
+---
+// App 說明頁（隱私權政策、支援）共用版面：Page 加上三語切換和內文排版。
+// 日文頁的網址 /ja/... 不在網站的中英語系裡，所以用 lang 覆寫 <html lang>，hreflang 也在這裡補上。
+import Page from './Page.astro';
+import { appLangs, appUi, getAppLang, type AppLang } from '../data/xddd';
+
+interface Props {
+  title: string;
+  lead: string;
+  /** 不含語言前綴的路徑，例如 /xddd/privacy/ */
+  path: string;
+  /** 標題下方的小字，例如生效日期 */
+  meta?: string;
+}
+
+const { title, lead, path, meta } = Astro.props;
+const lang = getAppLang(Astro.url);
+const langs = Object.keys(appLangs) as AppLang[];
+const href = (l: AppLang) => `${appLangs[l].prefix}${path}`;
+const abs = (l: AppLang) => new URL(href(l), Astro.site);
+---
+
+<Page title={title} lead={lead} lang={lang === 'ja' ? appLangs.ja.htmlLang : undefined}>
+  <Fragment slot="head">
+    {
+      // 中英頁的 zh/en/x-default 由 Base 輸出，這裡補日文；日文頁則全部自己輸出。
+      lang === 'ja' ? (
+        <>
+          {langs.map((l) => (
+            <link rel="alternate" hreflang={appLangs[l].htmlLang} href={abs(l)} />
+          ))}
+          <link rel="alternate" hreflang="x-default" href={abs('zh')} />
+        </>
+      ) : (
+        <link rel="alternate" hreflang={appLangs.ja.htmlLang} href={abs('ja')} />
+      )
+    }
+  </Fragment>
+
+  <div class="meta">
+    {meta && <p>{meta}</p>}
+    <nav class="langs" aria-label={appUi[lang].langNav}>
+      {
+        langs.map((l) => (
+          <a
+            href={href(l)}
+            hreflang={appLangs[l].htmlLang}
+            lang={appLangs[l].htmlLang}
+            aria-current={l === lang ? 'page' : undefined}
+          >
+            {appLangs[l].label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+
+  <div class="doc">
+    <slot />
+  </div>
+</Page>
+
+<style>
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    margin: -1.5rem 0 4rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .meta p {
+    margin: 0;
+  }
+
+  .langs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .langs a {
+    padding: 0.3125rem 0.875rem;
+    border-radius: 999px;
+    background: var(--card);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .langs a:hover {
+    color: var(--fg);
+  }
+
+  .langs a[aria-current='page'] {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .doc :global(section) {
+    margin-bottom: 3.5rem;
+  }
+
+  .doc :global(h2) {
+    margin: 0 0 1rem;
+    font-size: 1.625rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .doc :global(h3) {
+    margin: 2rem 0 0.5rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .doc :global(h2 + h3) {
+    margin-top: 0;
+  }
+
+  .doc :global(p),
+  .doc :global(ul) {
+    margin: 0 0 1rem;
+  }
+
+  .doc :global(ul) {
+    padding-left: 1.25rem;
+  }
+
+  .doc :global(li + li) {
+    margin-top: 0.375rem;
+  }
+</style>
