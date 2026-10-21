@@ -11,11 +11,10 @@ import LinkedInIcon from '../assets/icons/linkedin.svg';
 import InstagramIcon from '../assets/icons/instagram.svg';
 import XIcon from '../assets/icons/x.svg';
 import EmailIcon from '../assets/icons/email.svg';
-import type { Entry } from '../data/site';
 import { useI18n } from '../i18n';
 
 const { t, data, href } = useI18n(Astro.url);
-const { site, experienceSections, awardSections, communitySections, portfolio, story, traits, closing } = data;
+const { site, portfolio, story, traits, closing } = data;
 
 const socialIcons = {
   GitHub: GitHubIcon,
@@ -24,30 +23,6 @@ const socialIcons = {
   X: XIcon,
   Email: EmailIcon,
 } as const;
-
-const pick = (sections: { id: string; items: Entry[] }[], id: string, count: number) =>
-  sections.find((section) => section.id === id)?.items.slice(0, count) ?? [];
-
-const highlights = [
-  {
-    id: 'experience',
-    label: t.experience.title,
-    href: href('/experience/'),
-    items: [...pick(experienceSections, 'research', 1), ...pick(experienceSections, 'publications', 1)],
-  },
-  {
-    id: 'awards',
-    label: t.awards.title,
-    href: href('/awards/'),
-    items: pick(awardSections, 'awards', 4),
-  },
-  {
-    id: 'community',
-    label: t.community.title,
-    href: href('/community/'),
-    items: [...pick(communitySections, 'roles', 2), ...pick(communitySections, 'wwdc', 1)],
-  },
-];
 ---
 
 <Base>
@@ -165,31 +140,6 @@ const highlights = [
 
       <blockquote>{closing}</blockquote>
     </section>
-
-    <!-- 經歷、競賽、社群：只列標題和日期，細節留給各自的分頁 -->
-    {
-      highlights.map((section) => (
-        <section class="container" aria-labelledby={section.id}>
-          <div class="section-head">
-            <h2 id={section.id}>{section.label}</h2>
-            <a href={section.href}>{t.seeAll}</a>
-          </div>
-          <ul class="brief">
-            {section.items.map((item) => (
-              <li>
-                <div>
-                  <p class="brief-title">
-                    {item.href ? <a href={item.href}>{item.title}</a> : item.title}
-                  </p>
-                  {item.subtitle && <p class="brief-sub">{item.subtitle}</p>}
-                </div>
-                <span class="date">{item.date}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))
-    }
   </main>
 </Base>
 
@@ -638,51 +588,6 @@ const highlights = [
     text-align: center;
   }
 
-  /* 經歷精選：每項一行標題加日期，最多一行副標 */
-  .brief {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .brief li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1.5rem;
-  }
-
-  .brief li + li {
-    margin-top: 1.5rem;
-  }
-
-  .brief li > div {
-    min-width: 0;
-  }
-
-  .brief-title {
-    margin: 0;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-
-  .brief-title a {
-    text-decoration: none;
-  }
-
-  .brief-sub {
-    margin: 0.125rem 0 0;
-    overflow: hidden;
-    color: var(--muted);
-    font-size: 0.875rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .brief .date {
-    flex-shrink: 0;
-  }
-
   @media (max-width: 720px) {
     main {
       padding-bottom: 5rem;
@@ -725,15 +630,6 @@ const highlights = [
     blockquote {
       margin-top: 3.5rem;
       font-size: 1.0625rem;
-    }
-
-    .brief li {
-      flex-direction: column;
-      gap: 0.125rem;
-    }
-
-    .brief-sub {
-      white-space: normal;
     }
   }
 </style>
