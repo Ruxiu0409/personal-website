@@ -194,7 +194,7 @@ const highlights = [
 </Base>
 
 <style>
-  /* 首頁主視覺：置中的照片卡，左右留白，照原比例 16:9 顯示不裁切 */
+  /* 首頁主視覺：置中的圓角照片卡，左右留白，照原比例 16:9 顯示不裁切 */
   .hero {
     position: relative;
     isolation: isolate;
@@ -206,6 +206,7 @@ const highlights = [
     min-height: 26rem;
     margin: 1.5rem auto 0;
     overflow: hidden;
+    border-radius: 1.5rem;
     background: var(--bg);
     color: #fff;
   }
@@ -355,6 +356,7 @@ const highlights = [
       height: 70svh;
       min-height: 28rem;
       margin-top: 1rem;
+      border-radius: 1.25rem;
     }
 
     .hero-photo {
