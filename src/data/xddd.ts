@@ -41,13 +41,13 @@ export const appUi: Record<AppLang, { langNav: string }> = {
 export const privacy: Record<AppLang, { title: string; lead: string; effective: string; sections: DocSection[] }> = {
   zh: {
     title: '笑死 隱私權政策',
-    lead: '笑死不收集你的任何個人資料。你的梗圖只存在你的裝置和你自己的 iCloud 裡。',
-    effective: '生效日期：2026 年 10 月 21 日',
+    lead: '笑死不收集你的個人資料。你的梗圖只存在你的裝置和你自己的 iCloud 裡。',
+    effective: '生效日期：2026 年 10 月 23 日',
     sections: [
       {
         heading: '資料收集',
         body: [
-          '笑死沒有帳號，沒有廣告、分析或追蹤，也沒有使用任何第三方 SDK。開發者不會收集、儲存或分享你的任何個人資料。',
+          '笑死沒有帳號，沒有廣告、追蹤，也沒有使用任何第三方 SDK。開發者不會收集、儲存或分享你的個人資料。唯一送出的資料是下面說明的匿名使用統計，用來排出「今日熱門」，也讓開發者知道哪些精選梗圖比較受歡迎。這些資料不會與你的身分連結，也不會用來追蹤你。',
         ],
       },
       {
@@ -70,6 +70,15 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
         ],
       },
       {
+        heading: '今日熱門（匿名使用統計）',
+        body: [
+          '梗圖分頁的「今日熱門」會顯示當天大家最常收藏、分享的官方精選梗圖。為了排出這份排行，你在笑死裡收藏或分享一張官方精選梗圖時，App 會把這張梗圖當天的計數加一，存在 Apple 的 CloudKit 公開資料庫。',
+          '送出的只有日期、官方梗圖的編號，以及收藏或分享的次數。不包含你的姓名、Email、裝置識別碼或廣告識別碼，也不會用來追蹤你。你自己的梗圖不會送出任何資料。同一台裝置同一張梗圖，每種動作每天只算一次。',
+          'CloudKit 寫入公開資料庫時，會自動附上 Apple 產生、只在這個 App 內有效的匿名 iCloud 識別碼。開發者不會使用它，也無法用它知道你是誰。',
+          '你可以在「設定」關閉「分享匿名使用統計」，關閉後仍然看得到排行。沒有登入 iCloud 時不會送出任何資料。',
+        ],
+      },
+      {
         heading: '照片權限',
         body: ['笑死只在以下情況使用照片權限：'],
         list: [
@@ -83,7 +92,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       {
         heading: '訂閱與付款',
         body: [
-          'XDD Plus 是月訂閱，新訂閱者前 7 天免費。購買流程完全由 Apple 處理，開發者看不到你的付款資訊。',
+          'XDD Plus 是月訂閱，新訂閱者第一個月免費。購買流程完全由 Apple 處理，開發者看不到你的付款資訊。',
         ],
       },
       {
@@ -96,7 +105,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       },
       {
         heading: '兒童隱私',
-        body: ['笑死並非以 13 歲以下兒童為對象。笑死不收集任何人的資料，包括兒童。'],
+        body: ['笑死並非以 13 歲以下兒童為對象。笑死不收集任何人的個人資料，包括兒童。'],
       },
       {
         heading: '政策變更',
@@ -110,13 +119,13 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
   },
   en: {
     title: 'XDDD Privacy Policy',
-    lead: "XDDD doesn't collect any personal data. Your memes stay on your device and in your own iCloud.",
-    effective: 'Effective October 21, 2026',
+    lead: "XDDD doesn't collect personal data. Your memes stay on your device and in your own iCloud.",
+    effective: 'Effective October 23, 2026',
     sections: [
       {
         heading: 'Data Collection',
         body: [
-          'XDDD has no accounts, no ads, no analytics, no tracking, and no third-party SDKs. The developer does not collect, store, or share any of your personal data.',
+          'XDDD has no accounts, no ads, no tracking, and no third-party SDKs. The developer does not collect, store, or share your personal data. The only data sent is the anonymous usage count described below, used to rank Trending Today and to show the developer which curated memes are popular. It is not linked to your identity and is never used to track you.',
         ],
       },
       {
@@ -139,6 +148,15 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
         ],
       },
       {
+        heading: 'Trending Today (Anonymous Usage Stats)',
+        body: [
+          "The Trending Today row in the Meme tab shows the curated memes people saved and shared most that day. To build this ranking, when you save or share a curated meme in XDDD, the app adds one to that meme's count for the day in Apple's CloudKit public database.",
+          "Only the date, the curated meme's ID and the save/share counts are sent. Your name, email, device identifiers and advertising identifier are not included, and the data is never used to track you. Nothing is sent about your own memes. Each device counts a given meme at most once per action per day.",
+          "When CloudKit writes to a public database, it automatically attaches an anonymous iCloud identifier that Apple generates and that only works within this app. The developer doesn't use it and can't use it to find out who you are.",
+          "You can turn off “Share Anonymous Usage Stats” in Settings. You'll still see the ranking. Nothing is sent if you aren't signed in to iCloud.",
+        ],
+      },
+      {
         heading: 'Photos Access',
         body: ['XDDD uses Photos access only to:'],
         list: [
@@ -152,7 +170,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       {
         heading: 'Subscriptions and Payment',
         body: [
-          'XDD Plus is a monthly subscription, and new subscribers get the first 7 days free. Purchases are handled entirely by Apple, and the developer never sees your payment information.',
+          'XDD Plus is a monthly subscription, and new subscribers get the first month free. Purchases are handled entirely by Apple, and the developer never sees your payment information.',
         ],
       },
       {
@@ -166,7 +184,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       {
         heading: 'Children',
         body: [
-          'XDDD is not directed at children under 13. It does not collect data from anyone, including children.',
+          'XDDD is not directed at children under 13. It does not collect personal data from anyone, including children.',
         ],
       },
       {
@@ -181,13 +199,13 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
   },
   ja: {
     title: 'XDDD プライバシーポリシー',
-    lead: 'XDDD は個人データを一切収集しません。ミームはお使いのデバイスと、あなた自身の iCloud にだけ保存されます。',
-    effective: '施行日：2026年10月21日',
+    lead: 'XDDD は個人データを収集しません。ミームはお使いのデバイスと、あなた自身の iCloud にだけ保存されます。',
+    effective: '施行日：2026年10月23日',
     sections: [
       {
         heading: '収集するデータ',
         body: [
-          'XDDD にはアカウント、広告、分析、トラッキング、サードパーティ SDK は一切ありません。開発者があなたの個人データを収集、保存、共有することはありません。',
+          'XDDD にはアカウント、広告、トラッキング、サードパーティ SDK はありません。開発者があなたの個人データを収集、保存、共有することはありません。送信されるのは、下記の「今日の人気」のための匿名の利用統計だけです。このデータは、ランキングの作成と、どの厳選ミームが人気かを開発者が把握するために使われます。あなたの身元と結び付けられることはなく、トラッキングに使われることもありません。',
         ],
       },
       {
@@ -210,6 +228,15 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
         ],
       },
       {
+        heading: '今日の人気（匿名の利用統計）',
+        body: [
+          '「ミーム」タブの「今日の人気」には、その日に多く保存・共有された厳選ミームが表示されます。このランキングのために、XDDD で厳選ミームを保存または共有すると、そのミームのその日のカウントが Apple の CloudKit 公開データベースで 1 つ増えます。',
+          '送信されるのは、日付、厳選ミームの ID、保存・共有の回数だけです。名前、メールアドレス、デバイス識別子、広告識別子は含まれず、トラッキングに使われることもありません。自分のミームについては何も送信されません。同じデバイスでは、同じミームの同じ操作は 1 日 1 回だけカウントされます。',
+          'CloudKit は公開データベースへの書き込み時に、Apple が生成するこのアプリ専用の匿名 iCloud 識別子を自動的に付けます。開発者はこれを使用せず、これであなたを特定することもできません。',
+          '「設定」で「匿名の利用統計を共有」をオフにできます。オフにしてもランキングは表示されます。iCloud にサインインしていない場合は何も送信されません。',
+        ],
+      },
+      {
         heading: '写真へのアクセス',
         body: ['XDDD が写真へのアクセスを使用するのは、次の場合だけです。'],
         list: [
@@ -223,7 +250,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       {
         heading: 'サブスクリプションと支払い',
         body: [
-          'XDD Plus は月額サブスクリプションで、新規登録者は最初の7日間無料でご利用いただけます。購入の手続きはすべて Apple が行い、開発者が支払い情報を目にすることはありません。',
+          'XDD Plus は月額サブスクリプションで、新規登録者は最初の1か月無料でご利用いただけます。購入の手続きはすべて Apple が行い、開発者が支払い情報を目にすることはありません。',
         ],
       },
       {
@@ -236,7 +263,7 @@ export const privacy: Record<AppLang, { title: string; lead: string; effective: 
       },
       {
         heading: '子どものプライバシー',
-        body: ['XDDD は13歳未満の子どもを対象としていません。子どもを含め、誰のデータも収集しません。'],
+        body: ['XDDD は13歳未満の子どもを対象としていません。子どもを含め、誰の個人データも収集しません。'],
       },
       {
         heading: 'ポリシーの変更',
@@ -278,7 +305,7 @@ export const support: Record<
       {
         q: '「照片」相簿功能是什麼？',
         a: [
-          'XDD Plus 訂閱者開啟這個功能後，笑死會在「照片」App 建立一本名為「笑死」的相簿，並持續維護它。XDD Plus 是月訂閱，新訂閱者前 7 天免費。',
+          'XDD Plus 訂閱者開啟這個功能後，笑死會在「照片」App 建立一本名為「笑死」的相簿，並持續維護它。XDD Plus 是月訂閱，新訂閱者第一個月免費。',
           '訂閱到期後，已經在相簿裡的照片會留著，只是不再同步新的梗圖。',
         ],
       },
@@ -341,7 +368,7 @@ export const support: Record<
       {
         q: 'What is the Photos album feature?',
         a: [
-          'XDD Plus subscribers can turn this on to have XDDD create and maintain an album named “XDDD” in the Photos app. XDD Plus is a monthly subscription, and new subscribers get the first 7 days free.',
+          'XDD Plus subscribers can turn this on to have XDDD create and maintain an album named “XDDD” in the Photos app. XDD Plus is a monthly subscription, and new subscribers get the first month free.',
           'If your subscription ends, the photos already in the album stay there; only syncing new memes stops.',
         ],
       },
@@ -410,7 +437,7 @@ export const support: Record<
       {
         q: '「写真」アルバム機能とは？',
         a: [
-          'XDD Plus の登録者がこの機能をオンにすると、XDDD が「写真」App に「XDDD」というアルバムを作成し、管理します。XDD Plus は月額サブスクリプションで、新規登録者は最初の7日間無料でご利用いただけます。',
+          'XDD Plus の登録者がこの機能をオンにすると、XDDD が「写真」App に「XDDD」というアルバムを作成し、管理します。XDD Plus は月額サブスクリプションで、新規登録者は最初の1か月無料でご利用いただけます。',
           'サブスクリプションが終了しても、アルバム内の写真はそのまま残ります。新しいミームの同期だけが停止します。',
         ],
       },
