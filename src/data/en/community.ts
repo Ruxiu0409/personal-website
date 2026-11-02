@@ -76,25 +76,6 @@ export const communitySections: Section[] = [
           "During those days at Apple Park I saw how Apple Intelligence is making its way into everyday life. But what I learned most had nothing to do with technology: every detail of an experience can be done well, and the confidence and joy of everyone there was contagious. I want to bring that spirit back to the community in Taiwan.",
         ],
       },
-      {
-        title: 'Bitrig Bash',
-        subtitle: 'Santana Row, San Jose',
-        date: '2026.06.11',
-        description: 'A developer party hosted by the Bitrig team during WWDC week.',
-      },
-      {
-        title: 'build fridays sf',
-        subtitle: 'Cursor Office, San Francisco',
-        date: '2026.06.19',
-        description: 'Presented LumaStage on stage at a developer meetup at the Cursor office.',
-      },
-      {
-        title: 'WWDC Week Developer Meetups',
-        subtitle: 'Step-Into-Coffee, Swift Students Cafe, AiOS Meetup, Pre-WWDC Gathering, Feedback Friday',
-        date: '2026.06',
-        description:
-          'Saw someone teleoperate a humanoid robot with Apple Vision Pro, and met student communities from Singapore and Japan, which later led to bringing Swift Students Cafe to Taiwan together.',
-      },
     ],
   },
 ];

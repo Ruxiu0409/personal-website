@@ -72,25 +72,6 @@ export const communitySections: Section[] = [
           '在 Apple Park 的那幾天，我看見 Apple Intelligence 如何走進日常生活。但我學到最多的其實跟技術無關，而是發現每個體驗的細節都可以做得很好，現場每個人散發的自信與快樂互相感染。我希望把這份理念帶回台灣的社群。',
         ],
       },
-      {
-        title: 'Bitrig Bash',
-        subtitle: 'Santana Row，San Jose',
-        date: '2026.06.11',
-        description: 'Bitrig 團隊在 WWDC 週舉辦的開發者派對。',
-      },
-      {
-        title: 'build fridays sf',
-        subtitle: 'Cursor Office，San Francisco',
-        date: '2026.06.19',
-        description: '在 Cursor 辦公室的開發者聚會上台介紹 LumaStage。',
-      },
-      {
-        title: 'WWDC 週開發者聚會',
-        subtitle: 'Step-Into-Coffee、Swift Students Cafe、AiOS Meetup、Pre-WWDC Gathering、Feedback Friday',
-        date: '2026.06',
-        description:
-          '看到有人用 Apple Vision Pro 遠端操控人形機器人，也認識了新加坡和日本的學生社群，後來一起把 Swift Students Cafe 帶到台灣。',
-      },
     ],
   },
 ];
