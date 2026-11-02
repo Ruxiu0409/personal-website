@@ -10,11 +10,13 @@ interface Props {
   description?: string;
   /** 覆寫 <html lang>，給中英以外語言的頁面用（例如 /ja/ 的 App 說明頁） */
   lang?: string;
+  /** 是否顯示 AI 代理人畫網站的動畫（App 隱私權、支援頁關掉） */
+  agents?: boolean;
 }
 
 const { locale, t, data } = useI18n(Astro.url);
 const { site } = data;
-const { title = site.title, description = site.description, lang } = Astro.props;
+const { title = site.title, description = site.description, lang, agents = true } = Astro.props;
 const htmlLang = lang ?? locales[locale].htmlLang;
 const ogLocales: Record<string, string> = { 'zh-Hant': 'zh_TW', en: 'en_US', ja: 'ja_JP' };
 
@@ -57,7 +59,7 @@ const year = new Date().getFullYear();
     <slot name="head" />
   </head>
   <body>
-    <AgentCursors />
+    {agents && <AgentCursors />}
     <header class="site-header">
       <!-- 頭像就是「首頁」連結，導覽列不再另外放首頁文字 -->
       <a

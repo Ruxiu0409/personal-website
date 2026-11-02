@@ -10,14 +10,16 @@ interface Props {
   sections?: Section[];
   /** 傳給 Base 的 <html lang> 覆寫 */
   lang?: string;
+  /** 傳給 Base 的動畫開關 */
+  agents?: boolean;
 }
 
-const { title, lead, sections = [], lang } = Astro.props;
+const { title, lead, sections = [], lang, agents } = Astro.props;
 const { t, data } = useI18n(Astro.url);
 const { site } = data;
 ---
 
-<Base title={`${title} — ${site.name} ${site.nameEn}`} description={lead ?? site.description} lang={lang}>
+<Base title={`${title} — ${site.name} ${site.nameEn}`} description={lead ?? site.description} lang={lang} agents={agents}>
   <slot name="head" slot="head" />
   <main class="container">
     <header class="page-header">

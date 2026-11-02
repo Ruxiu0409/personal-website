@@ -20,7 +20,7 @@ const href = (l: AppLang) => `${appLangs[l].prefix}${path}`;
 const abs = (l: AppLang) => new URL(href(l), Astro.site);
 ---
 
-<Page title={title} lead={lead} lang={lang === 'ja' ? appLangs.ja.htmlLang : undefined}>
+<Page title={title} lead={lead} lang={lang === 'ja' ? appLangs.ja.htmlLang : undefined} agents={false}>
   <Fragment slot="head">
     {
       // 中英頁的 zh/en/x-default 由 Base 輸出，這裡補日文；日文頁則全部自己輸出。
