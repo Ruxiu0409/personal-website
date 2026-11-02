@@ -1,0 +1,629 @@
+---
+// 「AI 代理人幫我蓋網站」效果：捲到哪裡，一群有名字的游標就飛過去把那一塊組出來。
+// 標題用打字、段落一行行寫出來、圖片和卡片用拖曳放進位置、小標籤點一下彈出。
+// 只改 opacity / transform / clip-path，不會造成版面跳動；沒有 JS 或偏好減少動態時完全不啟用。
+---
+
+<script is:inline>
+  // 在內容畫出來前先藏起來，避免先閃一下完整頁面；3 秒保險機制確保內容一定會出現。
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('ag-on');
+    setTimeout(() => document.documentElement.classList.add('ag-ready'), 3000);
+  }
+</script>
+
+<div class="ag-layer" aria-hidden="true"></div>
+<div class="ag-hud" aria-hidden="true">
+  <span class="ag-dot"></span>
+  <span class="ag-status"></span>
+  <span class="ag-bar"><span></span></span>
+</div>
+
+<script>
+  type Kind = 'type' | 'write' | 'place' | 'pop';
+  type Task = { el: HTMLElement; kind: Kind; claimed: boolean; done: boolean };
+  type Agent = {
+    name: string;
+    color: string;
+    x: number;
+    y: number;
+    tx: number;
+    ty: number;
+    speed: number;
+    node: HTMLElement;
+    busy: boolean;
+    press: boolean;
+  };
+
+  const root = document.documentElement;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduced && root.classList.contains('ag-on')) start();
+
+  function start() {
+    const layer = document.querySelector<HTMLElement>('.ag-layer')!;
+    const hud = document.querySelector<HTMLElement>('.ag-hud')!;
+    const hudStatus = hud.querySelector<HTMLElement>('.ag-status')!;
+    const hudBar = hud.querySelector<HTMLElement>('.ag-bar > span')!;
+    const zh = root.lang.startsWith('zh');
+
+    // ---------- 找出要「蓋」的區塊 ----------
+    const CANDIDATES =
+      'h1, h2, h3, h4, h5, p, blockquote, img, picture, li, figure, .badge, .tile, .card, .toc, nav.links';
+    const scopes = document.querySelectorAll<HTMLElement>('body > header.hero, main');
+    const all = new Set<HTMLElement>();
+    scopes.forEach((scope) => scope.querySelectorAll<HTMLElement>(CANDIDATES).forEach((el) => all.add(el)));
+    // 只取最外層的候選元素：卡片整張拖進來，裡面的標題就不再分開處理
+    const targets = [...all].filter((el) => {
+      for (let p = el.parentElement; p; p = p.parentElement) if (all.has(p)) return false;
+      return el.getClientRects().length > 0;
+    });
+
+    const tasks = new Map<HTMLElement, Task>();
+    for (const el of targets) {
+      const kind = classify(el);
+      tasks.set(el, { el, kind, claimed: false, done: false });
+      el.classList.add('ag-pending', `ag-${kind}`);
+    }
+    root.classList.add('ag-ready');
+    const total = tasks.size;
+    let built = 0;
+
+    function classify(el: HTMLElement): Kind {
+      const tag = el.tagName;
+      const text = (el.textContent ?? '').trim();
+      const r = el.getBoundingClientRect();
+      if (tag === 'IMG' || tag === 'PICTURE' || tag === 'FIGURE' || el.querySelector('img')) return 'place';
+      if (/^H[1-5]$/.test(tag) && text.length <= 60) return 'type';
+      if (tag === 'LI' && r.height < 60) return 'pop';
+      if (el.matches('.badge, nav.links, .toc')) return 'pop';
+      if (r.height > 220 || el.matches('.tile, .card, li')) return 'place';
+      return text.length < 40 && r.height < 48 ? 'type' : 'write';
+    }
+
+    // ---------- 代理人 ----------
+    const AGENTS = [
+      { name: 'Claude', color: '#d97757' },
+      { name: 'Codex', color: '#10a37f' },
+      { name: 'Gemini', color: '#4f7cff' },
+      { name: 'Cursor', color: '#a855f7' },
+      { name: 'Copilot', color: '#e0457b' },
+    ];
+    const agents: Agent[] = AGENTS.map((a, i) => {
+      const node = document.createElement('div');
+      node.className = 'ag-cursor';
+      node.style.setProperty('--c', a.color);
+      node.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 2.5 20 11l-7.2 1.8L9.4 20z" /></svg><span class="ag-name">${a.name}<em></em></span>`;
+      layer.append(node);
+      // 從畫面右下角外面陸續飛進來
+      const x = innerWidth + 40 + i * 30;
+      const y = innerHeight + 40 + i * 20;
+      return { ...a, x, y, tx: x, ty: y, speed: 7 + i * 0.6, node, busy: false, press: false };
+    });
+
+    function setActivity(agent: Agent, label: string) {
+      agent.node.querySelector('em')!.textContent = label ? ` · ${label}` : '';
+    }
+
+    // ---------- 主迴圈：游標跟著目標移動（目標以視窗座標計算，所以捲動時會黏著內容） ----------
+    let last = performance.now();
+    function frame(now: number) {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      for (const a of agents) {
+        const k = 1 - Math.exp(-dt * a.speed);
+        a.x += (a.tx - a.x) * k;
+        a.y += (a.ty - a.y) * k;
+        a.node.style.transform = `translate3d(${a.x}px, ${a.y}px, 0) scale(${a.press ? 0.82 : 1})`;
+      }
+      for (const fn of followers) fn();
+      requestAnimationFrame(frame);
+    }
+    const followers = new Set<() => void>();
+    requestAnimationFrame(frame);
+
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    /** 讓游標飛到某元素上的某點，抵達後才 resolve；途中元素位置變動也會跟著修正 */
+    function flyTo(a: Agent, point: () => [number, number], maxMs = 1400) {
+      return new Promise<void>((resolve) => {
+        const t0 = performance.now();
+        const follow = () => {
+          [a.tx, a.ty] = point();
+          if (Math.hypot(a.tx - a.x, a.ty - a.y) < 4 || performance.now() - t0 > maxMs) {
+            followers.delete(follow);
+            resolve();
+          }
+        };
+        followers.add(follow);
+      });
+    }
+
+    /** 在 duration 內每一幀呼叫 step(進度 0..1) */
+    function animate(duration: number, step: (p: number) => void) {
+      return new Promise<void>((resolve) => {
+        const t0 = performance.now();
+        const tick = () => {
+          const p = Math.min(1, (performance.now() - t0) / duration);
+          step(p);
+          if (p >= 1) {
+            followers.delete(tick);
+            resolve();
+          }
+        };
+        followers.add(tick);
+      });
+    }
+
+    // ---------- 選取框 ----------
+    function selection(a: Agent, el: HTMLElement, label: string) {
+      const box = document.createElement('div');
+      box.className = 'ag-box';
+      box.style.setProperty('--c', a.color);
+      box.innerHTML = `<span class="ag-tag">${label}</span><i></i><i></i><i></i><i></i>`;
+      layer.append(box);
+      const tag = box.firstElementChild as HTMLElement;
+      const follow = () => {
+        const r = el.getBoundingClientRect();
+        box.style.transform = `translate3d(${r.left - 4}px, ${r.top - 4}px, 0)`;
+        box.style.width = `${r.width + 8}px`;
+        box.style.height = `${r.height + 8}px`;
+      };
+      follow();
+      followers.add(follow);
+      requestAnimationFrame(() => box.classList.add('on'));
+      return {
+        setLabel(text: string) {
+          tag.textContent = text;
+        },
+        remove() {
+          followers.delete(follow);
+          box.classList.remove('on');
+          setTimeout(() => box.remove(), 300);
+        },
+      };
+    }
+
+    // ---------- 各種動作 ----------
+    function reveal(task: Task) {
+      if (task.done) return;
+      task.done = true;
+      const el = task.el;
+      el.classList.remove('ag-pending', 'ag-live');
+      el.style.removeProperty('clip-path');
+      el.style.removeProperty('transform');
+      el.style.removeProperty('opacity');
+      built++;
+      updateHud();
+    }
+
+    /** 速度：排隊的工作越多做越快，快速捲動也追得上 */
+    function pace() {
+      const queued = [...tasks.values()].filter((t) => !t.done && visible.has(t.el)).length;
+      return 1 / (1 + queued * 0.25);
+    }
+
+    async function doType(a: Agent, task: Task) {
+      const el = task.el;
+      // 把每段文字拆成「已打」和「未打（透明）」兩段，版面維持不變
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const parts: { original: Text; typed: Text; rest: HTMLElement; wrap: HTMLElement }[] = [];
+      for (let n = walker.nextNode() as Text | null; n; n = walker.nextNode() as Text | null) {
+        if (!n.data.trim()) continue;
+        const wrap = document.createElement('span');
+        const typed = document.createTextNode('');
+        const rest = document.createElement('span');
+        rest.className = 'ag-rest';
+        rest.textContent = n.data;
+        wrap.append(typed, rest);
+        parts.push({ original: n, typed, rest, wrap });
+      }
+      if (!parts.length) return doPop(a, task);
+      for (const part of parts) part.original.replaceWith(part.wrap);
+      el.classList.remove('ag-pending');
+      el.classList.add('ag-live');
+
+      const caret = (): [number, number] => {
+        const part = parts.find((p) => p.rest.textContent) ?? parts[parts.length - 1];
+        const r = (part.rest.textContent ? part.rest : part.wrap).getBoundingClientRect();
+        const x = part.rest.textContent ? r.left : r.right;
+        return [x + 2, r.top + r.height * 0.55];
+      };
+      await flyTo(a, caret);
+      a.speed = 26;
+      const chars = parts.map((p) => p.original.data);
+      const length = chars.reduce((s, c) => s + c.length, 0);
+      const box = selection(a, el, `${a.name} ${zh ? '正在輸入…' : 'typing…'}`);
+      await animate(Math.max(250, Math.min(1400, length * 45)) * pace(), (p) => {
+        let n = Math.round(length * p);
+        for (let i = 0; i < parts.length; i++) {
+          const take = Math.min(n, chars[i].length);
+          parts[i].typed.data = chars[i].slice(0, take);
+          parts[i].rest.textContent = chars[i].slice(take);
+          n -= take;
+        }
+        [a.tx, a.ty] = caret();
+      });
+      for (const part of parts) part.wrap.replaceWith(part.original);
+      box.remove();
+    }
+
+    async function doWrite(a: Agent, task: Task) {
+      const el = task.el;
+      const r0 = el.getBoundingClientRect();
+      const lines = Math.max(1, Math.round(r0.height / 26));
+      await flyTo(a, () => {
+        const r = el.getBoundingClientRect();
+        return [r.left, r.top + 8];
+      });
+      el.style.clipPath = 'inset(0 100% 100% 0)';
+      el.classList.remove('ag-pending');
+      el.classList.add('ag-live');
+      a.speed = 30;
+      const box = selection(a, el, `${a.name} ${zh ? '正在撰寫…' : 'writing…'}`);
+      // 一行一行由左往右寫出來，游標跟著每一行的筆尖跑
+      await animate(Math.min(2400, 320 + lines * 260) * pace(), (p) => {
+        const r = el.getBoundingClientRect();
+        const lp = p * lines;
+        const line = Math.min(lines - 1, Math.floor(lp));
+        const inLine = lp - line;
+        const lineH = r.height / lines;
+        const bottom = Math.max(0, r.height - (line + 1) * lineH);
+        el.style.clipPath =
+          p >= 1
+            ? 'inset(0 0 0 0)'
+            : `polygon(0 0, 100% 0, 100% ${line * lineH}px, ${inLine * 100}% ${line * lineH}px, ${inLine * 100}% ${r.height - bottom}px, 0 ${r.height - bottom}px)`;
+        a.tx = r.left + r.width * inLine;
+        a.ty = r.top + (line + 0.6) * lineH;
+      });
+      box.remove();
+    }
+
+    async function doPlace(a: Agent, task: Task) {
+      const el = task.el;
+      // 從旁邊被「拖」進位置：先在偏移位置出現半透明的樣子，游標抓住後放回原位
+      const fromLeft = Math.random() < 0.5;
+      const dx = (fromLeft ? -1 : 1) * Math.min(160, innerWidth * 0.18);
+      const dy = 70;
+      const rot = fromLeft ? -3 : 3;
+      el.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(0.92)`;
+      el.style.opacity = '0';
+      el.classList.remove('ag-pending');
+      el.classList.add('ag-live');
+      const grab = (): [number, number] => {
+        const r = el.getBoundingClientRect();
+        return [r.left + Math.min(40, r.width * 0.25), r.top + Math.min(36, r.height * 0.3)];
+      };
+      await flyTo(a, grab);
+      a.press = true;
+      el.style.opacity = '0.55';
+      const box = selection(a, el, `${a.name} ${zh ? '拖曳中' : 'dragging'}`);
+      await sleep(120 * pace());
+      a.speed = 40;
+      await animate(700 * pace() + 200, (p) => {
+        const e = ease(p);
+        el.style.transform = `translate(${dx * (1 - e)}px, ${dy * (1 - e)}px) rotate(${rot * (1 - e)}deg) scale(${0.92 + 0.08 * e})`;
+        el.style.opacity = String(0.55 + 0.45 * e);
+        [a.tx, a.ty] = grab();
+      });
+      a.press = false;
+      const r = el.getBoundingClientRect();
+      box.setLabel(`${Math.round(r.width)} × ${Math.round(r.height)}`);
+      await sleep(260 * pace());
+      box.remove();
+    }
+
+    async function doPop(a: Agent, task: Task) {
+      const el = task.el;
+      await flyTo(a, () => {
+        const r = el.getBoundingClientRect();
+        return [r.left + r.width / 2, r.top + r.height / 2];
+      });
+      a.press = true;
+      el.classList.remove('ag-pending');
+      el.classList.add('ag-live');
+      await animate(380 * pace() + 120, (p) => {
+        // 有一點回彈的放大
+        const s = p < 1 ? 1 + 0.25 * Math.sin(p * Math.PI) * (1 - p) - 0.4 * (1 - p) * (1 - p) : 1;
+        el.style.transform = `scale(${s})`;
+        el.style.opacity = String(Math.min(1, p * 2));
+        if (p > 0.3) a.press = false;
+      });
+    }
+
+    const ACTIONS = { type: doType, write: doWrite, place: doPlace, pop: doPop };
+    const LABELS: Record<Kind, [string, string]> = {
+      type: ['輸入', 'typing'],
+      write: ['撰寫', 'writing'],
+      place: ['排版', 'placing'],
+      pop: ['點擊', 'clicking'],
+    };
+
+    // ---------- 排程：可見的區塊進佇列，閒著的代理人搶離自己最近的那個 ----------
+    const visible = new Set<HTMLElement>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const el = entry.target as HTMLElement;
+          const task = tasks.get(el)!;
+          if (entry.isIntersecting) {
+            visible.add(el);
+          } else if (visible.delete(el)) {
+            // 出現過、但沒人處理就被捲走的區塊直接完成，往回捲時內容一定都在
+            if (!task.claimed) {
+              reveal(task);
+              io.unobserve(el);
+            }
+          }
+        }
+        dispatch();
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+    tasks.forEach((_, el) => io.observe(el));
+
+    function dispatch() {
+      for (const a of agents) {
+        if (a.busy) continue;
+        const open = [...tasks.values()].filter((t) => !t.claimed && !t.done && visible.has(t.el));
+        if (!open.length) break;
+        // 先做上面的，同一排再挑離自己近的
+        open.sort((t1, t2) => {
+          const r1 = t1.el.getBoundingClientRect();
+          const r2 = t2.el.getBoundingClientRect();
+          const d1 = r1.top + Math.hypot(r1.left - a.x, r1.top - a.y) * 0.3;
+          const d2 = r2.top + Math.hypot(r2.left - a.x, r2.top - a.y) * 0.3;
+          return d1 - d2;
+        });
+        run(a, open[0]);
+      }
+      updateHud();
+    }
+
+    async function run(a: Agent, task: Task) {
+      a.busy = true;
+      task.claimed = true;
+      a.speed = 9 + Math.random() * 3;
+      setActivity(a, zh ? LABELS[task.kind][0] : LABELS[task.kind][1]);
+      try {
+        await ACTIONS[task.kind](a, task);
+      } finally {
+        reveal(task);
+        io.unobserve(task.el);
+        a.busy = false;
+        a.press = false;
+        a.speed = 6;
+        setActivity(a, '');
+        idle(a);
+        dispatch();
+      }
+    }
+
+    /** 沒事做的代理人在畫面邊緣晃來晃去 */
+    function idle(a: Agent) {
+      const i = agents.indexOf(a);
+      const side = i % 2 === 0 ? 0.08 : 0.92;
+      a.tx = innerWidth * side + (Math.random() - 0.5) * 60;
+      a.ty = innerHeight * (0.35 + 0.12 * i) + (Math.random() - 0.5) * 40;
+    }
+    setInterval(() => agents.forEach((a) => !a.busy && idle(a)), 2600);
+
+    // ---------- 進度膠囊 ----------
+    let hudTimer = 0;
+    function updateHud() {
+      const working = agents.filter((a) => a.busy).length;
+      hudBar.style.transform = `scaleX(${total ? built / total : 1})`;
+      if (built >= total) {
+        hudStatus.textContent = zh ? `由 ${agents.length} 個 AI 代理人完成` : `Built by ${agents.length} AI agents`;
+        hud.classList.add('done');
+        clearTimeout(hudTimer);
+        hudTimer = window.setTimeout(() => {
+          hud.classList.remove('on');
+          layer.classList.add('rest');
+        }, 2500);
+      } else {
+        hudStatus.textContent = working
+          ? zh
+            ? `${working} 個代理人施工中 · ${built}/${total}`
+            : `${working} agent${working > 1 ? 's' : ''} building · ${built}/${total}`
+          : zh
+            ? `代理人待命中 · ${built}/${total}`
+            : `Agents standing by · ${built}/${total}`;
+        hud.classList.add('on');
+        hud.classList.remove('done');
+      }
+    }
+
+    // 頁面一開始就看得到的區塊：稍微等代理人飛進來再開工
+    agents.forEach((a, i) => setTimeout(() => idle(a), i * 90));
+    updateHud();
+  }
+</script>
+
+<style is:global>
+  html.ag-on:not(.ag-ready) :is(body > header.hero, main) {
+    opacity: 0;
+  }
+
+  .ag-pending {
+    opacity: 0 !important;
+  }
+
+  .ag-live {
+    will-change: transform, opacity, clip-path;
+  }
+
+  .ag-type .ag-rest {
+    color: transparent;
+  }
+
+  .ag-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 0.6s;
+  }
+
+  /* 全部蓋完後游標淡出，不干擾閱讀 */
+  .ag-layer.rest .ag-cursor {
+    opacity: 0;
+    transition: opacity 0.8s;
+  }
+
+  .ag-cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+
+  .ag-cursor svg {
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .ag-cursor path {
+    fill: var(--c);
+    stroke: #fff;
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+  }
+
+  .ag-name {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px 999px 999px 4px;
+    background: var(--c);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+
+  .ag-name em {
+    font-style: normal;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  .ag-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1.5px solid var(--c);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--c) 7%, transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .ag-box.on {
+    opacity: 1;
+  }
+
+  /* 四個角的縮放把手 */
+  .ag-box i {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--c);
+    border-radius: 2px;
+    background: var(--bg);
+  }
+
+  .ag-box i:nth-of-type(1) { top: -4px; left: -4px; }
+  .ag-box i:nth-of-type(2) { top: -4px; right: -4px; }
+  .ag-box i:nth-of-type(3) { bottom: -4px; left: -4px; }
+  .ag-box i:nth-of-type(4) { bottom: -4px; right: -4px; }
+
+  .ag-tag {
+    position: absolute;
+    bottom: 100%;
+    left: -1.5px;
+    margin-bottom: 5px;
+    padding: 0.0625rem 0.4375rem;
+    border-radius: 4px;
+    background: var(--c);
+    color: #fff;
+    font: 600 0.625rem/1.6 ui-monospace, 'SF Mono', Menlo, monospace;
+    white-space: nowrap;
+  }
+
+  .ag-hud {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    z-index: 71;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    background: var(--glass-bg);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    box-shadow: 0 4px 20px var(--glass-shadow);
+    color: var(--fg);
+    font: 500 0.75rem/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+    transition: opacity 0.4s, transform 0.4s;
+    pointer-events: none;
+  }
+
+  .ag-hud.on {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .ag-dot {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 999px;
+    background: #22c55e;
+    animation: ag-pulse 1.2s ease-in-out infinite;
+  }
+
+  .ag-hud.done .ag-dot {
+    animation: none;
+  }
+
+  .ag-bar {
+    width: 4rem;
+    height: 3px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--glass-chip);
+  }
+
+  .ag-bar span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #d97757, #a855f7, #4f7cff, #10a37f);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  @keyframes ag-pulse {
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ag-layer,
+    .ag-hud {
+      display: none;
+    }
+  }
+</style>

@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import '../styles/global.css';
 import avatar from '../assets/avatar.jpg';
+import AgentCursors from '../components/AgentCursors.astro';
 import { useI18n, basePath, localize, locales, pages, unlistedPages, type Locale } from '../i18n';
 
 interface Props {
@@ -56,6 +57,7 @@ const year = new Date().getFullYear();
     <slot name="head" />
   </head>
   <body>
+    <AgentCursors />
     <header class="site-header">
       <!-- 頭像就是「首頁」連結，導覽列不再另外放首頁文字 -->
       <a
