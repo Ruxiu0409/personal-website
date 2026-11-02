@@ -23,7 +23,7 @@ export class Agent {
   tool: Tool = 'move';
   private vx = 0;
   private vy = 0;
-  private readonly omega = 13 + Math.random() * 3;
+  private readonly omega = 20 + Math.random() * 4;
   private readonly activity: HTMLElement;
   private readonly chat: HTMLElement;
   private chatTimer = 0;
@@ -84,7 +84,7 @@ export class Agent {
   }
 
   /** 飛到目標點，抵達後 resolve；目標跟著元素位置每幀更新 */
-  flyTo(target: () => Point, maxMs = 1600): Promise<void> {
+  flyTo(target: () => Point, maxMs = 1000): Promise<void> {
     const [ex, ey] = target();
     const dist = Math.hypot(ex - this.x, ey - this.y) || 1;
     const nx = -(ey - this.y) / dist;
@@ -99,7 +99,7 @@ export class Agent {
         const arc = 4 * f * (1 - f) * bend;
         this.tx = gx + nx * arc;
         this.ty = gy + ny * arc;
-        if ((rem < 3 && Math.hypot(this.vx, this.vy) < 90) || now - t0 > maxMs) {
+        if ((rem < 5 && Math.hypot(this.vx, this.vy) < 160) || now - t0 > maxMs) {
           stop();
           resolve();
         }

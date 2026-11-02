@@ -23,7 +23,7 @@ export interface Task {
   frame?: Frame;
   claimed: boolean;
   done: boolean;
-  /** 形狀和填色已經畫好（文字可能還在打），複製它的步驟可以先開始 */
+  /** 形狀已經畫好（或背景圖開始渲染），依賴它的步驟不用等它收尾就能開始 */
   shaped?: boolean;
   cleanups: Array<() => void>;
   /** 原本的 style 屬性，完成時還原 */

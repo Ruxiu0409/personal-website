@@ -8,6 +8,9 @@ import { collect, type Frame, type Kind, type Task } from './collect';
 import { clamp, FrameTag, initStage, pick, runLoop } from './stage';
 import { Layers, Toolbar } from './ui';
 
+/** 整體速度倍率：越小越快（所有動作時間都乘上它） */
+const SPEED = 0.6;
+
 const AGENTS: AgentSpec[] = [
   { name: 'Claude', color: '#d97757' },
   { name: 'Codex', color: '#10a37f' },
@@ -86,8 +89,9 @@ export function start() {
   let paceValue = 1;
   let paceAt = 0;
 
+  // 外層的形狀一畫好（或背景圖開始渲染）裡面的東西就能開工，不用等它整個收尾
   const isReady = (t: Task) =>
-    !t.claimed && !t.done && visible.has(t.el) && t.deps.every((d) => d.done || (d === t.master && d.shaped));
+    !t.claimed && !t.done && visible.has(t.el) && t.deps.every((d) => d.done || d.shaped);
 
   const ctx: Ctx = {
     zh,
@@ -96,7 +100,7 @@ export function start() {
       if (now - paceAt > 250) {
         paceAt = now;
         const waiting = tasks.filter(isReady).length;
-        paceValue = clamp(1 / (1 + Math.max(0, waiting - 2) * 0.14), 0.35, 1);
+        paceValue = SPEED * clamp(1 / (1 + Math.max(0, waiting - 2) * 0.14), 0.45, 1);
       }
       return paceValue;
     },

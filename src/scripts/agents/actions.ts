@@ -40,7 +40,7 @@ import {
 
 export interface Ctx {
   zh: boolean;
-  /** 動作速度倍率：排隊的工作越多越快（0.35–1） */
+  /** 動作時間倍率：基本速度再乘上排隊程度，工作越多越快 */
   pace(): number;
   layer(a: Agent, tool: Tool, name: string): void;
   frameTag(f: Frame, color?: string): FrameTag;
@@ -196,6 +196,7 @@ export async function buildFrame(a: Agent, ctx: Ctx, t: Task) {
   tag?.ghost(true);
   const shape = new Shape('frame', a.color);
   const pill = await dragOut(a, ctx, target, shape, 650);
+  t.shaped = true;
   if (t.frame) ctx.layer(a, 'frame', t.frame.name);
   await radiusDrag(a, ctx, target, shape, radiusOf(el));
   el.classList.remove('ag-shell');
@@ -297,8 +298,11 @@ export async function buildImage(a: Agent, ctx: Ctx, t: Task) {
   // 渲染：掃描線由上往下，掃過的地方從模糊、低彩度變清楚
   el.classList.remove('ag-hide');
   el.classList.add('ag-live');
-  // 鋪底的背景圖：容器的漸層之類的跟著圖一起出現
-  if (t.backdrop) el.parentElement?.classList.remove('ag-pseudo');
+  // 鋪底的背景圖：容器的漸層之類的跟著圖一起出現，上面的文字也可以開始打了
+  if (t.backdrop) {
+    el.parentElement?.classList.remove('ag-pseudo');
+    t.shaped = true;
+  }
   const scan = node('ag-scan');
   scan.style.setProperty('--c', a.color);
   await animate(850 * ctx.pace(), (p) => {
@@ -562,9 +566,9 @@ async function typeIn(a: Agent, ctx: Ctx, sp: Split, perChar = 38) {
     await run(0, typo, (ms * typo) / sp.total);
     sp.set(typo, 0, neighbor(sp.text[typo]));
     caret.blink(false);
-    await sleep(200);
+    await sleep(130);
     sp.set(typo);
-    await sleep(110);
+    await sleep(70);
     await run(typo, sp.total, (ms * (sp.total - typo)) / sp.total);
   } else {
     await run(0, sp.total, ms);
@@ -785,5 +789,5 @@ export async function comment(a: Agent, ctx: Ctx, f: Frame) {
   await a.flyTo(spot);
   a.click();
   pin(spot, a.color, a.name[0], pick(ctx.zh ? COMMENTS.zh : COMMENTS.en));
-  await sleep(500);
+  await sleep(300);
 }
