@@ -11,6 +11,7 @@ import PythonIcon from '../assets/icons/python.svg';
 // Flutter 用官方藍色 logo
 import FlutterIcon from '../assets/icons/flutter.svg';
 import MediaPipeIcon from '../assets/icons/mediapipe.svg';
+// 雲端服務用各自的官方彩色 logo
 import FirebaseIcon from '../assets/icons/firebase.svg';
 import SupabaseIcon from '../assets/icons/supabase.svg';
 import GoogleCloudIcon from '../assets/icons/googlecloud.svg';
