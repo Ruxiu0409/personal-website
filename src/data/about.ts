@@ -14,9 +14,16 @@ import FirebaseIcon from '../assets/icons/firebase.svg';
 import SupabaseIcon from '../assets/icons/supabase.svg';
 import GoogleCloudIcon from '../assets/icons/googlecloud.svg';
 import CloudflareWorkersIcon from '../assets/icons/cloudflareworkers.svg';
+import OpenAIIcon from '../assets/icons/openai.svg';
 // SwiftUI、Jamf 用官方的彩色圖示（點陣圖）
 import swiftUIImage from '../assets/icons/swiftui.png';
 import jamfImage from '../assets/icons/jamf.png';
+// Apple 框架圖示取自 developer.apple.com 官方素材
+import realityKitImage from '../assets/icons/realitykit.png';
+import arKitImage from '../assets/icons/arkit.png';
+import widgetKitImage from '../assets/icons/widgetkit.png';
+import swiftDataImage from '../assets/icons/swiftdata.png';
+import coreMLImage from '../assets/icons/coreml.png';
 
 export const education: Entry[] = [
   {
@@ -103,18 +110,18 @@ export type Skill = {
 
 export const frameworkSkills: Skill[] = [
   { name: 'SwiftUI', image: swiftUIImage },
-  { name: 'RealityKit', mono: 'RK' },
-  { name: 'ARKit', mono: 'AR' },
-  { name: 'WidgetKit', mono: 'WK' },
-  { name: 'SwiftData', mono: 'SD' },
+  { name: 'RealityKit', image: realityKitImage },
+  { name: 'ARKit', image: arKitImage },
+  { name: 'WidgetKit', image: widgetKitImage },
+  { name: 'SwiftData', image: swiftDataImage },
   { name: 'Flutter', icon: FlutterIcon },
 ];
 
 export const aiSkills: Skill[] = [
-  { name: 'Core ML', mono: 'ML' },
+  { name: 'Core ML', image: coreMLImage },
   { name: 'Vision', mono: 'Vi' },
   { name: 'MediaPipe', icon: MediaPipeIcon },
-  { name: 'Whisper', mono: 'W' },
+  { name: 'Whisper', icon: OpenAIIcon },
   { name: 'RAG', mono: 'RAG' },
 ];
 
