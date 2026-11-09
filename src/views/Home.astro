@@ -69,7 +69,7 @@ const socialIcons = {
   </header>
 
   <main>
-    <!-- 作品放在主視覺正下方：由上往下排列的大圖，每張只留標題、獎項和日期 -->
+    <!-- 作品放在主視覺正下方：電腦版左右並排的大圖，每張只留標題、獎項和日期 -->
     <section class="showcase" aria-labelledby="portfolio">
       <div class="section-head wide">
         <h2 id="portfolio">{t.portfolio.title}</h2>
@@ -87,7 +87,7 @@ const socialIcons = {
                       src={project.image}
                       alt={project.imageAlt ?? project.title}
                       widths={[480, 720, 960]}
-                      sizes="(max-width: 720px) 80vw, 22rem"
+                      sizes="(max-width: 720px) 80vw, 24rem"
                     />
                   ) : (
                     <span class="placeholder" aria-hidden="true">
@@ -391,7 +391,7 @@ const socialIcons = {
 
   /* 作品區標題和下方作品欄同寬 */
   .section-head.wide {
-    width: min(100% - 3rem, 24rem);
+    width: min(100% - 3rem, 50rem);
     margin-inline: auto;
   }
 
@@ -414,12 +414,12 @@ const socialIcons = {
     color: var(--accent);
   }
 
-  /* 作品由上往下排成一欄，置中，每張之間留大間距 */
+  /* 作品在電腦版左右並排，手機改回由上往下一欄 */
   .rail {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    width: min(100% - 3rem, 24rem);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem 2rem;
+    width: min(100% - 3rem, 50rem);
     margin: 0 auto;
     padding: 0;
     list-style: none;
@@ -588,7 +588,13 @@ const socialIcons = {
     }
 
     .rail {
+      grid-template-columns: 1fr;
       gap: 3rem;
+    }
+
+    .section-head.wide,
+    .rail {
+      width: min(100% - 3rem, 24rem);
     }
 
     .frame {
