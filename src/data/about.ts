@@ -8,6 +8,7 @@ import JavaScriptIcon from '../assets/icons/javascript.svg';
 import CIcon from '../assets/icons/c.svg';
 import CppIcon from '../assets/icons/cplusplus.svg';
 import PythonIcon from '../assets/icons/python.svg';
+// Flutter 用官方藍色 logo
 import FlutterIcon from '../assets/icons/flutter.svg';
 import MediaPipeIcon from '../assets/icons/mediapipe.svg';
 import FirebaseIcon from '../assets/icons/firebase.svg';
