@@ -3,8 +3,27 @@
 import type { Project } from '../site';
 import banFengImg from '../../assets/portfolio/ban-feng-yu-jia.png';
 import fcuMobileImg from '../../assets/portfolio/fcu-mobile.png';
+import xdddImg from '../../assets/portfolio/xddd.png';
 
 export const portfolio: Project[] = [
+  {
+    slug: 'xddd',
+    title: 'XDDD: Meme Collector',
+    role: 'Indie developer',
+    date: '2026.10',
+    summary: 'A meme collection app: find the perfect meme in three seconds by tag or by the text in the image.',
+    body: [
+      'When a friend sends a message, you can spend three minutes scrolling your photo library for the right meme. XDDD keeps memes organized and tagged, and finds them by tag or by the words in the image; text recognition for Chinese, English and Japanese runs on device with Vision. No account, no ads, no tracking: memes stay on the device and in the user\'s own iCloud.',
+      'A Share extension saves memes from LINE, Instagram or any app with one tap, including GIFs and short videos. The XDD Plus subscription adds the XDDD keyboard for searching and pasting memes right in a chat, a meme maker that erases the text in an image so you can write your own line, and an auto-maintained "XDDD" album in Photos. Data is stored with SwiftData and synced through CloudKit, subscriptions run on StoreKit, and the app is localized into Traditional Chinese, English and Japanese.',
+    ],
+    image: xdddImg,
+    imageAlt: 'The XDDD library screen, with saved memes in a three-column grid, some marked as GIFs or videos',
+    tags: ['SwiftUI', 'SwiftData', 'CloudKit', 'Vision', 'StoreKit'],
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/tw/app/id6825192786' },
+      { label: 'Support', href: '/en/xddd/support/' },
+    ],
+  },
   {
     slug: 'ban-feng-yu-jia',
     title: 'Ban Feng Yu Jia',

@@ -87,7 +87,7 @@ const socialIcons = {
                       src={project.image}
                       alt={project.imageAlt ?? project.title}
                       widths={[480, 720, 960]}
-                      sizes="(max-width: 720px) 80vw, 24rem"
+                      sizes="(max-width: 720px) 80vw, 22rem"
                     />
                   ) : (
                     <span class="placeholder" aria-hidden="true">
@@ -391,7 +391,7 @@ const socialIcons = {
 
   /* 作品區標題和下方作品欄同寬 */
   .section-head.wide {
-    width: min(100% - 3rem, 50rem);
+    width: min(100% - 3rem, 68rem);
     margin-inline: auto;
   }
 
@@ -417,9 +417,9 @@ const socialIcons = {
   /* 作品在電腦版左右並排，手機改回由上往下一欄 */
   .rail {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 4rem 2rem;
-    width: min(100% - 3rem, 50rem);
+    width: min(100% - 3rem, 68rem);
     margin: 0 auto;
     padding: 0;
     list-style: none;

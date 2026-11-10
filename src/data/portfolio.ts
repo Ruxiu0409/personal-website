@@ -1,10 +1,29 @@
 // 「作品集」頁。隊友姓名不公開，只寫自己的角色。
-// 只放兩個校園 App；其他比賽作品寫在競賽頁（awards.ts）。圖片來源 ~/Project/推甄/Assets。
+// 放自己上架的 App 與兩個校園 App；其他比賽作品寫在競賽頁（awards.ts）。圖片來源 ~/Project/推甄/Assets。
 import type { Project } from './site';
 import banFengImg from '../assets/portfolio/ban-feng-yu-jia.png';
 import fcuMobileImg from '../assets/portfolio/fcu-mobile.png';
+import xdddImg from '../assets/portfolio/xddd.png';
 
 export const portfolio: Project[] = [
+  {
+    slug: 'xddd',
+    title: '笑死：梗圖收藏',
+    role: '獨立開發',
+    date: '2026.10',
+    summary: '梗圖收藏 App：用標籤或圖上的字，三秒找到那張剛好的梗圖。',
+    body: [
+      '朋友一句話丟過來，常常在相簿滑了三分鐘才找到那張梗圖。笑死把梗圖收好、標好，用標籤或直接搜圖上的字就能找到；中、英、日文的文字辨識都在手機上用 Vision 完成。不用登入、沒有廣告、不追蹤，梗圖只存在裝置和使用者自己的 iCloud。',
+      '分享延伸功能讓 LINE、IG 傳來的梗圖按「分享」就能存進來，支援 GIF 和短影片。XDD Plus 訂閱提供笑死鍵盤，在聊天室直接搜圖貼上；也能自動擦掉圖上的字、換上自己的台詞做成新梗圖，並在「照片」App 維護一本「笑死」相簿。資料用 SwiftData 存放、透過 CloudKit 同步，訂閱以 StoreKit 處理，介面支援繁中、英文、日文。',
+    ],
+    image: xdddImg,
+    imageAlt: '笑死的圖庫畫面，收藏的梗圖排成三欄格狀，部分標示 GIF 和影片長度',
+    tags: ['SwiftUI', 'SwiftData', 'CloudKit', 'Vision', 'StoreKit'],
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/tw/app/id6825192786' },
+      { label: '支援', href: '/xddd/support/' },
+    ],
+  },
   {
     slug: 'ban-feng-yu-jia',
     title: '半逢遇甲',
